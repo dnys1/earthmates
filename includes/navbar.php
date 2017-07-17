@@ -1,10 +1,7 @@
 <?php
-	$script = $_SERVER["REQUEST_URI"];
-	$script = ltrim($script, '/');
-	
 	function on_page ($page) {
-		global $script;
-		if(strcmp($script, $page) == 0) {
+		$script = $_SERVER["REQUEST_URI"];
+		if(strpos($script, $page) !== false) {
 			return true;
 		}
 		return false;
