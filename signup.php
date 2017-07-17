@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					$_SESSION['userID'] = $handle->fetchColumn();
 					$_SESSION['userName'] = $firstName . ' ' . $lastName;
 					
-					redirect_to('profile.php');
+					redirect_to('profile.php?signup=1');
 				}
 			}
 		}

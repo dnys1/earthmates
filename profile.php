@@ -20,6 +20,17 @@
 		
     <!-- Begin page content -->
     <div class="container">
+			<?php
+				if ($_SERVER["REQUEST_METHOD"] == "GET")
+				{
+					if(isset($_GET['signup']) && intval($_GET['signup']) == 1) {
+						echo '<div class="alert alert-success" role="alert">' . "\n";
+						echo "Success! Welcome to your profile.\n";
+						echo '</div>' . "\n";
+					}
+				}
+			?>
+		
       <div class="page-header">
         <h1>Profile <small><?php echo $_SESSION['userName']; ?></small></h1>
       </div>
