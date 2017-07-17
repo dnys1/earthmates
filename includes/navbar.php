@@ -24,23 +24,19 @@
 			<ul class="nav navbar-nav">
 				<li><a href="./">Home</a></li>
 				<li <?php echo on_page('about.php') ? 'class="active"' : ''?>><a href="about.php">About</a></li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<?php
+				<?php
 							// If not logged in
+							// echo the dropdown 'Account' menu
 							if(!isset($_SESSION['userID'])) {
+								echo '<li class="dropdown">';
+								echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>';
+								echo '<ul class="dropdown-menu">';						
 								echo '<li ';
 								echo on_page('login.php') ? 'class="active"' : '';
 								echo '><a href="login.php">Log In</a></li>';
 								echo '<li ';
 								echo on_page('signup.php') ? 'class="active"' : '';
 								echo '><a href="signup.php">Sign Up</a></li>';
-							}
-							// If logged in
-							else
-							{
-								echo '<li><a href="logout.php">Log Out</a></li>';
 							}
 						?>
 					</ul>
@@ -52,6 +48,7 @@
 					echo '<li ';
 					echo on_page('profile.php') ? 'class="active"' : '';
 					echo '><a href="profile.php">Profile</a></li>';
+					echo '<li><a href="logout.php">Log Out</a></li>';
 				}
 			?>
 			 </ul>

@@ -36,7 +36,30 @@
       </div>
 			
 			<!-- Generating competency content -->
-			
+			<?php include('includes/get_db_competencies.php'); ?>
+			<div class="panel panel-default">
+				<!-- Default panel contents -->
+				<div class="panel-heading">Competencies</div>
+
+				<!-- Table -->
+				<table class="table">
+					<tr>
+						<th>Competency</th>
+						<th>Score</th>
+						<th></th>
+					</tr>
+					<?php
+						foreach ($competencies as $row)
+						{
+							echo "<tr>\n";
+							echo "<td>" . $row['Competency'] . "</td>\n";
+							echo "<td>0</td>";
+							echo '<td><a href="#">More Information</a></td>';
+							echo "</tr>\n";
+						}
+					?>
+				</table>
+			</div>
     </div>
 	
 	<?php include('includes/footer.php'); ?>
