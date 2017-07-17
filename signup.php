@@ -81,32 +81,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		require_once('includes/pdo_connect.php');
 		
 		try {
-			$handle = $link->prepare('INSERT INTO Users (FirstName, LastName, Email, PasswordHash) VALUES(?, ?, ?, ?)');
+			// Check if email is already in database
+			$handle = $link->prepare('SELECT * FROM Users WHERE Email = ?');
+			$handle->bindValue(1, $email);
+			$handle->execute();
 			
-			$handle->bindValue(1, $firstName);
-			$handle->bindValue(2, $lastName);
-			$handle->bindValue(3, $email);
-			$handle->bindValue(4, $passwordHash);
+			$emailExists = !empty($handle->fetch());
 			
-			if($handle->execute()) {
-				// Get back the userID that was just created
-				$handle = $link->prepare('SELECT * FROM Users WHERE Email = ?');
+			if ($emailExists)
+			{
+				$err .= "<li>That email is already in use.</li>\n";
+			}
+			// If not, try to add it (should work?)
+			else
+			{
+				$handle = $link->prepare('INSERT INTO Users (FirstName, LastName, Email, PasswordHash) VALUES(?, ?, ?, ?)');
+			
+				$handle->bindValue(1, $firstName);
+				$handle->bindValue(2, $lastName);
+				$handle->bindValue(3, $email);
+				$handle->bindValue(4, $passwordHash);
 				
-				$handle->bindValue(1, $email);
-				$handle->execute();
-				
-				// Set Session vars
-				// Redirect to Profile
-				$_SESSION['userID'] = $handle->fetchColumn();
-				$_SESSION['userName'] = $firstName . ' ' . $lastName;
-				
-				redirect_to('profile.php');
+				if($handle->execute()) {
+					// Get back the userID that was just created
+					$handle = $link->prepare('SELECT * FROM Users WHERE Email = ?');
+					
+					$handle->bindValue(1, $email);
+					$handle->execute();
+					
+					// Set Session vars
+					// Redirect to Profile
+					$_SESSION['userID'] = $handle->fetchColumn();
+					$_SESSION['userName'] = $firstName . ' ' . $lastName;
+					
+					redirect_to('profile.php');
+				}
 			}
 		}
 		catch (PDOException $ex)
 		{
 			print($ex->getMessage());
-			$err .= "<li>That email is already in use.</li>\n";
 		}
 	}
 }

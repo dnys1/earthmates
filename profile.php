@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	
-	if (!isset($_SESSION['userID'])) {
+	if (!isset($_SESSION['userID']) || empty($_SESSION['userID'])) {
 		header('Location: login.php');
 		exit();
 	}
@@ -23,6 +23,9 @@
       <div class="page-header">
         <h1>Profile <small><?php echo $_SESSION['userName']; ?></small></h1>
       </div>
+			
+			<!-- Generating competency content -->
+			
     </div>
 	
 	<?php include('includes/footer.php'); ?>

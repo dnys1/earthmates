@@ -17,24 +17,34 @@
   <body>
 		<!-- Fixed navbar -->
 		<?php include('includes/navbar.php'); ?>
-	
-		<?php
-				if (isset($err) && !empty($err)) {
-					echo '<div class="text-center form-error"><p>The following errors were found. Please fix them and try logging in again.</p>' . "\n";
-					echo '<ul style="list-style:none">' . "\n";
-					echo $err;
-					echo "</ul></div>\n";
-				}
-		?>
 		
 		<!-- Begin page content -->
     <div class="container">
+			<?php
+				if (isset($err) && !empty($err)) {
+					echo '<div class="alert alert-danger" role="alert">' . "\n";
+					echo '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>' . "\n";
+					echo '<span class="sr-only">Error:</span>' . "\n";
+					echo 'Enter a valid email/password combination' . "\n";
+					echo '</div>';
+				}
+			?>
 			<form class="form-signin" method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
         <h2 class="form-signin-heading">Sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
+				<div class="input-group">
+					<label for="inputEmail" class="sr-only">Email address</label>
+					<span class="input-group-addon" id="basic-addon1">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					</span>
+					<input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address" aria-describedby="basic-addon1" required autofocus>
+				</div>
+				<div class="input-group">
+					<label for="inputPassword" class="sr-only">Password</label>
+					<span class="input-group-addon" id="basic-addon2">
+						<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+					</span>
+					<input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" aria-describedby="basic-addon2" required>
+				</div>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me

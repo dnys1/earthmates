@@ -16,10 +16,14 @@
     <div class="container">
 			<?php
 				if (isset($err) && !empty($err)) {
-					echo '<div class="text-center form-error"><p>The following errors were found. Please fix them and try submitting the form again.</p>' . "\n";
-					echo '<ul style="list-style:none">' . "\n";
+					echo '<div class="alert alert-danger" role="alert">' . "\n";
+					echo '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>' . "\n";
+					echo '<span class="sr-only">Error:</span>' . "\n";
+					echo "The following errors were found. Please fix them and try again.\n";
+					echo "<ul>\n";
 					echo $err;
-					echo "</ul></div>\n";
+					echo "</ul>\n";
+					echo "</div>\n";
 				}
 			?>
       <form class="form-signin" method="post" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]) ?>">
