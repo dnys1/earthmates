@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	}
 }
 
-include('login_page.php');
+include('includes/login_page.php');
 
 function test_input($data)
 {

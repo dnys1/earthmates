@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	}
 }
 
-include('signup_page.php');
+include('includes/signup_page.php');
 
 function test_input($data)
 {

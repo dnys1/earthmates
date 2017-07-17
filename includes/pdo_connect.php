@@ -8,7 +8,7 @@ try{
     // \PDO::ATTR_PERSISTENT disables persistent connections, which can cause concurrency issues in certain cases.  See "Gotchas".
     $link = new \PDO(   'mysql:host=localhost;dbname=id2197103_users;charset=utf8mb4',
                         'id2197103_usersroot',
-                        'id2197103_usersroot',
+                        'usersroot',
                         array(
                             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
                             \PDO::ATTR_PERSISTENT => false
