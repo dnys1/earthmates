@@ -114,7 +114,3 @@ code {
 .form-signin button[type="submit"] {
 	margin-bottom: 10px;
 }
-
-.form-error {
-	color: #F00;
-}
