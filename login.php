@@ -1,8 +1,21 @@
 <?php
 session_start();
 
+// Connect to MySQL database
+// Reuse this code and do it only once
+require_once('includes/db_functions.php');
+require_once('includes/redirect.php');
+
 $err = "";
 $email = $inputPassword = "";
+
+function test_input($data)
+{
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -28,10 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		$inputPassword = $_POST['inputPassword'];
 	}
-	
-	// Connect to MySQL database
-	// Reuse this code and do it only once
-	require_once('includes/pdo_connect.php');
 	
 	try {
 		$handle = $link->prepare('SELECT * FROM Users WHERE Email = ?');
@@ -64,19 +73,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	}
 }
 
-include('includes/login_page.php');
-
-function test_input($data)
-{
-	$data = trim($data);
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data);
-	return $data;
-}
-
-function redirect_to($site)
-{
-	header('Location: ' . $site);
-	exit();
-}
+include('pages/login_page.php');
 ?>

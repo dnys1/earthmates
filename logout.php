@@ -11,8 +11,3 @@ session_destroy();
 header('Location: https://earthmates.000webhostapp.com');
 exit();
 ?>
-<DOCTYPE !html>
-<html>
-<body>
-</body>
-</html>

@@ -1,8 +1,15 @@
 <?php
 session_start();
 
+/********* INCLUDES **********/
+require_once('includes/db_functions.php');
+require_once('includes/redirect.php');
+require_once('includes/form_functions.php');
+/****************************/
+
 $err = "";
 $firstName = $lastName = $email = $inputPassword = $retypePassword = $passwordHash = "";
+$message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -75,11 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		$inputPassword = $retypePassword = "";
 	}
 	
-	if (empty($err)) {
-		// Connect to MySQL database
-		// Reuse this code and do it only once
-		require_once('includes/pdo_connect.php');
-		
+	if (empty($err)) {		
 		try {
 			// Check if email is already in database
 			$handle = $link->prepare('SELECT * FROM Users WHERE Email = ?');
@@ -125,19 +128,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	}
 }
 
-include('includes/signup_page.php');
-
-function test_input($data)
-{
-	$data = trim($data);
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data);
-	return $data;
-}
-
-function redirect_to($site)
-{
-	header('Location: ' . $site);
-	exit();
-}
+include('pages/signup_page.php');
 ?>

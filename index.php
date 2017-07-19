@@ -30,12 +30,12 @@
 		
     <!-- Begin page content -->
     <div class="container">
-			<h3>Based off the breakthrough principals of these works:</h3>
+			<h3>Based off the breakthrough principles of these works:</h3>
 		
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <h2>Good to Great <small>Jim Collins</small></h2>
+          <h2>Good to Great: Why Some Companies Make the Leap... and Others Don't <small>Jim Collins</small></h2>
           <img src="img/collins.png" class="img-responsive" alt="Jim Collins Good to Great">
         </div>
         <div class="col-md-4">

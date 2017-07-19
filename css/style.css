@@ -114,3 +114,9 @@ code {
 .form-signin button[type="submit"] {
 	margin-bottom: 10px;
 }
+
+/*** PROFILE PAGE ***/
+.profile-button {
+	width: 45%;
+	margin: 30px auto;
+}

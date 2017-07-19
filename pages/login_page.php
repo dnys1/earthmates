@@ -1,8 +1,5 @@
 <?php
-	if (isset($_SESSION['userID'])) {
-		header('Location: profile.php');
-		exit();
-	}
+	include('includes/ensure_login.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
