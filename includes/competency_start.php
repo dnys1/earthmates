@@ -4,8 +4,8 @@
 </p>
 
 <div class="profile-button">
-	<a href="selfquiz.php"><button type="button" class="btn btn-lg btn-block btn-success">Take the quiz</button></a>
+	<a href="selfquiz.php" class="btn btn-lg btn-block btn-success">Take the quiz</a>
 </div>
 <div class="profile-button">
-	<a href="request.php"><button type="button" class="btn btn-lg btn-block btn-success">Request feedback</button></a>
+	<a href="request.php" class="btn btn-lg btn-block btn-success">Request feedback</a>
 </div>

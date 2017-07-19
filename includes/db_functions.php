@@ -220,6 +220,58 @@ function createFollowerLink($userID, $followerID) : string
 	}
 }
 
+function getNumberOfQuestions() : int
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT COUNT(ID) FROM Questions');
+		$handle->execute();
+		
+		return intval(($handle->fetch()[0]));
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
+function loadQuestionSet()
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT * FROM Questions');
+		$handle->execute();
+		
+		return $handle->fetchAll();
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
+function loadQuestion($q)
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT * FROM Questions WHERE ID = ?');
+		$handle->bindValue(1, $q, \PDO::PARAM_INT);
+		$handle->execute();
+		
+		return $handle->fetch();
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
 function test($test)
 {
 	global $link;

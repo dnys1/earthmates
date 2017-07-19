@@ -1,6 +1,3 @@
-<?php
-	include('includes/ensure_login.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
