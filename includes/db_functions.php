@@ -1,4 +1,5 @@
 <?php
+session_start();
 declare(strict_types = 1);
 
 $link = connectToDB();
@@ -88,6 +89,27 @@ function isEmptyCompetencyIndex($userID) : bool
 	}
 }
 
+function updateQuizComplete($userID, $boolVal) : bool
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('UPDATE Users SET QuizComplete = ? WHERE UserID = ?');
+		$handle->bindValue(1, $boolVal);
+		$handle->bindValue(2, $userID, \PDO::PARAM_INT);
+		
+		$handle->execute();
+		$_SESSION['quizComplete'] = true;
+		
+		return true;
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return false;
+	}
+}
+
 function getCompetencyIndex($userID, $competencyID)
 {
 	global $link;
@@ -107,7 +129,7 @@ function getCompetencyIndex($userID, $competencyID)
 	}
 }
 
-function getAverageCompetencyScore($userID, $competencyID) : int
+function getAverageCompetencyScore($userID, $competencyID) : float
 {
 	global $link;
 	
@@ -118,7 +140,7 @@ function getAverageCompetencyScore($userID, $competencyID) : int
 		$handle->execute();
 		
 		$row = $handle->fetch();
-		return intval($row['CompetencyScore']);
+		return floatval($row['CompetencyScore']);
 	}
 	catch(\PDOException $e)
 	{
@@ -144,6 +166,56 @@ function getUserName($userID) : string
 	{
 		print($e->getMessage());
 		return NULL;
+	}
+}
+
+// Get the userID and followerID from
+// the FollowerLinks database
+function getTokenInfo($token)
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT UserID, FollowerID FROM FollowerLinks WHERE Token = ?');
+		$handle->bindValue(1, $token);
+		$handle->execute();
+		
+		$row = $handle->fetch();
+		if(!empty($row))
+		{
+			return array('UserID' => $row['UserID'], 'FollowerID' => $row['FollowerID']);
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
+// Remove token from database so it can
+// no longer be used
+function invalidateToken($token) : bool
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('DELETE FROM FollowerLinks WHERE Token = ?');
+		$handle->bindValue(1, $token);
+		
+		$handle->execute();
+		unset($_SESSION['token']);
+		
+		return true;
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return false;
 	}
 }
 
@@ -269,6 +341,26 @@ function loadQuestion($q)
 	{
 		print($e->getMessage());
 		return NULL;
+	}
+}
+
+function postValue($userID, $followerID, $competencyID, $level) : bool
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('INSERT INTO CompetencyIndex (UserID, FollowerID, CompetencyID, Level) VALUES (?, ?, ?, ?)');
+		$handle->bindValue(1, $userID, \PDO::PARAM_INT);
+		$handle->bindValue(2, $followerID, \PDO::PARAM_INT);
+		$handle->bindValue(3, $competencyID, \PDO::PARAM_INT);
+		$handle->bindValue(4, $level, \PDO::PARAM_INT);
+		
+		return $handle->execute();
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return false;
 	}
 }
 

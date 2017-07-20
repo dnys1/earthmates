@@ -16,8 +16,8 @@
 				
 				echo "<tr>\n";
 				echo "<td>" . $row['Competency'] . "</td>\n";
-				echo "<td>" . $score . "</td>";
-				echo '<td><a href="competency.php?id=' . $row['ID'] . '">More Information</a></td>';
+				echo "<td>" . number_format($score, 1) . "</td>";
+				echo '<td><a href="competency.php?id=' . $row['ID'] . '" class="btn btn-xs btn-default">More Information</a></td>';
 				echo "</tr>\n";
 			}
 		?>

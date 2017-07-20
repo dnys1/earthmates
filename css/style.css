@@ -116,9 +116,18 @@ code {
 }
 
 /*** PROFILE PAGE ***/
+.profile-buttons {
+	width: 50%;
+	min-width: 50%;
+	margin: auto;
+}
+
 .profile-button {
-	width: 45%;
-	margin: 30px auto;
+	min-width: 200px;
+	width: 10%;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 20px;
 }
 
 /** SELF QUIZ PAGE **/
@@ -138,4 +147,8 @@ code {
 
 #quizContainer button {
 	margin-top: 20px;
+}
+
+#quizContainer input[type="radio"] {
+	padding-left: 15px;
 }

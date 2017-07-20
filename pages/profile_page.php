@@ -19,17 +19,17 @@
         <h1>Profile <small><?php echo $_SESSION['userName']; ?></small></h1>
       </div>
 			
-			<?php
-				//Include either the start buttons or the table of competencies
-				//depending on whether or not they've completed the self-quiz
-				if ($empty)
-				{
-					include('includes/competency_start.php');
-				} else
-				{
-					include('includes/competency_table.php');
-				}
-			?>
+			<div class="profile-buttons">
+				<?php 
+					if (!$quizComplete) 
+						echo '<a href="quiz.php" class="btn btn-success profile-button">Take the Quiz!</a>';
+					else
+						echo '<a href="quiz.php" class="btn btn-success profile-button disabled">Take the Quiz!</a>';
+				?>
+				<a href="request.php" class="btn btn-success profile-button">Request Feedback</a>
+			</div>
+			
+			<?php include('includes/competency_table.php'); ?>
 		</div>
 	<?php include('includes/footer.php'); ?>
 	</body>

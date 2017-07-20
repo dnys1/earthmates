@@ -6,14 +6,13 @@
 			$pageDescription = "Time to test your skills!";
 			include('includes/header.php'); 
 		?>
+		<script src="js/quiz.js"></script>
 	</head>
 
   <body>
 
    <!-- Fixed navbar -->
    <?php include('includes/navbar.php'); ?>
-
-	 	<script src="js/quiz.js"></script>
 		
     <!-- Begin page content -->
     <div class="container">
@@ -23,7 +22,11 @@
 			
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Self-Assessment</h3>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em">
+							0%
+						</div>
+					</div>
 				</div>
 				
 				<!-- Welcome panel -->
@@ -31,7 +34,7 @@
 					Welcome to the self assessment. You'll be asked to evaluate a series of statements regarding your
 					personal beliefs and levels of awareness. Please answer as honestly as possible. Only you will be
 					able to see the results of the assessment, unless you choose otherwise.<br><br>
-					Press "Start" to begin.
+					There are <span id="numQuestions" class="fa fa-spinner fa-spin"></span> questions. Press "Start" to begin.
 					<button type="button" class="btn btn-default center-block" id="startButton">Start</button>
 				</div>
 				
@@ -75,7 +78,10 @@
 							Very true of me
 						</label>
 					</div>
-					<input type="hidden" name="answers" id="answers" />
+					<input type="hidden" name="answers" />
+					<input type="hidden" name="competencyValues" />
+					<input type="hidden" name="tokenUserID" value="<?php if(isset($tokenUserID)) echo $tokenUserID; ?>" />
+					<input type="hidden" name="tokenFollowerID" value="<?php if(isset($tokenFollowerID)) echo $tokenFollowerID; ?>" />
 					<div class="form-group">
 						<button type="button" class="btn btn-lg btn-default" id="prevQuestion">Previous</button>
 						<button type="button" class="btn btn-lg btn-default" id="nextQuestion">Next</button>

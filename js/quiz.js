@@ -1,23 +1,24 @@
-var numQuestions;
-var answersArray = [null];
-var idArray = [null];
-var q = 1;
+var questionsArray = [];
+var competencyArray = [];
+var answersArray = [];
+var q = 0;
 
 $(document).ready(function() {
 	$("#quizContainer").hide();
-	getNumQuestions();
+	loadAllQuestions();
 	
 	$("#startButton").click(function() {
 		$("#welcomeScreen").hide();
-		loadQuestion(q);
 		$("#quizContainer").show();
 		$("#submitQuiz").hide();
 		$("#nextQuestion").removeClass("disabled");
 		$("#prevQuestion").addClass("disabled");
+		
+		loadQuestion(q);
 	});
 	
 	$("#prevQuestion").click(function() {
-		if(q>1) {
+		if(q>0) {
 			// Check if radio is marked
 			if($('form input[type=radio]:checked').val()) {
 				// Record answer to array
@@ -29,11 +30,14 @@ $(document).ready(function() {
 			
 			// Load previous question
 			loadQuestion(--q);
+			
+			// Update the progress bar
+			updateProgressBar();
 			}			
 	});
 	
 	$("#nextQuestion").click(function() {
-		if(q<numQuestions) {
+		if(q<questionsArray.length) {
 			if(!$('form input[type=radio]:checked').val()) {
 				alert('Nothing is checked');
 			} else {
@@ -45,6 +49,9 @@ $(document).ready(function() {
 				
 				// Load next question
 				loadQuestion(++q);
+				
+				// Update the progress bar
+				updateProgressBar();
 			}
 		}
 	});
@@ -58,32 +65,58 @@ $(document).ready(function() {
 		}
 		else {
 			$("input[name='answers']").val(JSON.stringify(answersArray));
+			$("input[name='competencyValues']").val(JSON.stringify(competencyArray));
 			$("form#quizForm").submit();
 		}
 	});
 });
 
-function loadQuestion(question) {
+/**
+ * Load all questions using the get_quiz_questions.php script
+ * which returns an array of JSON objects. Each object has the
+ * format of the Questions table, and so each object has a
+ * Question key value pair. Load all of these Question values
+ * into the questionsArray array. This is done once on document load
+ * to make for faster loading of questions.
+*/
+function loadAllQuestions() {
 	$.ajax({
 			type: 'GET',
-			url: 'includes/get_question.php',
-			data: 'q=' + question,
+			url: 'includes/get_quiz_questions.php',
 			cache: false,
 			success: function(result) {
 				var json = JSON.parse(result);
-				$("#question").html(json.Question);
+				for (var i = 0; i < json.length; i++)
+				{
+					questionsArray[i] = json[i].Question;
+					competencyArray[i] = json[i].CompetencyID;
+				}
+				$("#numQuestions").html(questionsArray.length);
+				$("#numQuestions").removeClass("fa");
+				$("#numQuestions").removeClass("fa-spinner");
+				$("#numQuestions").removeClass("fa-spin");
 			}
 	});
+}
+
+/**
+ * Load the question from the questionsArray.
+ * Check buttons are properly disabled/enabled
+ * and update the progress bar.
+ * @param {int} question - The question number to load
+ */
+function loadQuestion(question) {
+	$("#question").html(questionsArray[question]);
 	
 	// Ensure proper buttons are shown/hidden
 	// I.e. previous button not needed at the start
 	// Toggled disabled
-	if (question == 1) {
+	if (question == 0) {
 		$("#submitQuiz").hide();
 		$("#nextQuestion").removeClass("disabled");
 		$("#prevQuestion").addClass("disabled");
 	}
-	else if (question == numQuestions) {
+	else if (question == questionsArray.length-1) {
 		$("#submitQuiz").show();
 		$("#nextQuestion").addClass("disabled");
 		$("#prevQuestion").removeClass("disabled");
@@ -97,7 +130,6 @@ function loadQuestion(question) {
 	// If question has already been answered
 	// Load that answer
 	var val = answersArray[question];
-	console.log(val);
 	if (val)
 	{
 		var selector = "#answerRadio"+val;
@@ -105,17 +137,16 @@ function loadQuestion(question) {
 	}
 }
 
-function getNumQuestions() {
-	$.ajax({
-			type: 'GET',
-			url: 'includes/get_num_questions.php',
-			cache: false,
-			success: function(result) {
-				numQuestions = result;
-			}
-	});
+function updateProgressBar() {
+	var progressValue = Math.floor(q / (questionsArray.length - 1) * 100);
+	$(".progress-bar").attr('aria-valuenow', progressValue);
+	$(".progress-bar").html(progressValue + "%");
+	$(".progress-bar").css('width', progressValue + "%");
 }
 
+/**
+ * Returns the index of the radio button checked.
+ */
 function getCheckedValue()
 {
 	return $('form input[type=radio]:checked').val();
