@@ -1,11 +1,11 @@
 <?php
-session_start();
-	
 /********* INCLUDES **********/
+require_once('includes/session_start.php');
 require_once('includes/db_functions.php');
 require_once('includes/redirect.php');
-include('includes/ensure_login.php');
 /****************************/
+
+ensure_user_logged_in();
 
 // Assign variables. Get competency info from DB.
 if ($_SERVER["REQUEST_METHOD"] == "GET")

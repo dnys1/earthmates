@@ -1,7 +1,6 @@
 <?php
-	session_start();
-	
 	/********* INCLUDES **********/
+	require_once('includes/session_start.php');
 	require_once('includes/db_functions.php');
 	require_once('includes/redirect.php');
 	/****************************/
@@ -19,7 +18,7 @@
 		else
 		{
 			$tokenUserID = $tokenFollowerID = $_SESSION['userID'];
-			updateQuizComplete(true);
+			updateQuizComplete($tokenUserID, true);
 		}
 		
 		// Array of answers
@@ -46,7 +45,6 @@
 			redirect_to('profile.php?success=1');
 		else
 			redirect_to('index.php?success=1');
-		
 	}
 	else
 	{
@@ -62,7 +60,8 @@
 			}
 			else
 			{
-				redirect_to('index.php');
+				// Invalid token
+				redirect_to('index.php?token-invalid=1');
 			}
 		}
 		else
@@ -71,7 +70,7 @@
 			{
 				// User is not logged in
 				// and no token is provided
-				redirect_to('index.php');
+				redirect_to('index.php?login-required=1');
 			}
 		}
 	}

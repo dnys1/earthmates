@@ -6,14 +6,14 @@ html {
 }
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 140px;
+  margin-bottom: 60px;
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 70px;
+  height: 60px;
   background-color: #f5f5f5;
 }
 
@@ -69,9 +69,9 @@ code {
 
 .btn-xlg {
 	padding: 20px 32px;
-    font-size: 36px;
-    line-height: 1.3333333;
-    border-radius: 6px;
+	font-size: 36px;
+	line-height: 1.3333333;
+	border-radius: 6px;
 }
 
 /* Sign In page styles
@@ -116,18 +116,29 @@ code {
 }
 
 /*** PROFILE PAGE ***/
+.welcome-text {
+	margin-bottom: 60px;
+}
+
 .profile-buttons {
 	width: 50%;
 	min-width: 50%;
 	margin: auto;
+	margin-bottom: 30px;
 }
 
 .profile-button {
-	min-width: 200px;
-	width: 10%;
+	min-width: 250px;
 	margin-left: 10px;
 	margin-right: 10px;
-	margin-bottom: 20px;
+}
+
+.table-score {
+	text-align: center;
+}
+
+.profile-table tr:hpver {
+	cursor: pointer;
 }
 
 /** SELF QUIZ PAGE **/
@@ -151,4 +162,14 @@ code {
 
 #quizContainer input[type="radio"] {
 	padding-left: 15px;
+}
+
+/** COMPETENCY PAGE **/
+.cover {
+	width: 100px;
+	margin-right: 20px;
+}
+
+.resource blockquote {
+	margin-left: 120px;
 }

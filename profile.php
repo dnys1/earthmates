@@ -1,7 +1,6 @@
 <?php
-	session_start();
-	
 	/********* INCLUDES **********/
+	require_once('includes/session_start.php');
 	require_once('includes/db_functions.php');
 	require_once('includes/redirect.php');
 	/****************************/
@@ -25,7 +24,10 @@
 		}
 	}
 	
-	$quizComplete = $_SESSION['quizComplete'];
+	if (isset($_SESSION['quizComplete']))
+		$quizComplete = $_SESSION['quizComplete'];
+	else
+		$quizComplete = false;
 	
 	require_once('pages/profile_page.php');
 	?>

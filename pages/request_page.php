@@ -36,7 +36,7 @@
 					echo "</div>\n";
 				}
 			?>
-			<p>In order to request feedback, please fill out the form below.</p>
+			<p class="text-center">Enter the information of the person you'd like to request feedback from.</p>
       <form class="form-signin" method="post" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]) ?>">
 				<div class="form-group">
 					<label for="firstName">First Name</label>

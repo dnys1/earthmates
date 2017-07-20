@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-		<?php 
-			$pageTitle = "Self-Assessment";
-			$pageDescription = "Time to test your skills!";
+		<?php
+			if(isset($tokenFollowerID) && !empty($tokenFollowerID))
+			{
+				$selfAssessment = false;
+				$pageTitle = "Assessment";
+				$pageDescription = "Time to evaluate your peer!";
+			}
+			else
+			{
+				$selfAssessment = true;
+				$pageTitle = "Self-Assessment";
+				$pageDescription = "Time to test your skills!";
+			}
 			include('includes/header.php'); 
 		?>
 		<script src="js/quiz.js"></script>
@@ -17,7 +27,7 @@
     <!-- Begin page content -->
     <div class="container">
       <div class="page-header">
-        <h1><?php echo $pageTitle ?></h1>
+        <h1><?php echo $pageTitle; if(!$selfAssessment) echo " for " . getUserName($tokenUserID); ?></h1>
       </div>
 			
 			<div class="panel panel-default">
@@ -31,9 +41,20 @@
 				
 				<!-- Welcome panel -->
 				<div class="panel-body" id="welcomeScreen">
-					Welcome to the self assessment. You'll be asked to evaluate a series of statements regarding your
-					personal beliefs and levels of awareness. Please answer as honestly as possible. Only you will be
-					able to see the results of the assessment, unless you choose otherwise.<br><br>
+					<?php 
+					if($selfAssessment)
+					{
+						echo 	"Welcome to the self assessment. You'll be asked to evaluate a series of statements regarding your
+									personal beliefs and levels of awareness. Please answer as honestly as possible. Only you will be
+									able to see the results of the assessment, unless you choose otherwise.<br><br>";
+					}
+					else
+					{
+						echo 	"Thanks for choosing to take part in this assessment. You'll be asked to evaluate a series of statements
+									regarding " . getFirstName($tokenUserID) . "'s behaviors and levels of awareness. Please answer as honestly
+									as possible. Only they will be able to see the results of the assessment.<br><br>";
+					}
+					?>
 					There are <span id="numQuestions" class="fa fa-spinner fa-spin"></span> questions. Press "Start" to begin.
 					<button type="button" class="btn btn-default center-block" id="startButton">Start</button>
 				</div>

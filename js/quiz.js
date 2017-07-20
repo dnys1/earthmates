@@ -64,6 +64,11 @@ $(document).ready(function() {
 			alert('Nothing is checked');
 		}
 		else {
+			// record the last answer
+			answersArray[q] = getCheckedValue();
+			
+			// update POST variables
+			// and submit the quiz form
 			$("input[name='answers']").val(JSON.stringify(answersArray));
 			$("input[name='competencyValues']").val(JSON.stringify(competencyArray));
 			$("form#quizForm").submit();

@@ -1,6 +1,9 @@
 <?php
-session_start();
+/* Declare strict return types */
 declare(strict_types = 1);
+
+/* Ensure the session has started, i.e. load vars */
+require_once('session_start.php');
 
 $link = connectToDB();
 
@@ -94,7 +97,7 @@ function updateQuizComplete($userID, $boolVal) : bool
 	global $link;
 	
 	try {
-		$handle = $link->prepare('UPDATE Users SET QuizComplete = ? WHERE UserID = ?');
+		$handle = $link->prepare('UPDATE Users SET QuizComplete = ? WHERE ID = ?');
 		$handle->bindValue(1, $boolVal);
 		$handle->bindValue(2, $userID, \PDO::PARAM_INT);
 		
@@ -110,14 +113,32 @@ function updateQuizComplete($userID, $boolVal) : bool
 	}
 }
 
+function getResourcesForCompetency($competencyID)
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT * FROM ResourceDescriptions WHERE CompetencyID = ?');
+		$handle->bindValue(1, $competencyID, \PDO::PARAM_INT);
+		$handle->execute();
+		
+		return $handle->fetchAll();
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
 function getCompetencyIndex($userID, $competencyID)
 {
 	global $link;
 	
 	try {
 		$handle = $link->prepare('SELECT * FROM CompetencyIndex WHERE UserID = ? AND CompetencyID = ?');
-		$handle->bindValue(1, $userID, PDO::PARAM_INT);
-		$handle->bindValue(2, $competencyID, PDO::PARAM_INT);
+		$handle->bindValue(1, $userID, \PDO::PARAM_INT);
+		$handle->bindValue(2, $competencyID, \PDO::PARAM_INT);
 		$handle->execute();
 		
 		return $handle->fetchAll();
@@ -161,6 +182,26 @@ function getUserName($userID) : string
 		$row = $handle->fetch();
 		$name = $row['FirstName'] . " " . $row['LastName'];
 		return $name;
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
+function getFirstName($userID) : string
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT * FROM Users Where ID = ?');
+		$handle->bindValue(1, $userID, \PDO::PARAM_INT);
+		$handle->execute();
+		
+		$row = $handle->fetch();
+		$firstName = $row['FirstName'];
+		return $firstName;
 	}
 	catch(\PDOException $e)
 	{
@@ -301,23 +342,6 @@ function getNumberOfQuestions() : int
 		$handle->execute();
 		
 		return intval(($handle->fetch()[0]));
-	}
-	catch(\PDOException $e)
-	{
-		print($e->getMessage());
-		return NULL;
-	}
-}
-
-function loadQuestionSet()
-{
-	global $link;
-	
-	try {
-		$handle = $link->prepare('SELECT * FROM Questions');
-		$handle->execute();
-		
-		return $handle->fetchAll();
 	}
 	catch(\PDOException $e)
 	{

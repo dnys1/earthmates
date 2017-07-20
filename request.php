@@ -1,13 +1,13 @@
 <?php
-session_start();
-
 /********* INCLUDES **********/
+require_once('includes/session_start.php');
 require_once('includes/db_functions.php');
 require_once('includes/redirect.php');
 require_once('includes/form_functions.php');
 require_once('includes/PHPMailer/PHPMailerAutoload.php');
-include('includes/ensure_login.php');
 /****************************/
+
+ensure_user_logged_in();
 
 $err = "";
 $firstName = $lastName = $email = "";

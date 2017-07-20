@@ -6,6 +6,10 @@
 			$pageDescription = "Competency: " . $competencyName;
 			include('includes/header.php'); 
 		?>
+		<script>
+			var $_GET = <?php echo json_encode($_GET); ?>;
+		</script>
+		<script src="js/load_resources.js"></script>
 	</head>
 
   <body>
@@ -18,7 +22,28 @@
 			<div class="page-header">
 				<h1><?php echo $competencyName ?></h1>
 			</div>
-			<p class="lead">Your score is: <?php echo getAverageCompetencyScore($_SESSION['userID'], $competencyID) ?></p>
+			
+			<!-- Score panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Score</h3>
+				</div>
+				<div class="panel-body" id="scorePanel">
+				<p class="lead text-center">
+					Your score is: <?php echo number_format(getAverageCompetencyScore($_SESSION['userID'], $competencyID), 1); ?>
+				</p>
+				</div>
+			</div>
+			
+			<!-- Resources panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Resources</h3>
+				</div>
+				<div class="panel-body" id="resourcePanel">
+				<span id="spinner" class="fa fa-spinner fa-spin"></span>
+				</div>
+			</div>
 			
 			<!-- Comments panel -->
 			<div class="panel panel-default">
