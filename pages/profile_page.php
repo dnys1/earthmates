@@ -29,7 +29,7 @@
 					if (!$quizComplete)
 						echo '<a href="quiz.php" class="btn btn-lg btn-success profile-button">Take the Quiz!</a>';
 					else
-						echo '<a href="quiz.php" class="btn btn-lg btn-success profile-button disabled">Take the Quiz!</a>';
+						echo '<a href="quiz.php" class="btn btn-lg btn-default profile-button disabled">Take the Quiz!</a>';
 				?>
 				<a href="request.php" class="btn btn-lg btn-success profile-button">Request Feedback</a>
 			</div>

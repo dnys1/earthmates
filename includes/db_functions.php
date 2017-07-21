@@ -38,7 +38,7 @@ function getAllCompetencies()
 	global $link;
 	
 	try {
-		$handle = $link->prepare('SELECT * FROM Competencies');
+		$handle = $link->prepare('SELECT * FROM Competencies ORDER BY ListOrder');
 		$handle->execute();
 		
 		$competencies = $handle->fetchAll();

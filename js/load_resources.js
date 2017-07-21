@@ -2,6 +2,27 @@ var resourceJSONArray; // Array of JSON objects
 
 $(document).ready(loadAllResources);
 
+function escapeHtml(text) {
+  var map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+
+  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
+function replaceQuotes(text) {
+  var map = {
+    '“': '"',
+    '”': '"'
+  };
+
+  return text.replace(/[“”]/g, function(m) { return map[m]; });
+}
+
 function loadAllResources() {
 	$.ajax({
 			type: 'GET',
@@ -23,7 +44,7 @@ function loadAllResourceDescriptions() {
 			cache: false,
 			success: function(result) {
 				// If it returns an empty array
-				if (!json || !json.length) 
+				if (result == "[]")
 				{
 					$("#spinner").html("There don't appear to be any resources for this competency, yet.");
 					$("#spinner").removeClass("fa");
@@ -44,19 +65,22 @@ function loadAllResourceDescriptions() {
 					var author = resourceJSONArray[resourceIndex].Author;
 					var imageLink = resourceJSONArray[resourceIndex].ImageLink;
 					var description = json[i].Description;
-					var quote = json[i].Quote;
+					var quoteArray = replaceQuotes(json[i].QuoteArray);
+					quoteArray = JSON.parse(quoteArray);
 					
 					// Create the resource div
 					div += '<div class="resource" id="resource' + i + '">';
 					div += '<img src="' + imageLink + '" class="cover pull-left" alt="' + title + '" />';
 					div += '<h3 class="title">' + title;
-					if (subtitle) div += '<small>' + subtitle + '</small>';
+					if (subtitle) div += ' <small>' + subtitle + '</small>';
 					div += '</h3>';
-					div += '<h4 class="author">' + author + '</h4>';
+					div += '<h4 class="author"><i>' + author + '</i></h4>';
 					if (description) div += '<p class="description">' + description + '</p>';
-					if (quote) {
+					if (quoteArray) {
 						div += '<blockquote>';
-						div += '<p class="quote">' + quote + '</p>';
+						quoteArray.forEach(function(item, index) {
+							div += '<p class="quote">' + item + '</p>';
+						});
 						div += '</blockquote>';
 					}
 					div += '</div>';

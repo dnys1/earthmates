@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-				<div class="panel-heading">Competencies (Click on one for more information)</div>
+				<div class="panel-heading">Competencies (Click for more information)</div>
 				<table class="table table-hover profile-table">
 					<thead>
 						<tr>
