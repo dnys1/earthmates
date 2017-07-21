@@ -115,6 +115,7 @@
 						// Redirect to Profile
 						$_SESSION['userID'] = $handle->fetchColumn();
 						$_SESSION['userName'] = $firstName . ' ' . $lastName;
+						$_SESSION['userEmail'] = $resultArray[3];
 						
 						redirect_to('profile.php?signup=1');
 					}

@@ -53,6 +53,7 @@
 			if (password_verify($inputPassword, $savedHash)) {
 				$_SESSION['userID'] = $resultArray[0];
 				$_SESSION['userName'] = $resultArray[1] . " " . $resultArray[2];
+				$_SESSION['userEmail'] = $resultArray[3];
 				$_SESSION['quizComplete'] = $resultArray[5];
 				redirect_to('profile.php');
 			} 
