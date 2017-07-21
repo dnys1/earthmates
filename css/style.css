@@ -5,8 +5,8 @@ html {
   min-height: 100%;
 }
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  /* Margin bottom by footer height + 20px */
+  margin-bottom: 80px;
 }
 .footer {
   position: absolute;
@@ -115,6 +115,15 @@ code {
 	margin-bottom: 10px;
 }
 
+/**** INDEX PAGE ****/
+.book-cover img {
+	height: 300px;
+}
+
+.book-cover {
+	text-align: center;
+}
+
 /**** ABOUT PAGE ****/
 .about-container h2 {
 	margin-bottom: 20px;
@@ -128,7 +137,6 @@ code {
 
 .about-button {
 	margin-top: 20px;
-	margin-bottom: 20px;
 }
 
 /*** PROFILE PAGE ***/

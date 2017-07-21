@@ -46,13 +46,13 @@
 			improvement. By becoming aware of what could be improved, we allow for the possibility of improvement. This tool is meant to serve as both a jumping off point, to get you grounded in a new reality,
 			and as a springboard, to provide further resources to keep you heading in the right direction.<br><br>
 			</p>
-			<p class="text-center">
+			<h4 class="text-center">
 			We're not here to tell you what to do; we're only here to serve as a platform for honest dialogue.
-			</p>
+			</h4>
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="text-center">
-						<a class="btn btn-lg btn-success about-button" href="signup.php">Let's get started!</a>
+						<a class="btn btn-lg btn-primary about-button" href="signup.php">Let's get started!</a>
 					</div>
 				</div>
 			</div>

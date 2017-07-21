@@ -1,3 +1,11 @@
+<!-- Scores explanation -->
+<div class="panel panel-default">
+	<div class="panel-heading">What Do Your Scores Mean?</div>
+	<div class="panel-body">
+		<h3>What do scores mean?</h3>
+	</div>
+</div>
+
 <div class="panel panel-default">
 				<div class="panel-heading">Competencies (Click for more information)</div>
 				<table class="table table-hover profile-table">

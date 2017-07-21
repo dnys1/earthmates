@@ -32,11 +32,11 @@
     <div class="container">
 			<h3>Based off the breakthrough principles of these works:</h3>
 		
-      <!-- Example row of columns -->
+      <!-- Row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <h2>Good to Great: Why Some Companies Make the Leap... and Others Don't <small>Jim Collins</small></h2>
-          <img src="img/collins.png" class="img-responsive" alt="Jim Collins Good to Great">
+          <h2 title="Good to Great: Why Some Companies Make the Leap... and Others Don't">Good to Great: Why Some Companies... <small>Jim Collins</small></h2>
+          <img src="img/collins.jpg" class="img-responsive" alt="Jim Collins Good to Great">
         </div>
         <div class="col-md-4">
           <h2>How to Win Friends and Influence People <small>Dale Carnegie</small></h2>
