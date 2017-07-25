@@ -1,11 +1,15 @@
-var questionsArray = [];
-var competencyArray = [];
-var answersArray = [];
+// selfAssessment defined in quiz_page.php
+var questionsArray = []; // array of objects
 var q = 0;
 
 $(document).ready(function() {
 	$("#quizContainer").hide();
 	loadAllQuestions();
+	
+	if(selfAssessment)
+		$(".meOrThem").html("me")
+	else
+		$(".meOrThem").html("them");
 	
 	$("#startButton").click(function() {
 		$("#welcomeScreen").hide();
@@ -14,7 +18,7 @@ $(document).ready(function() {
 		$("#nextQuestion").removeClass("disabled");
 		$("#prevQuestion").addClass("disabled");
 		
-		loadQuestion(q);
+		loadQuestion();
 	});
 	
 	$("#prevQuestion").click(function() {
@@ -22,14 +26,15 @@ $(document).ready(function() {
 			// Check if radio is marked
 			if($('form input[type=radio]:checked').val()) {
 				// Record answer to array
-				answersArray[q] = getCheckedValue();
+				recordCheckedValue();
 			}
 			
 			// Unmark all radio buttons
 			$("input[name=answerRadio]").prop("checked", false);
 			
 			// Load previous question
-			loadQuestion(--q);
+			q--;
+			loadQuestion();
 			
 			// Update the progress bar
 			updateProgressBar();
@@ -42,13 +47,14 @@ $(document).ready(function() {
 				alert('Nothing is checked');
 			} else {
 				// Record answer to array
-				answersArray[q] = getCheckedValue();
+				recordCheckedValue();
 				
 				// Unmark all radio buttons
 				$("input[name=answerRadio]").prop("checked", false);
 				
 				// Load next question
-				loadQuestion(++q);
+				q++;
+				loadQuestion();
 				
 				// Update the progress bar
 				updateProgressBar();
@@ -65,12 +71,11 @@ $(document).ready(function() {
 		}
 		else {
 			// record the last answer
-			answersArray[q] = getCheckedValue();
+			recordCheckedValue();
 			
 			// update POST variables
 			// and submit the quiz form
-			$("input[name='answers']").val(JSON.stringify(answersArray));
-			$("input[name='competencyValues']").val(JSON.stringify(competencyArray));
+			$("input[name='answers']").val(JSON.stringify(questionsArray));
 			$("form#quizForm").submit();
 		}
 	});
@@ -93,9 +98,16 @@ function loadAllQuestions() {
 				var json = JSON.parse(result);
 				for (var i = 0; i < json.length; i++)
 				{
-					questionsArray[i] = json[i].Question;
-					competencyArray[i] = json[i].CompetencyID;
+					questionsArray[i] = {};
+					if(selfAssessment)
+						questionsArray[i].question = json[i].QuestionSelf;
+					else
+						questionsArray[i].question = json[i].QuestionOther;
+					
+					questionsArray[i].weight = parseInt(json[i].WeightValue);
+					questionsArray[i].competencyID = parseInt(json[i].CompetencyID);
 				}
+				shuffleArray();
 				$("#numQuestions").html(questionsArray.length);
 				$("#numQuestions").removeClass("fa");
 				$("#numQuestions").removeClass("fa-spinner");
@@ -104,24 +116,41 @@ function loadAllQuestions() {
 	});
 }
 
+function shuffleArray() {
+  var currentIndex = questionsArray.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = questionsArray[currentIndex];
+    questionsArray[currentIndex] = questionsArray[randomIndex];
+    questionsArray[randomIndex] = temporaryValue;
+  }
+}
+
 /**
  * Load the question from the questionsArray.
  * Check buttons are properly disabled/enabled
  * and update the progress bar.
  * @param {int} question - The question number to load
  */
-function loadQuestion(question) {
-	$("#question").html(questionsArray[question]);
+function loadQuestion() {
+	$("#question").html(questionsArray[q].question);
 	
 	// Ensure proper buttons are shown/hidden
 	// I.e. previous button not needed at the start
 	// Toggled disabled
-	if (question == 0) {
+	if (q == 0) {
 		$("#submitQuiz").hide();
 		$("#nextQuestion").removeClass("disabled");
 		$("#prevQuestion").addClass("disabled");
 	}
-	else if (question == questionsArray.length-1) {
+	else if (q == questionsArray.length-1) {
 		$("#submitQuiz").show();
 		$("#nextQuestion").addClass("disabled");
 		$("#prevQuestion").removeClass("disabled");
@@ -134,7 +163,7 @@ function loadQuestion(question) {
 	
 	// If question has already been answered
 	// Load that answer
-	var val = answersArray[question];
+	var val = questionsArray[q].answer;
 	if (val)
 	{
 		var selector = "#answerRadio"+val;
@@ -152,7 +181,13 @@ function updateProgressBar() {
 /**
  * Returns the index of the radio button checked.
  */
-function getCheckedValue()
+function recordCheckedValue()
 {
-	return $('form input[type=radio]:checked').val();
+	var val = $('form input[type=radio]:checked').val();
+	if (questionsArray[q].weight == -1)
+	{
+		val = 5 - val;
+	}
+	questionsArray[q].answer = val;
+	console.log("q: "+q+" val: "+val);
 }

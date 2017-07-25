@@ -5,6 +5,7 @@
 	require_once('includes/redirect.php');
 	/****************************/
 	
+	
 	/* Process quiz data */
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
@@ -21,19 +22,12 @@
 			updateQuizComplete($tokenUserID, true);
 		}
 		
-		// Array of answers
-		$competencyValues = $_POST['competencyValues'];
-		$competencyValues = json_decode($competencyValues);
-		
-		$answers = $_POST['answers'];
-		$answers = json_decode($answers);
-		
-		for ($x = 0; $x < count($answers); $x++)
-		{
-			$ans = $answers[$x];
-			$comp = $competencyValues[$x];
-			
-			postValue($tokenUserID, $tokenFollowerID, $comp, $ans);
+		$array = $_POST['answers'];
+		$array = json_decode($array);
+		foreach ($array as $value){
+			$competency = $value->competencyID;
+			$answer = $value->answer;
+			postValue($tokenUserID, $tokenFollowerID, $competency, $answer);
 		}
 		
 		// Delete the token and invalidate it

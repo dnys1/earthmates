@@ -16,6 +16,7 @@
 			}
 			include('includes/header.php'); 
 		?>
+		<script>var selfAssessment = <?php echo $selfAssessment ? 'true' : 'false';?>;</script>
 		<script src="js/quiz.js"></script>
 	</head>
 
@@ -66,37 +67,37 @@
 					<div class="radio form-group">
 						<label>
 							<input type="radio" name="answerRadio" id="answerRadio0" value="0">
-							Very untrue of me
+							Very untrue of <span class="meOrThem"></span>
 						</label>
 					</div>
 					<div class="radio form-group">
 						<label>
 							<input type="radio" name="answerRadio" id="answerRadio1" value="1">
-							Untrue of me
+							Untrue of <span class="meOrThem"></span>
 						</label>
 					</div>
 					<div class="radio form-group">
 						<label>
 							<input type="radio" name="answerRadio" id="answerRadio2" value="2">
-							Somewhat untrue of me
+							Somewhat untrue of <span class="meOrThem"></span>
 						</label>
 					</div>
 					<div class="radio form-group">
 						<label>
 							<input type="radio" name="answerRadio" id="answerRadio3" value="3">
-							Somewhat true of me
+							Somewhat true of <span class="meOrThem"></span>
 						</label>
 					</div>
 					<div class="radio form-group">
 						<label>
 							<input type="radio" name="answerRadio" id="answerRadio4" value="4">
-							True of me
+							True of <span class="meOrThem"></span>
 						</label>
 					</div>
 					<div class="radio form-group">
 						<label>
 							<input type="radio" name="answerRadio" id="answerRadio5" value="5">
-							Very true of me
+							Very true of <span class="meOrThem"></span>
 						</label>
 					</div>
 					<input type="hidden" name="answers" />

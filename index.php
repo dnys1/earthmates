@@ -1,5 +1,25 @@
 <?php
 	require_once('includes/session_start.php');
+	
+	$message = "";
+	
+	if ($_SERVER["REQUEST_METHOD"] == "GET")
+	{
+		if (isset($_GET["success"]) && intval($_GET['success']) == 1)
+		{
+			$message .= '<div class="alert alert-success" role="alert">';
+			$message .= "Thanks for taking the quiz! Your answers have been recorded and the recipient will be notified.";
+			$message .= "</div>";
+		}
+		
+		if (isset($_GET["token-invalid"]) && intval($_GET['token-invalid']) == 1)
+		{
+			$message .= '<div class="alert alert-danger" role="alert">';
+			$message .= '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>' . "\n";
+			$message .= "That quiz is no longer available.";
+			$message .= "</div>";
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +36,8 @@
    <!-- Fixed navbar -->
    <?php include('includes/navbar.php'); ?>
 
+	 <div class="container">
+	 <?php if(isset($message)) { echo $message; } ?>
 		<!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
@@ -48,6 +70,7 @@
         </div>
       </div>
     </div>
+		</div>
 	
 	<?php
 		// include('includes/page_nav.html');

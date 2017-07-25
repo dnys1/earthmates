@@ -1,11 +1,19 @@
-<!-- Scores explanation -->
+<!-- Scores explanation
 <div class="panel panel-default">
 	<div class="panel-heading">What Do Your Scores Mean?</div>
 	<div class="panel-body">
-		<h3>What do scores mean?</h3>
+		<p>In general, the scoring was designed to follow this pattern:</p>
+		<ul>
+			<li><b>Level 0:</b> </li>
+			<li><b>Level 1:</b> </li>
+			<li><b>Level 2:</b> </li>
+			<li><b>Level 3:</b> </li>
+			<li><b>Level 4:</b> </li>
+			<li><b>Level 5:</b> </li>
+		</ul>
 	</div>
 </div>
-
+-->
 <div class="panel panel-default">
 				<div class="panel-heading">Competencies (Click for more information)</div>
 				<table class="table table-hover profile-table">
