@@ -51,8 +51,9 @@ function isEmptyCompetencyIndex($userID) : bool
 	global $link;
 		
 	try {
-		$handle = $link->prepare('SELECT * FROM CompetencyIndex WHERE UserID = ?');
+		$handle = $link->prepare('SELECT * FROM CompetencyIndex WHERE UserID = ? AND FollowerID <> ?');
 		$handle->bindValue(1, $userID, \PDO::PARAM_INT);
+		$handle->bindValue(2, $userID, \PDO::PARAM_INT);
 		$handle->execute();
 		
 		if(empty($handle->fetchAll())) {
@@ -73,12 +74,15 @@ function updateQuizComplete($userID, $boolVal) : bool
 	global $link;
 	
 	try {
-		$handle = $link->prepare('UPDATE Users SET QuizComplete = ? WHERE ID = ?');
+		$handle = $link->prepare('UPDATE Users SET QuizComplete = ?, QuizResume = NULL WHERE ID = ?');
 		$handle->bindValue(1, $boolVal);
 		$handle->bindValue(2, $userID, \PDO::PARAM_INT);
 		
 		$handle->execute();
+		
+		// Update SESSION vars
 		$_SESSION['quizComplete'] = true;
+		if(isset($_SESSION['quizResume'])) unset($_SESSION['quizResume']);
 		
 		return true;
 	}
@@ -126,7 +130,7 @@ function getCompetencyIndex($userID, $competencyID)
 	}
 }
 
-function getAverageCompetencyScore($userID, $competencyID) : float
+function getAverageSelfCompetencyScore($userID, $competencyID) : float
 {
 	global $link;
 	
@@ -145,6 +149,28 @@ function getAverageCompetencyScore($userID, $competencyID) : float
 		return NULL;
 	}
 }
+
+function getAverageOtherCompetencyScore($userID, $competencyID) : float
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT AVG(Level) AS "CompetencyScore" FROM CompetencyIndex WHERE UserID = ? AND CompetencyID = ? AND FollowerID <> ?');
+		$handle->bindValue(1, $userID, \PDO::PARAM_INT);
+		$handle->bindValue(2, $competencyID, \PDO::PARAM_INT);
+		$handle->bindValue(3, $userID, \PDO::PARAM_INT);
+		$handle->execute();
+		
+		$row = $handle->fetch();
+		return floatval($row['CompetencyScore']);
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
 
 function getUserName($userID) : string
 {
@@ -361,6 +387,23 @@ function postValue($userID, $followerID, $competencyID, $level) : bool
 	{
 		print($e->getMessage());
 		return false;
+	}
+}
+
+function saveIncompleteQuestions($userID, $questionString) : bool
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('UPDATE Users SET QuizResume = ? WHERE ID = ?');
+		$handle->bindValue(1, $questionString);
+		$handle->bindValue(2, $userID, \PDO::PARAM_INT);
+		
+		return $handle->execute();
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
 	}
 }
 

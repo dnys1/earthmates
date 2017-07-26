@@ -30,7 +30,8 @@
 				</div>
 				<div class="panel-body" id="scorePanel">
 				<p class="lead text-center">
-					Your score is: <?php echo number_format(getAverageCompetencyScore($_SESSION['userID'], $competencyID), 1); ?><br>
+					Your self-score is: <?php echo number_format(getAverageSelfCompetencyScore($_SESSION['userID'], $competencyID), 1); ?>
+					Your score among others is: <?php echo number_format(getAverageOtherCompetencyScore($_SESSION['userID'], $competencyID), 1); ?><br>
 					
 					<h4>Explain the score.</h4>
 				</p>

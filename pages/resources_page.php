@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
 		<?php 
-			$pageTitle = "Template";
-			$pageDescription = "EarthMates template page";
+			$pageTitle = "Resources";
+			$pageDescription = "A compiled list of resources geared towards becoming a better human being.";
 			include('includes/header.php'); 
 		?>
 	</head>

@@ -1,5 +1,6 @@
 // selfAssessment defined in quiz_page.php
 var questionsArray = []; // array of objects
+var completedIDs = [];
 var q = 0;
 
 $(document).ready(function() {
@@ -79,6 +80,18 @@ $(document).ready(function() {
 			$("form#quizForm").submit();
 		}
 	});
+	
+	$("#saveProgress").click(function() {
+		if($('form input[type=radio]:checked').val()) {
+			// record the last answer
+			recordCheckedValue();
+		}
+		
+		// update POST variables
+		// and submit the quiz form
+		$("input[name='answers']").val(JSON.stringify(questionsArray));
+		$("form#quizForm").submit();
+	});
 });
 
 /**
@@ -98,15 +111,31 @@ function loadAllQuestions() {
 				var json = JSON.parse(result);
 				for (var i = 0; i < json.length; i++)
 				{
-					questionsArray[i] = {};
-					if(selfAssessment)
-						questionsArray[i].question = json[i].QuestionSelf;
-					else
-						questionsArray[i].question = json[i].QuestionOther;
+					var questionID = parseInt(json[i].ID);
 					
-					questionsArray[i].weight = parseInt(json[i].WeightValue);
-					questionsArray[i].competencyID = parseInt(json[i].CompetencyID);
+					if(quizResume.indexOf(questionID) != -1)
+					{
+						questionObject = {};
+						if(selfAssessment)
+							questionObject.question = json[i].QuestionSelf;
+						else
+							questionObject.question = json[i].QuestionOther;
+						
+						// Save questions's ID so we can track progress
+						questionObject.ID = questionID;
+						
+						questionObject.weight = parseInt(json[i].WeightValue);
+						questionObject.competencyID = parseInt(json[i].CompetencyID);
+						
+						questionsArray.push(questionObject);
+					}
 				}
+				if (questionsArray.length < json.length)
+				{
+					// Some questions were omitted. Quiz is resume
+					console.log("resuming quiz...");
+				}
+				
 				shuffleArray();
 				$("#numQuestions").html(questionsArray.length);
 				$("#numQuestions").removeClass("fa");
@@ -147,16 +176,19 @@ function loadQuestion() {
 	// Toggled disabled
 	if (q == 0) {
 		$("#submitQuiz").hide();
+		$("#saveProgress").show();
 		$("#nextQuestion").removeClass("disabled");
 		$("#prevQuestion").addClass("disabled");
 	}
 	else if (q == questionsArray.length-1) {
 		$("#submitQuiz").show();
+		$("#saveProgress").hide();
 		$("#nextQuestion").addClass("disabled");
 		$("#prevQuestion").removeClass("disabled");
 	} 
 	else {
 		$("#submitQuiz").hide();
+		$("#saveProgress").show();
 		$("#prevQuestion").removeClass("disabled");
 		$("#nextQuestion").removeClass("disabled");
 	}

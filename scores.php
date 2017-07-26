@@ -6,22 +6,20 @@
 	/****************************/
 	
 	ensure_user_logged_in();
-
+	
 	$message = "";
 	
 	if ($_SERVER["REQUEST_METHOD"] == "GET")
 	{
-		if(isset($_GET['signup']) && intval($_GET['signup']) == 1) {
+		if(isset($_GET['success']) && intval($_GET['success']) == 1) {
 			$message .= '<div class="alert alert-success" role="alert">' . "\n";
-			$message .= "Success! Welcome to your profile.\n";
+			$message .= "Thanks for taking the quiz! Your answers have been recorded.\n";
 			$message .= "</div>\n";
 		}
 	}
 	
-	if (isset($_SESSION['quizComplete']))
-		$quizComplete = $_SESSION['quizComplete'];
-	else
-		$quizComplete = false;
+	if(!$_SESSION['quizComplete'] || !$_SESSION['receivedFeedback'])
+		redirect_to('profile.php');
 	
-	require_once('pages/profile_page.php');
-	?>
+	require_once('pages/scores_page.php');
+?>

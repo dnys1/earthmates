@@ -17,24 +17,19 @@
       <div class="page-header">
         <h1>Profile <small><?php echo $_SESSION['userName']; ?></small></h1>
       </div>
+
+			<?php if(!$_SESSION['quizComplete'] || !$_SESSION['receivedFeedback']) include('profile_panel.php'); ?>
 			
-			<?php
-				if (!$quizComplete)
-					echo  '<p class="lead welcome-text">' . "It looks like you're just getting started. That's great! Complete the self-assessment to generate your competency scores
-								and feel free to invite as many people as you'd like to increase the accuracy of your scores.</p>\n";
-			?>
-			
-			<div class="profile-buttons">
-				<?php 
-					if (!$quizComplete)
-						echo '<a href="quiz.php" class="btn btn-lg btn-success profile-button">Take the Quiz!</a>';
-					else
-						echo '<a href="quiz.php" class="btn btn-lg btn-default profile-button disabled">Take the Quiz!</a>';
-				?>
-				<a href="request.php" class="btn btn-lg btn-success profile-button">Request Feedback</a>
+			<div class="profile-info row">
+				<div class="col-md-2">
+					<img src="img/anonymous.png" class="img-responsive pull-left" />
+				</div>
+				<div class="col-md-10">
+					<h2><b>Name: </b><?php echo $_SESSION['userName']; ?></h2>
+					<h2><b>Email: </b><?php echo $_SESSION['userEmail']; ?></h2>
+					<h2><b>Location: </b></h2>
+				</div>
 			</div>
-			
-			<?php if($quizComplete) include('pages/profile_table.php') ?>
 		</div>
 	<?php include('includes/footer.php'); ?>
 	</body>

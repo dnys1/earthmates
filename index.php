@@ -57,16 +57,16 @@
       <!-- Row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <h2 title="Good to Great: Why Some Companies Make the Leap... and Others Don't">Good to Great: Why Some Companies... <small>Jim Collins</small></h2>
-          <img src="img/collins.jpg" class="img-responsive" alt="Jim Collins Good to Great">
-        </div>
-        <div class="col-md-4">
           <h2>How to Win Friends and Influence People <small>Dale Carnegie</small></h2>
-          <img src="img/carnegie.jpg" class="img-responsive" alt="Dale Carnegie How to Win Friends and Influence People">
+          <a href="https://www.amazon.com/How-Win-Friends-Influence-People/dp/0671027034"><img src="img/carnegie.jpg" class="img-responsive" alt="Dale Carnegie How to Win Friends and Influence People"></a>
        </div>
         <div class="col-md-4">
           <h2>The 7 Habits of Highly Effective People <small>Stephen Covey</small></h2>
-          <img src="img/covey.jpg" class="img-responsive" alt="Stephen Covey The 7 Habits of Highly Effective People">
+          <a href="https://www.amazon.com/Habits-Highly-Effective-People-Powerful/dp/0743269519"><img src="img/covey.jpg" class="img-responsive" alt="Stephen Covey The 7 Habits of Highly Effective People"></a>
+        </div>
+				<div class="col-md-4">
+          <h2>The Four Agreements <small>Don Miguel Ruiz</small></h2>
+          <a href="https://www.amazon.com/Four-Agreements-Practical-Personal-Freedom/dp/1878424319"><img src="img/ruiz.jpg" class="img-responsive" alt="Jim Collins Good to Great"></a>
         </div>
       </div>
     </div>

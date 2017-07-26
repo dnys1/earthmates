@@ -49,12 +49,15 @@
 			// 3 - Email
 			// 4 - PasswordHash
 			// 5 - QuizComplete
+			// 6 - QuizResume
 			$savedHash = $resultArray[4];
 			if (password_verify($inputPassword, $savedHash)) {
 				$_SESSION['userID'] = $resultArray[0];
 				$_SESSION['userName'] = $resultArray[1] . " " . $resultArray[2];
 				$_SESSION['userEmail'] = $resultArray[3];
 				$_SESSION['quizComplete'] = $resultArray[5];
+				if(!empty($resultArray[6])) $_SESSION['quizResume'] = $resultArray[6];
+				$_SESSION['receivedFeedback'] = !isEmptyCompetencyIndex($resultArray[0]);
 				redirect_to('profile.php');
 			} 
 			else

@@ -29,7 +29,7 @@
 			for the first time) who you are and what you're good at.
 			</p>
 			<p>
-			By working with this website, you'll engage with 17 competencies we believe to encompass the full range of the human experience. But don't take our word for it. If you've ever read leading
+			By working with this website, you'll engage with 16 competencies we believe to encompass the full range of the human experience. But don't take our word for it. If you've ever read leading
 			self-help gurus and business experts life Dale Carnegie, Stephen Covey, Jim Collins, etc., you'll surely recognize many, if not all, of the competencies listed.
 			</p>
 			<h2>Why?</h2>

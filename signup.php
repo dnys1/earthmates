@@ -116,6 +116,8 @@
 						$_SESSION['userID'] = $handle->fetchColumn();
 						$_SESSION['userName'] = $firstName . ' ' . $lastName;
 						$_SESSION['userEmail'] = $email;
+						$_SESSION['quizComplete'] = FALSE;
+						$_SESSION['receivedFeedback'] = FALSE;
 						
 						redirect_to('profile.php?signup=1');
 					}
@@ -127,6 +129,9 @@
 			}
 		}
 	}
+	
+	if(check_if_logged_in())
+		redirect_to('profile.php');
 
 	include('pages/signup_page.php');
 ?>

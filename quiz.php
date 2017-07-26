@@ -19,15 +19,47 @@
 		else
 		{
 			$tokenUserID = $tokenFollowerID = $_SESSION['userID'];
-			updateQuizComplete($tokenUserID, true);
 		}
+		
+		$incompleteQ = [];
+		if(isset($_SESSION['quizResume'])) $incompleteQ = json_decode($_SESSION['quizResume']);
 		
 		$array = $_POST['answers'];
 		$array = json_decode($array);
+		
 		foreach ($array as $value){
-			$competency = $value->competencyID;
-			$answer = $value->answer;
-			postValue($tokenUserID, $tokenFollowerID, $competency, $answer);
+			if(isset($value->answer))
+			{
+				$competency = $value->competencyID;
+				$answer = $value->answer;
+				// postValue($tokenUserID, $tokenFollowerID, $competency, $answer);
+				
+				// If it was previously an unanswered question and this is a quiz resume
+				// Delete it from the unanswered questions array
+				if(!empty($incompleteQ) && in_array($value->ID, $incompleteQ))
+				{
+					$index = array_search($value->ID, $incompleteQ);
+					array_splice($incompleteQ, $index, 1);
+				}
+			}
+			else
+			{
+				if(!in_array($value->ID, $incompleteQ))
+					$incompleteQ[] = $value->ID;
+			}
+		}
+		
+		// Quiz complete 
+		if(!isset($incompleteQ) || empty($incompleteQ))
+		{
+			updateQuizComplete($tokenUserID, true);
+		}
+		// Quiz incompelte
+		else
+		{
+			$incompleteString = json_encode($incompleteQ);
+			saveIncompleteQuestions($tokenUserID, $incompleteString);
+			$_SESSION['quizResume'] = $incompleteString;
 		}
 		
 		// Delete the token and invalidate it
@@ -35,13 +67,14 @@
 		if(isset($_SESSION['token']))
 			invalidateToken($_SESSION['token']);
 		
+		/*
 		if (check_if_logged_in())
-			redirect_to('profile.php?success=1');
+			redirect_to('scores.php?success=1');
 		else
-			redirect_to('index.php?success=1');
+			redirect_to('index.php?success=1');*/
 	}
 	else
-	{
+	{	
 		if(isset($_GET['token']) && !empty($_GET['token']))
 		{
 			$_SESSION['token'] = $token = $_GET['token'];
@@ -67,8 +100,8 @@
 				redirect_to('index.php?login-required=1');
 			}
 		}
-	}
 	
 	include('pages/quiz_page.php');
+	}
 ?>
 

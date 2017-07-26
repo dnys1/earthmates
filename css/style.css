@@ -140,8 +140,10 @@ code {
 }
 
 /*** PROFILE PAGE ***/
-.welcome-text {
-	margin-bottom: 60px;
+
+.profile-info {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .profile-buttons {
@@ -154,16 +156,48 @@ code {
 	min-width: 250px;
 	margin-left: 10px;
 	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.profile-panel {
 	margin-bottom: 30px;
 }
 
+/*** SCORES PAGE ***/
+
 .table-score {
 	text-align: center;
+	width: 11.25%;
 }
 
 .profile-table tr:hover {
 	cursor: pointer;
 }
+
+.bar-self {
+	font: 10px sans-serif;
+	background-color: #333;
+	text-align: right;
+	padding: 3px;
+	margin: 1px;
+	color: white;
+}
+
+.bar-other {
+	font: 10px sans-serif;
+	text-align: right;
+	padding: 3px;
+	margin: 1px;
+	color: white;
+}
+
+.you {color: #333;}
+.l1 {color: rgb(255,0,0);}
+.l2 {color: rgb(255,128,0);}
+.l3 {color: rgb(255,255,0);}
+.l4 {color: rgb(170,255,0);}
+.l5 {color: rgb(85,255,0);}
+.l6 {color: rgb(0,255,0);}
 
 /** SELF QUIZ PAGE **/
 #quizContainer {

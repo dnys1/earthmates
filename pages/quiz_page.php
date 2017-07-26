@@ -16,7 +16,11 @@
 			}
 			include('includes/header.php'); 
 		?>
-		<script>var selfAssessment = <?php echo $selfAssessment ? 'true' : 'false';?>;</script>
+		<script>
+			var selfAssessment = <?php echo $selfAssessment ? 'true' : 'false';?>;
+			var quizResume = [];
+			<?php if(isset($_SESSION['quizResume'])) echo "quizResume = " . $_SESSION['quizResume'] . ";"; ?>
+		</script>
 		<script src="js/quiz.js"></script>
 	</head>
 
@@ -56,7 +60,7 @@
 									as possible. Only they will be able to see the results of the assessment.<br><br>";
 					}
 					?>
-					There are <span id="numQuestions" class="fa fa-spinner fa-spin"></span> questions. Press "Start" to begin.
+					There are <span id="numQuestions" class="fa fa-spinner fa-spin"></span> questions. Click on "Save Progress" if you would like to come back later to finish.<br><br>
 					<button type="button" class="btn btn-default center-block" id="startButton">Start</button>
 				</div>
 				
@@ -107,7 +111,8 @@
 					<div class="form-group">
 						<button type="button" class="btn btn-lg btn-default" id="prevQuestion">Previous</button>
 						<button type="button" class="btn btn-lg btn-default" id="nextQuestion">Next</button>
-						<button type="button" class="btn btn-lg btn-success" id="submitQuiz">Submit</button>
+						<button type="button" class="btn btn-lg btn-primary pull-right" id="saveProgress">Save Progress</button>
+						<button type="button" class="btn btn-lg btn-success pull-right" id="submitQuiz">Submit</button>
 					</div>
 				</form>
 			</div>

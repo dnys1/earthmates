@@ -75,7 +75,7 @@
 			// Create the stable link
 			// Email to follower
 			// Generate success message at profile page
-			$followerLink = "https://earthmates.000webhostapp.com/feedback.php?token=" . $token;
+			$followerLink = "https://earthmates.000webhostapp.com/quiz.php?token=" . $token;
 			
 			$body = $_SESSION['userName'] . " is requesting feedback for his EarthMates profile. To provide them feedback, follow the link below.<br><br>";
 			$body .= '<a href="' . $followerLink . '">Link to form</a>';
