@@ -14,15 +14,7 @@
 		
 		<!-- Begin page content -->
     <div class="container">
-			<?php
-				if (isset($err) && !empty($err)) {
-					echo '<div class="alert alert-danger" role="alert">' . "\n";
-					echo '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>' . "\n";
-					echo '<span class="sr-only">Error:</span>' . "\n";
-					echo 'Enter a valid email/password combination' . "\n";
-					echo '</div>';
-				}
-			?>
+			<?php printAlerts(); ?>
 			<form class="form-signin" method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
         <h2 class="form-signin-heading">Sign in</h2>
 				<div class="input-group">

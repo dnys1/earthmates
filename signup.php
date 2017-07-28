@@ -4,11 +4,10 @@
 	require_once('includes/db_functions.php');
 	require_once('includes/redirect.php');
 	require_once('includes/form_functions.php');
+	require_once('includes/alerts.php');
 	/****************************/
 
-	$err = "";
 	$firstName = $lastName = $email = $inputPassword = $retypePassword = $passwordHash = "";
-	$message = "";
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
@@ -16,14 +15,14 @@
 		// First, is it empty?
 		// Then, does it contain only letters?
 		if(empty($_POST["firstName"])) {
-			$err .= "<li>First name is required.</li>\n";
+			$alert['error'] .= "<li>First name is required.</li>\n";
 		} 
 		else
 		{
 			$firstName = test_input($_POST["firstName"]);
 			if (!preg_match("/^[a-zA-Z]*$/", $firstName))
 			{
-				$err .= "<li>Only letters allowed in name fields.</li>\n";
+				$alert['error'] .= "<li>Only letters allowed in name fields.</li>\n";
 			}
 		}
 		
@@ -31,34 +30,34 @@
 		// First, is it empty?
 		// Then, does it contain only letters?
 		if(empty($_POST["lastName"])) {
-			$err .= "<li>Last Name is required.</li>\n";
+			$alert['error'] .= "<li>Last Name is required.</li>\n";
 		} 
 		else
 		{
 			$lastName = test_input($_POST['lastName']);
 			if (!preg_match("/^[a-zA-Z]*$/", $lastName))
 			{
-				$err .= "<li>Only letters allowed in name fields.</li>\n";
+				$alert['error'] .= "<li>Only letters allowed in name fields.</li>\n";
 			}
 		}
 		
 		// Check email field
 		// Is it in the proper format?
 		if(empty($_POST["inputEmail"])) {
-			$err .= "<li>Email is required.</li>\n";
+			$alert['error'] .= "<li>Email is required.</li>\n";
 		}
 		else 
 		{
 			$email = test_input($_POST["inputEmail"]);
 			if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 			{
-				$err .= "<li>Invalid email format.</li>\n";
+				$alert['error'] .= "<li>Invalid email format.</li>\n";
 			}
 		}
 		
 		// Collect the Passwords
 		if(empty($_POST['inputPassword'])) {
-			$err .= "<li>Password is required.</li>";
+			$alert['error'] .= "<li>Password is required.</li>";
 		}
 		else
 		{
@@ -72,7 +71,7 @@
 		// Empty password field?
 		// Do they match?				
 		if(strcmp($inputPassword,$retypePassword) != 0) {
-			$err .= "<li>Passwords do not match.</li>\n";
+			$alert['error'] .= "<li>Passwords do not match.</li>\n";
 		}
 		else
 		{
@@ -81,7 +80,7 @@
 			$inputPassword = $retypePassword = "";
 		}
 		
-		if (empty($err)) {		
+		if (empty($alert['error'])) {		
 			try {
 				// Check if email is already in database
 				$handle = $link->prepare('SELECT * FROM Users WHERE Email = ?');
@@ -92,7 +91,7 @@
 				
 				if ($emailExists)
 				{
-					$err .= "<li>That email is already in use.</li>\n";
+					$alert['error'] .= "<li>That email is already in use.</li>\n";
 				}
 				// If not, try to add it (should work?)
 				else

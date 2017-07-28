@@ -20,14 +20,14 @@
 
 			<?php if(!$_SESSION['quizComplete'] || !$_SESSION['receivedFeedback']) include('profile_panel.php'); ?>
 			
-			<div class="profile-info row">
-				<div class="col-md-2">
+			<div class="profile row">
+				<div class="col-md-2 col-xs-6 profile-picture">
 					<img src="img/anonymous.png" class="img-responsive pull-left" />
 				</div>
-				<div class="col-md-10">
+				<div class="col-md-10 col-xs-12 profile-info">
 					<h2><b>Name: </b><?php echo $_SESSION['userName']; ?></h2>
 					<h2><b>Email: </b><?php echo $_SESSION['userEmail']; ?></h2>
-					<h2><b>Location: </b></h2>
+					<h2><b>Timezone: </b><?php echo getTimezone($_SESSION['userID']); ?></h2>
 				</div>
 			</div>
 		</div>

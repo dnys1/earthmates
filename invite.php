@@ -5,13 +5,12 @@
 	require_once('includes/redirect.php');
 	require_once('includes/form_functions.php');
 	require_once('includes/PHPMailer/PHPMailerAutoload.php');
+	require_once('includes/alerts.php');
 	/****************************/
 
 	ensure_user_logged_in();
-
-	$err = "";
+	
 	$firstName = $lastName = $email = "";
-	$message = "";
 
 	/* Process form data */
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
@@ -20,14 +19,14 @@
 		// First, is it empty?
 		// Then, does it contain only letters?
 		if(empty($_POST["firstName"])) {
-			$err .= "<li>First name is required.</li>\n";
+			$alert['error'] .= "<li>First name is required.</li>\n";
 		} 
 		else
 		{
 			$firstName = test_input($_POST["firstName"]);
 			if (!preg_match("/^[a-zA-Z]*$/", $firstName))
 			{
-				$err .= "<li>Only letters allowed in name fields.</li>\n";
+				$alert['error'] .= "<li>Only letters allowed in name fields.</li>\n";
 			}
 		}
 		
@@ -35,36 +34,36 @@
 		// First, is it empty?
 		// Then, does it contain only letters?
 		if(empty($_POST["lastName"])) {
-			$err .= "<li>Last Name is required.</li>\n";
+			$alert['error'] .= "<li>Last Name is required.</li>\n";
 		} 
 		else
 		{
 			$lastName = test_input($_POST['lastName']);
 			if (!preg_match("/^[a-zA-Z]*$/", $lastName))
 			{
-				$err .= "<li>Only letters allowed in name fields.</li>\n";
+				$alert['error'] .= "<li>Only letters allowed in name fields.</li>\n";
 			}
 		}
 		
 		// Check email field
 		// Is it in the proper format?
 		if(empty($_POST["inputEmail"])) {
-			$err .= "<li>Email is required.</li>\n";
+			$alert['error'] .= "<li>Email is required.</li>\n";
 		}
 		else 
 		{
 			$email = test_input($_POST["inputEmail"]);
 			if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 			{
-				$err .= "<li>Invalid email format.</li>\n";
+				$alert['error'] .= "<li>Invalid email format.</li>\n";
 			}
 			if (!strcmp($email, $_SESSION['userEmail']))
 			{
-				$err .= "<li>You cannot request feedback from yourself.</li>";
+				$alert['error'] .= "<li>You cannot request feedback from yourself.</li>";
 			}
 		}
 		
-		if (empty($err)) 
+		if (empty($alert['error'])) 
 		{
 			$userID = $_SESSION['userID'];
 			$followerID = createUser($firstName, $lastName, $email);
@@ -77,7 +76,7 @@
 			// Generate success message at profile page
 			$followerLink = "https://earthmates.000webhostapp.com/quiz.php?token=" . $token;
 			
-			$body = $_SESSION['userName'] . " is requesting feedback for his EarthMates profile. To provide them feedback, follow the link below.<br><br>";
+			$body = $_SESSION['userName'] . " is requesting feedback for their EarthMates profile. To take a short assessment of their behavior, follow the link below. You may save at any point.<br><br>";
 			$body .= '<a href="' . $followerLink . '">Link to form</a>';
 			
 			$obj = new PHPMailer();
@@ -90,19 +89,19 @@
 
 			$obj->Send();
 			
-			redirect_to('request.php?success=1');
+			redirect_to('invite.php?success=1');
 		}
 	} 
 	else if ($_SERVER["REQUEST_METHOD"] == "GET")
 	{
 		if(isset($_GET['success']) && intval($_GET['success']) == 1)
 		{
-			$message .= '<div class="alert alert-success" role="alert">' . "\n";
-			$message .= "Success! An e-mail has been sent.\n";
-			$message .= "</div>\n";
+			$alert['success'] .= '<div class="alert alert-success" role="alert">' . "\n";
+			$alert['success'] .= "Success! An e-mail has been sent.\n";
+			$alert['success'] .= "</div>\n";
 		}
 	}
 
 	// The request form
-	include('pages/request_page.php');
+	include('pages/invite_page.php');
 ?>

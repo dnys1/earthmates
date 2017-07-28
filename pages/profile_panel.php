@@ -4,14 +4,14 @@
 					<div class="profile-buttons">
 						<?php 
 							if (!$_SESSION['quizComplete'])
-								echo '<a href="quiz.php" class="btn btn-lg btn-default profile-button">Take Self-Assessment</a>';
+								echo '<a href="quiz.php" class="btn btn-lg btn-default profile-button">Take the Quiz!</a>';
 							else
 								echo '<a href="quiz.php" class="btn btn-lg btn-default profile-button disabled">Take the Quiz!</a>';
 							
 							if(!$_SESSION['receivedFeedback'])
-								echo '<a href="request.php" class="btn btn-lg btn-default profile-button">Invite Friend</a>';
+								echo '<a href="invite.php" class="btn btn-lg btn-default profile-button">Invite Friend</a>';
 							else
-								echo '<a href="request.php" class="btn btn-lg btn-default profile-button disabled">Invite Friend</a>';
+								echo '<a href="invite.php" class="btn btn-lg btn-default profile-button disabled">Invite Friend</a>';
 						?>
 					</div>
 				</div>

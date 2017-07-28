@@ -6,6 +6,8 @@ declare(strict_types = 1);
 require_once('session_start.php');
 /* Sensitive login data */
 require_once('db_login.php');
+/* Get timezone values */
+require_once('timezones.php');
 
 $link = connectToDB();
 
@@ -24,6 +26,80 @@ function getAllCompetencies()
 	{
 		print($e->getMessage());
 		return NULL;
+	}
+}
+
+function getTimezone($userID)
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT Timezone FROM Users WHERE ID = ?');
+		$handle->bindValue(1, $userID);
+		$handle->execute();
+		
+		$row = $handle->fetch();
+		return $row['Timezone'];
+	}
+	catch (\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
+function updateTimezone($userID, $timezone)
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('UPDATE Users SET Timezone = ? WHERE ID = ?');
+		$handle->bindValue(1, $timezone, PDO::PARAM_BOOL);
+		$handle->bindValue(2, $userID, PDO::PARAM_INT);
+		
+		return $handle->execute();;
+	}
+	catch (\PDOException $e)
+	{
+		print($e->getMessage());
+		return false;
+	}
+}
+
+function isGlobalProfile($userID)
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT GlobalProfile FROM Users WHERE ID = ?');
+		$handle->bindValue(1, $userID, PDO::PARAM_INT);
+		$handle->execute();
+		
+		$row = $handle->fetch();
+		return $row['GlobalProfile'];
+	}
+	catch (\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
+function setGlobalProfile($userID, $boolVal) : bool
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('UPDATE Users SET GlobalProfile = ? WHERE ID = ?');
+		$handle->bindValue(1, $boolVal, PDO::PARAM_BOOL);
+		$handle->bindValue(2, $userID, PDO::PARAM_INT);
+		
+		return $handle->execute();;
+	}
+	catch (\PDOException $e)
+	{
+		print($e->getMessage());
+		return false;
 	}
 }
 
@@ -69,46 +145,50 @@ function isEmptyCompetencyIndex($userID) : bool
 	}
 }
 
-function updateQuizComplete($userID, $boolVal) : bool
+function updateQuizComplete($tokenOrUserID, $token = false) : bool
 {
 	global $link;
 	
-	try {
-		$handle = $link->prepare('UPDATE Users SET QuizComplete = ?, QuizResume = NULL WHERE ID = ?');
-		$handle->bindValue(1, $boolVal);
-		$handle->bindValue(2, $userID, \PDO::PARAM_INT);
-		
-		$handle->execute();
-		
-		// Update SESSION vars
-		$_SESSION['quizComplete'] = true;
-		if(isset($_SESSION['quizResume'])) unset($_SESSION['quizResume']);
-		
-		return true;
-	}
-	catch(\PDOException $e)
+	if(!$token)
 	{
-		print($e->getMessage());
-		return false;
+		try {
+			$handle = $link->prepare('UPDATE Users SET QuizComplete = 1, QuizResume = NULL WHERE ID = ?');
+			$handle->bindValue(1, $tokenOrUserID, \PDO::PARAM_INT);
+			
+			$handle->execute();
+			
+			// Update SESSION vars
+			$_SESSION['quizComplete'] = true;
+			if(isset($_SESSION['quizResume'])) unset($_SESSION['quizResume']);
+			
+			return true;
+		}
+		catch(\PDOException $e)
+		{
+			print($e->getMessage());
+			return false;
+		}
 	}
-}
+	else 
+	{
+		try {
+			$handle = $link->prepare('UPDATE FollowerLinks SET TokenResume = NULL WHERE Token = ?');
+			$handle->bindValue(1, $tokenOrUserID, \PDO::PARAM_INT);
+			
+			$handle->execute();
+			
+			// Update SESSION vars
+			if(isset($_SESSION['quizResume'])) unset($_SESSION['quizResume']);
+			
+			return true;
+		}
+		catch(\PDOException $e)
+		{
+			print($e->getMessage());
+			return false;
+		}
+	}
 
-function getResourcesForCompetency($competencyID)
-{
-	global $link;
-	
-	try {
-		$handle = $link->prepare('SELECT * FROM ResourceDescriptions WHERE CompetencyID = ?');
-		$handle->bindValue(1, $competencyID, \PDO::PARAM_INT);
-		$handle->execute();
-		
-		return $handle->fetchAll();
-	}
-	catch(\PDOException $e)
-	{
-		print($e->getMessage());
-		return NULL;
-	}
 }
 
 function getCompetencyIndex($userID, $competencyID)
@@ -250,10 +330,7 @@ function invalidateToken($token) : bool
 		$handle = $link->prepare('DELETE FROM FollowerLinks WHERE Token = ?');
 		$handle->bindValue(1, $token);
 		
-		$handle->execute();
-		unset($_SESSION['token']);
-		
-		return true;
+		return $handle->execute();
 	}
 	catch(\PDOException $e)
 	{
@@ -262,7 +339,7 @@ function invalidateToken($token) : bool
 	}
 }
 
-function createUser($firstName, $lastName, $email, $passwordHash = NULL)
+function createUser($firstName, $lastName, $email, $passwordHash = NULL) : int
 {
 	global $link;
 	
@@ -281,7 +358,7 @@ function createUser($firstName, $lastName, $email, $passwordHash = NULL)
 		$row = $handle->fetch();
 		$userID = $row['ID'];
 		
-		return $userID;
+		return intval($userID);
 	}
 	// User already exists in database
 	// Get the user's ID and return it
@@ -295,7 +372,7 @@ function createUser($firstName, $lastName, $email, $passwordHash = NULL)
 			$row = $handle->fetch();
 			$userID = $row['ID'];
 			
-			return $userID;
+			return intval($userID);
 		}
 		catch(\PDOException $e)
 		{
@@ -390,21 +467,77 @@ function postValue($userID, $followerID, $competencyID, $level) : bool
 	}
 }
 
-function saveIncompleteQuestions($userID, $questionString) : bool
+function saveIncompleteQuestions($tokenOrUserID, $questionString, $token = false) : bool
 {
 	global $link;
 	
-	try {
-		$handle = $link->prepare('UPDATE Users SET QuizResume = ? WHERE ID = ?');
-		$handle->bindValue(1, $questionString);
-		$handle->bindValue(2, $userID, \PDO::PARAM_INT);
-		
-		return $handle->execute();
-	}
-	catch(\PDOException $e)
+	if($token)
 	{
-		print($e->getMessage());
+		try {
+			$handle = $link->prepare('UPDATE FollowerLinks SET TokenResume = ? WHERE Token = ?');
+			$handle->bindValue(1, $questionString, PDO::PARAM_STR);
+			$handle->bindValue(2, $tokenOrUserID, PDO::PARAM_STR);
+			
+			return $handle->execute();
+		}
+		catch(PDOException $e)
+		{
+			print($e->getMessage());
+		}
 	}
+	else
+	{
+		try {
+			$handle = $link->prepare('UPDATE Users SET QuizResume = ? WHERE ID = ?');
+			$handle->bindValue(1, $questionString);
+			$handle->bindValue(2, $tokenOrUserID, \PDO::PARAM_INT);
+			
+			return $handle->execute();
+		}
+		catch(\PDOException $e)
+		{
+			print($e->getMessage());
+		}
+	}
+}
+
+function getIncompleteQuestions($userID, $token = NULL)
+{
+	global $link;
+	
+	if(empty($token))
+	{
+		try {
+			$handle = $link->prepare('SELECT QuizResume FROM Users WHERE ID = ?');
+			$handle->bindValue(1, $userID, PDO::PARAM_INT);
+			$handle->execute();
+			
+			$row = $handle->fetch();
+			return $row['QuizResume'];
+		}
+		catch (PDOException $e)
+		{
+			print($e->getMessage());
+		}
+	}
+	else
+	{
+		try {
+			$handle = $link->prepare('SELECT TokenResume FROM FollowerLinks WHERE Token = ?');
+			$handle->bindValue(1, $token);
+			$handle->execute();
+			
+			$row = $handle->fetch();
+			
+			return $row['TokenResume'];
+		}
+		catch(PDOException $e)
+		{
+			print($e->getMessage());
+		}
+	}
+	
+	
 }
 
 function test($test)

@@ -14,18 +14,7 @@
 		
 		<!-- Begin page content -->
     <div class="container">
-			<?php
-				if (isset($err) && !empty($err)) {
-					echo '<div class="alert alert-danger" role="alert">' . "\n";
-					echo '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>' . "\n";
-					echo '<span class="sr-only">Error:</span>' . "\n";
-					echo "The following errors were found. Please fix them and try again.\n";
-					echo "<ul>\n";
-					echo $err;
-					echo "</ul>\n";
-					echo "</div>\n";
-				}
-			?>
+			<?php printAlerts(); ?>
       <form class="form-signin" method="post" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]) ?>">
         <h2 class="form-signin-heading">Create an account</h2>
 				<div class="form-group">

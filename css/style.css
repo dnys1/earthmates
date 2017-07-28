@@ -141,9 +141,13 @@ code {
 
 /*** PROFILE PAGE ***/
 
-.profile-info {
+.profile {
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+.profile-info {
+	padding: 20px;
 }
 
 .profile-buttons {
@@ -165,6 +169,15 @@ code {
 
 /*** SCORES PAGE ***/
 
+.score-gradient {
+	background: #22c1c3;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom, #fdbb2d, #22c1c3);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to bottom, #fdbb2d, #22c1c3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	width: 10%;
+	height: 95%;
+	margin: auto 10px auto auto;
+}
+
 .table-score {
 	text-align: center;
 	width: 11.25%;
@@ -174,13 +187,17 @@ code {
 	cursor: pointer;
 }
 
+.table>tbody>tr>td {
+	vertical-align: middle;
+}
+
 .bar-self {
 	font: 10px sans-serif;
-	background-color: #333;
+	border: 1px solid black;
 	text-align: right;
 	padding: 3px;
 	margin: 1px;
-	color: white;
+	color: black;
 }
 
 .bar-other {

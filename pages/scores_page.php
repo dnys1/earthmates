@@ -21,21 +21,7 @@
         <h1><?php echo $pageTitle ?></h1>
       </div>
 		
-			<!--
-			<div class="panel panel-default">
-				<div class="panel-heading">What Do Your Scores Mean?</div>
-				<div class="panel-body">
-					<p>In general, the scoring was designed to follow this pattern:</p>
-					<ul>
-						<li><b>Level 0:</b> </li>
-						<li><b>Level 1:</b> </li>
-						<li><b>Level 2:</b> </li>
-						<li><b>Level 3:</b> </li>
-						<li><b>Level 4:</b> </li>
-						<li><b>Level 5:</b> </li>
-					</ul>
-				</div>
-			</div>-->
+			<?php include('scores_panel.php'); ?>
 		
 			<!-- Scores Table -->
 			<div class="panel panel-default">
@@ -45,7 +31,7 @@
 						<tr>
 							<th>#</th>
 							<th>Competency</th>
-							<th class="table-score">Scores<br>(<span class="you">You</span> vs. <span class="l1">O</span><span class="l2">t</span><span class="l3">h</span><span class="l4">e</span><span class="l5">r</span><span class="l6">s</span>)</th>
+							<th class="table-score">Scores<br>(You vs. Others)</th>
 						</tr>
 					</thead>
 					<tbody>

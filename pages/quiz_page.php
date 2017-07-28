@@ -31,6 +31,7 @@
 		
     <!-- Begin page content -->
     <div class="container">
+			<?php printAlerts(); ?>
       <div class="page-header">
         <h1><?php echo $pageTitle; if(!$selfAssessment) echo " for " . getUserName($tokenUserID); ?></h1>
       </div>

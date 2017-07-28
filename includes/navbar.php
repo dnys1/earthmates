@@ -52,6 +52,9 @@
 					echo '<li ';
 					echo on_page('profile.php') ? 'class="active"' : '';
 					echo '><a href="profile.php">Profile</a></li>';
+					echo '<li ';
+					echo on_page('invite.php') ? 'class="active"' : '';
+					echo '><a href="invite.php">Invite Friend</a></li>';
 					if($_SESSION['quizComplete'] && $_SESSION['receivedFeedback']) {
 						echo '<li role="separator" class="divider"></li>';
 						echo '<li ';
@@ -59,7 +62,7 @@
 						echo '><a href="scores.php">Your Scores</a></li>';
 						echo '<li ';
 						echo on_page('resources.php') ? 'class="active"' : '';
-						echo '><a href=resources.php">Resources</a></li>';
+						echo '><a href="resources.php">Resources</a></li>';
 					}
 					echo '<li role="separator" class="divider"></li>';
 					echo '<li ';

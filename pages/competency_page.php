@@ -6,10 +6,6 @@
 			$pageDescription = "Competency: " . $competencyName;
 			include('includes/header.php'); 
 		?>
-		<script>
-			var $_GET = <?php echo json_encode($_GET); ?>;
-		</script>
-		<script src="js/load_resources.js"></script>
 	</head>
 
   <body>
@@ -23,6 +19,8 @@
 				<h1><?php echo $competencyName ?></h1>
 			</div>
 			
+			<?php include('scores_panel.php'); ?>
+			
 			<!-- Score panel -->
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -35,16 +33,6 @@
 					
 					<h4>Explain the score.</h4>
 				</p>
-				</div>
-			</div>
-			
-			<!-- Resources panel -->
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Resources</h3>
-				</div>
-				<div class="panel-body" id="resourcePanel">
-				<span id="spinner" class="fa fa-spinner fa-spin"></span>
 				</div>
 			</div>
 			

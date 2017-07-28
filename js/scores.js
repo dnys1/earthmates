@@ -58,6 +58,9 @@ $(document).ready(function() {
 $(document).ajaxStop(function() {
 	$(".spinner").remove();
 	
+	var levelColors = ["rgb(253, 187, 45)", "rgb(209, 188, 75)", "rgb(165, 189, 105)",
+										 "rgb(121, 191, 135)", "rgb(77, 192, 165)", "rgb(34, 193, 195)"];
+	
 	var blocks = d3.select("tbody")
 									.selectAll(".table-score")
 									.data(competencies);
@@ -67,7 +70,7 @@ $(document).ajaxStop(function() {
 	
 	var width = d3.scaleLinear()
 				.domain([0, 5])
-				.range([0, 100]);
+				.range([12, 112]);
 				
 	var green = d3.scaleLinear()
 				.domain([0, 2.5])
@@ -75,17 +78,19 @@ $(document).ajaxStop(function() {
 	
 	var red = d3.scaleLinear()
 				.domain([2.5, 5])
-				.range([0, 255]);
+				.range([255, 0]);
+				
+	function roundScore(score) {
+		if (score <= 4.8) return parseInt(score);
+		else return 5;
+	}
 	
-	blocks.selectAll(".bar-self").style("width", function(d) {return width(selfScores[d.ID]) + "px";});
-	blocks.selectAll(".bar-other").style("width", function(d) {return width(otherScores[d.ID]) + "px";})
+	blocks.selectAll(".bar-self").style("width", function(d) {return width(roundScore(selfScores[d.ID])) + "px";})
+																.text(function(d) { return roundScore(selfScores[d.ID]); });
+	blocks.selectAll(".bar-other").style("width", function(d) {return width(roundScore(otherScores[d.ID])) + "px";})
 																.style("background-color", function(d) {
-																	var score = parseFloat(otherScores[d.ID]);
-																	
-																	if(score < 2.5) {var r = 255; var g = parseInt(green(score));}
-																	else {var r = parseInt(red(score)); var g = 255;}
-																	
-																	return "rgb("+r+","+g+",0)";
+																	var score = roundScore(otherScores[d.ID]);
+																	return levelColors[score];
 																})
-																.text(function (d) {var score = parseFloat(otherScores[d.ID]).toFixed(1); if (score >= 1.0) return score;});
+																.text(function (d) {return roundScore(otherScores[d.ID]);});
 });

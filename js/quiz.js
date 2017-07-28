@@ -113,7 +113,7 @@ function loadAllQuestions() {
 				{
 					var questionID = parseInt(json[i].ID);
 					
-					if(quizResume.indexOf(questionID) != -1)
+					if(quizResume.length == 0 || quizResume.indexOf(questionID) != -1)
 					{
 						questionObject = {};
 						if(selfAssessment)

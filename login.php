@@ -4,9 +4,9 @@
 	require_once('includes/db_functions.php');
 	require_once('includes/form_functions.php');
 	require_once('includes/redirect.php');
+	require_once('includes/alerts.php');
 	/****************************/
 
-	$err = "";
 	$email = $inputPassword = "";
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
@@ -14,20 +14,20 @@
 		// Check email field
 		// Is it in the proper format?
 		if(empty($_POST["inputEmail"])) {
-			$err .= "<li>Email is required.</li>\n";
+			$alert['error'] .= "<li>Email is required.</li>\n";
 		}
 		else 
 		{
 			$email = test_input($_POST["inputEmail"]);
 			if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 			{
-				$err .= "<li>Invalid email format.</li>\n";
+				$alert['error'] .= "<li>Invalid email format.</li>\n";
 			}
 		}
 		
 		// Collect the password
 		if(empty($_POST['inputPassword'])) {
-			$err .= "<li>Password is required.</li>";
+			$alert['error'] .= "<li>Password is required.</li>";
 		}
 		else
 		{
@@ -62,7 +62,7 @@
 			} 
 			else
 			{
-				$err .= "<li>Email/password combination does not exist.</li>";
+				$alert['error'] .= "<li>Email/password combination does not exist.</li>";
 			}
 		}
 		catch (PDOException $ex)

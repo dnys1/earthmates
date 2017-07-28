@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
 		<?php 
-			$pageTitle = "Request Feedback";
-			$pageDescription = "Page to request feedback";
+			$pageTitle = "Invite Friend";
+			$pageDescription = "Page to invite a friend to submit feedback";
 			include('includes/header.php'); 
 		?>
 	</head>
@@ -14,9 +14,8 @@
    <?php include('includes/navbar.php'); ?>
 
     <!-- Begin page content -->
-    <div class="container">
-		<?php if(isset($message)) { echo $message; } ?>
-		
+    <div class="container">		
+		<?php printAlerts(); ?>
       <div class="page-header">
         <h1><?php echo $pageTitle ?></h1>
       </div>
@@ -24,18 +23,6 @@
 		
 		<!-- Request form -->
     <div class="container">
-			<?php
-				if (isset($err) && !empty($err)) {
-					echo '<div class="alert alert-danger" role="alert">' . "\n";
-					echo '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>' . "\n";
-					echo '<span class="sr-only">Error:</span>' . "\n";
-					echo "The following errors were found. Please fix them and try again.\n";
-					echo "<ul>\n";
-					echo $err;
-					echo "</ul>\n";
-					echo "</div>\n";
-				}
-			?>
 			<p class="text-center lead">Enter the information of the person you'd like to request feedback from.</p>
       <form class="form-signin" method="post" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]) ?>">
 				<div class="form-group">
