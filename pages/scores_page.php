@@ -5,8 +5,7 @@
 			$pageTitle = "View Scores";
 			$pageDescription = "Your EarthMates scores";
 			include('includes/header.php'); 
-		?>
-	<script src="https://d3js.org/d3.v4.min.js"></script>
+		?>	
 	<script src="js/scores.js"></script>
 	</head>
 
@@ -29,9 +28,9 @@
 				<table class="table table-hover profile-table">
 					<thead>
 						<tr>
-							<th>#</th>
-							<th>Competency</th>
-							<th class="table-score">Scores<br>(You vs. Others)</th>
+							<th><h3>#</h3></th>
+							<th><h3>Competency</h3></th>
+							<th class="table-score"><h3>Scores</h3></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -42,8 +41,8 @@
 						foreach ($competencies as $row)
 						{
 							echo '<tr onclick="window.document.location=\'competency.php?id=' . $row['ID'] . "'\">\n";
-							echo "<td>" . $index . "</td>\n";
-							echo "<td>" . $row['Competency'] . "</td>\n";
+							echo "<td><h5>" . $index . "</h5></td>\n";
+							echo "<td><h5>" . $row['Competency'] . "</h5></td>\n";
 							echo '<td class="table-score"></td>';
 							echo "</tr></a>\n";
 							

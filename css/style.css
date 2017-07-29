@@ -169,6 +169,12 @@ code {
 
 /*** SCORES PAGE ***/
 
+.table h5 {
+	font-weight: bold;
+	padding: 0;
+	font-size: 20px;
+}
+
 .score-gradient {
 	background: #22c1c3;  /* fallback for old browsers */
 	background: -webkit-linear-gradient(to bottom, #fdbb2d, #22c1c3);  /* Chrome 10-25, Safari 5.1-6 */
@@ -179,8 +185,9 @@ code {
 }
 
 .table-score {
+	width: 250px;
 	text-align: center;
-	width: 11.25%;
+	position: relative;
 }
 
 .profile-table tr:hover {
@@ -191,30 +198,42 @@ code {
 	vertical-align: middle;
 }
 
-.bar-self {
-	font: 10px sans-serif;
-	border: 1px solid black;
-	text-align: right;
-	padding: 3px;
-	margin: 1px;
-	color: black;
+.overallScore {
+	width: 400px;
+	margin-top: 30px;
+	margin-bottom: 40px;
 }
 
-.bar-other {
-	font: 10px sans-serif;
+.marker {
+	border: 1px solid black;
+	background-color: transparent;
+	text-align: right;
+	padding: 2px;
+	color: black;
+	position: absolute;
+	top:0;
+	left:0;
+	width: 400px;
+}
+
+.bar-self {
+	font: 14px sans-serif;
+	background-color: black;
 	text-align: right;
 	padding: 3px;
 	margin: 1px;
 	color: white;
+	position: relative;
 }
 
-.you {color: #333;}
-.l1 {color: rgb(255,0,0);}
-.l2 {color: rgb(255,128,0);}
-.l3 {color: rgb(255,255,0);}
-.l4 {color: rgb(170,255,0);}
-.l5 {color: rgb(85,255,0);}
-.l6 {color: rgb(0,255,0);}
+.bar-other {
+	font: 14px sans-serif;
+	text-align: right;
+	padding: 3px;
+	margin: 1px;
+	color: white;
+	position: relative;
+}
 
 /** SELF QUIZ PAGE **/
 #quizContainer {

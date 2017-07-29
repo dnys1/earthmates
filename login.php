@@ -42,22 +42,14 @@
 			
 			$resultArray = $handle->fetch();
 			
-			// Database structure
-			// 0 - ID
-			// 1 - FirstName
-			// 2 - LastName
-			// 3 - Email
-			// 4 - PasswordHash
-			// 5 - QuizComplete
-			// 6 - QuizResume
-			$savedHash = $resultArray[4];
+			$savedHash = $resultArray['PasswordHash'];
 			if (password_verify($inputPassword, $savedHash)) {
-				$_SESSION['userID'] = $resultArray[0];
-				$_SESSION['userName'] = $resultArray[1] . " " . $resultArray[2];
-				$_SESSION['userEmail'] = $resultArray[3];
-				$_SESSION['quizComplete'] = $resultArray[5];
-				if(!empty($resultArray[6])) $_SESSION['quizResume'] = $resultArray[6];
-				$_SESSION['receivedFeedback'] = !isEmptyCompetencyIndex($resultArray[0]);
+				$_SESSION['userID'] = $resultArray['ID'];
+				$_SESSION['userName'] = $resultArray['FirstName'] . " " . $resultArray['LastName'];
+				$_SESSION['userEmail'] = $resultArray['Email'];
+				$_SESSION['quizComplete'] = $resultArray['QuizComplete'];
+				if(!empty($resultArray['QuizResume'])) $_SESSION['quizResume'] = $resultArray['QuizResume'];
+				$_SESSION['receivedFeedback'] = !isEmptyCompetencyIndex($resultArray['ID']);
 				redirect_to('profile.php');
 			} 
 			else

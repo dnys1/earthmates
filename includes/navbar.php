@@ -22,12 +22,14 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="./">Home</a></li>
-				<li <?php echo on_page('about.php') ? 'class="active"' : ''?>><a href="about.php">About</a></li>
 				<?php
 							// If not logged in
 							// echo the dropdown 'Account' menu
 							if(!isset($_SESSION['userID'])) {
+								echo '<li><a href="./">Home</a></li>';
+								echo '<li ';
+								echo on_page('about.php') ? 'class="active"' : '';
+								echo '><a href="about.php">About</a></li>';
 								echo '<li class="dropdown">';
 								echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>';
 								echo '<ul class="dropdown-menu">';						
@@ -43,9 +45,9 @@
 					</ul>
 				</li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
 			<?php
 				if (isset($_SESSION['userID'])) {
+					echo '<ul class="nav navbar-nav navbar-right">';
 					echo '<li class="dropdown">';
 					echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' . $_SESSION['userName'] . '	<span class="caret"></span></a>';
 					echo '<ul class="dropdown-menu">';
@@ -68,11 +70,18 @@
 					echo '<li ';
 					echo on_page('settings.php') ? 'class="active"' : '';
 					echo '><a href="settings.php">Settings</a></li>';
-					echo '</ul></li>';
 					echo '<li><a href="logout.php">Log Out</a></li>';
-				}
+					echo '</li></ul>';
+					echo '</ul>';
+					
+					echo '<form class="navbar-form navbar-right" role="search" method="get" action="index.php">';
+					echo '<div class="form-group">';
+					echo '<input type="text" class="form-control" placeholder="Search Users" name="q">';
+					echo '</div>';
+					echo '<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>';
+					echo '</form>';
+					}
 			?>
-			 </ul>
 		</div><!--/.nav-collapse -->
 	</div>
 </nav>

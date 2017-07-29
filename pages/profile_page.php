@@ -27,7 +27,7 @@
 				<div class="col-md-10 col-xs-12 profile-info">
 					<h2><b>Name: </b><?php echo $_SESSION['userName']; ?></h2>
 					<h2><b>Email: </b><?php echo $_SESSION['userEmail']; ?></h2>
-					<h2><b>Timezone: </b><?php echo getTimezone($_SESSION['userID']); ?></h2>
+					<h2><b>Timezone: </b><?php echo array_search(getTimezone($_SESSION['userID']), $timezones); ?></h2>
 				</div>
 			</div>
 		</div>

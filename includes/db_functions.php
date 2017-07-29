@@ -251,6 +251,46 @@ function getAverageOtherCompetencyScore($userID, $competencyID) : float
 	}
 }
 
+function getTotalAverageOtherScore($userID) : float
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT AVG(Level) AS "CompetencyScore" FROM CompetencyIndex WHERE UserID = ? AND FollowerID <> ?');
+		$handle->bindValue(1, $userID, \PDO::PARAM_INT);
+		$handle->bindValue(2, $userID, \PDO::PARAM_INT);
+		$handle->execute();
+		
+		$row = $handle->fetch();
+		return floatval($row['CompetencyScore']);
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
+function getTotalAverageSelfScore($userID) : float
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT AVG(Level) AS "CompetencyScore" FROM CompetencyIndex WHERE UserID = ? AND FollowerID = ?');
+		$handle->bindValue(1, $userID, \PDO::PARAM_INT);
+		$handle->bindValue(2, $userID, \PDO::PARAM_INT);
+		$handle->execute();
+		
+		$row = $handle->fetch();
+		return floatval($row['CompetencyScore']);
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
 
 function getUserName($userID) : string
 {

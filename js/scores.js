@@ -56,41 +56,63 @@ $(document).ready(function() {
 });
 
 $(document).ajaxStop(function() {
-	$(".spinner").remove();
+	var otherLevelColors = ["rgb(253, 187, 45)", "rgb(209, 188, 75)", "rgb(165, 189, 105)",
+									 "rgb(121, 191, 135)", "rgb(77, 192, 165)", "rgb(34, 193, 195)"];
+	var selfLevelColors = ["rgba(253, 187, 45, 0.6)", "rgba(209, 188, 75, 0.6)", "rgba(165, 189, 105, 0.6)",
+									      "rgba(121, 191, 135, 0.6)", "rgba(77, 192, 165, 0.6)", "rgba(34, 193, 195, 0.6)"];
 	
-	var levelColors = ["rgb(253, 187, 45)", "rgb(209, 188, 75)", "rgb(165, 189, 105)",
-										 "rgb(121, 191, 135)", "rgb(77, 192, 165)", "rgb(34, 193, 195)"];
-	
-	var blocks = d3.select("tbody")
-									.selectAll(".table-score")
-									.data(competencies);
-	
-	blocks.append("div").classed("bar-self", true);
-	blocks.append("div").classed("bar-other", true);
+	var minWidth = 12;
+	var maxWidth = 224;
 	
 	var width = d3.scaleLinear()
 				.domain([0, 5])
-				.range([12, 112]);
-				
-	var green = d3.scaleLinear()
-				.domain([0, 2.5])
-				.range([0, 255]);
-	
-	var red = d3.scaleLinear()
-				.domain([2.5, 5])
-				.range([255, 0]);
-				
+				.range([minWidth, maxWidth]);
+
 	function roundScore(score) {
 		if (score <= 4.8) return parseInt(score);
 		else return 5;
 	}
 	
+	$(".spinner").remove();
+		
+	var blocks = d3.select("tbody")
+									.selectAll(".table-score:empty")
+									.data(competencies);
+	
+	blocks.append("div").classed("bar-self", true);
+	blocks.append("div").classed("bar-other", true);
+	
 	blocks.selectAll(".bar-self").style("width", function(d) {return width(roundScore(selfScores[d.ID])) + "px";})
-																.text(function(d) { return roundScore(selfScores[d.ID]); });
+															 .style("background-color", function(d) {
+																	var score = roundScore(selfScores[d.ID]);
+																	return selfLevelColors[score];
+																})
+															 .text(function(d) { return roundScore(selfScores[d.ID]); });
+															 
 	blocks.selectAll(".bar-other").style("width", function(d) {return width(roundScore(otherScores[d.ID])) + "px";})
 																.style("background-color", function(d) {
 																	var score = roundScore(otherScores[d.ID]);
-																	return levelColors[score];
+																	return otherLevelColors[score];
 																})
 																.text(function (d) {return roundScore(otherScores[d.ID]);});
+
+	blocks.selectAll(".bar-self").append("div").classed("marker",true)
+															 .style("width", maxWidth + "px")
+															 .style("border-color", function(d) {
+																	var score = roundScore(selfScores[d.ID]);
+																	return selfLevelColors[score];
+																}).text(function(d) {
+																	if(roundScore(selfScores[d.ID]) == 5) return "";
+																	else return "5";
+																});
+																
+	blocks.selectAll(".bar-other").append("div").classed("marker",true)
+																.style("width", maxWidth + "px")
+																.style("border-color", function(d) {
+																	var score = roundScore(otherScores[d.ID]);
+																	return otherLevelColors[score];
+																}).text(function(d) {
+																	if(roundScore(otherScores[d.ID]) == 5) return "";
+																	else return "5";
+																});										
 });

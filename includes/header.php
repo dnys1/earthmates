@@ -32,3 +32,6 @@
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+		
+		<!-- D3 visualization library -->
+		<script src="https://d3js.org/d3.v4.min.js"></script>
