@@ -185,9 +185,10 @@ code {
 }
 
 .table-score {
-	width: 250px;
+	width: 25%;
 	text-align: center;
 	position: relative;
+	padding: 10px;
 }
 
 .profile-table tr:hover {
@@ -199,7 +200,7 @@ code {
 }
 
 .overallScore {
-	width: 400px;
+	width: 50%;
 	margin-top: 30px;
 	margin-bottom: 40px;
 }
@@ -271,4 +272,14 @@ code {
 
 .resource {
 	min-height: 175px;
+}
+
+/** Resources Page **/
+
+div.book-row {
+	height: 300px;
+}
+
+div.book {
+	height: 100%;
 }

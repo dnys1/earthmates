@@ -62,7 +62,7 @@ $(document).ajaxStop(function() {
 									      "rgba(121, 191, 135, 0.6)", "rgba(77, 192, 165, 0.6)", "rgba(34, 193, 195, 0.6)"];
 	
 	var minWidth = 12;
-	var maxWidth = 224;
+	var maxWidth = $(".table-score").width();
 	
 	var width = d3.scaleLinear()
 				.domain([0, 5])

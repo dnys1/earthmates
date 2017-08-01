@@ -1,14 +1,7 @@
-var minWidth = 20;
-var maxWidth = 400;
-
 var otherLevelColors = ["rgb(253, 187, 45)", "rgb(209, 188, 75)", "rgb(165, 189, 105)",
 									 "rgb(121, 191, 135)", "rgb(77, 192, 165)", "rgb(34, 193, 195)"];
 var selfLevelColors = ["rgba(253, 187, 45, 0.6)", "rgba(209, 188, 75, 0.6)", "rgba(165, 189, 105, 0.6)",
 									      "rgba(121, 191, 135, 0.6)", "rgba(77, 192, 165, 0.6)", "rgba(34, 193, 195, 0.6)"];
-									 
-var width = d3.scaleLinear()
-				.domain([0, 5])
-				.range([minWidth, maxWidth]);
 				
 function roundScore(score) {
 	if (score <= 4.8) return parseInt(score);
@@ -16,6 +9,14 @@ function roundScore(score) {
 }
 
 $(document).ready(function () {	
+	// Set values
+	var minWidth = 20;
+	var maxWidth = parseInt($(".overallScore").width());
+	
+	var width = d3.scaleLinear()
+				.domain([0, 5])
+				.range([minWidth, maxWidth]);
+
 	// Generate score-panel overall bar chart
 	var overallScore = d3.select(".overallScore");
 	overallScore.append("div").classed("bar-self", true);
