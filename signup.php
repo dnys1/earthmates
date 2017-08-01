@@ -117,6 +117,7 @@
 						$_SESSION['userEmail'] = $email;
 						$_SESSION['quizComplete'] = FALSE;
 						$_SESSION['receivedFeedback'] = FALSE;
+						$_SESSION['showInfoMessage'] = TRUE;
 						
 						redirect_to('profile.php?signup=1');
 					}

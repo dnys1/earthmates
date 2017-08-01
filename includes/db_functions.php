@@ -103,6 +103,24 @@ function setGlobalProfile($userID, $boolVal) : bool
 	}
 }
 
+function setShowInfoMessage($userID, $boolVal) : bool
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('UPDATE Users SET ShowInfoMessage = ? WHERE ID = ?');
+		$handle->bindValue(1, $boolVal, PDO::PARAM_BOOL);
+		$handle->bindValue(2, $userID, PDO::PARAM_INT);
+		
+		return $handle->execute();;
+	}
+	catch (\PDOException $e)
+	{
+		print($e->getMessage());
+		return false;
+	}
+}
+
 function getCompetency($id)
 {
 	global $link;

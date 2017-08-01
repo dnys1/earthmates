@@ -10,6 +10,7 @@
 			$(document).ready(function() {
 				$("#visibleGlobally").prop("checked", <?php echo $visibleGlobally ? 'true' : 'false' ?>);
 				$("#timezone").val("<?php echo $currentTimezone; ?>");
+				$("#showInfoMessage").prop("checked", <?php echo $showInfoMessage ? 'true' : 'false' ?>);
 			});
 		</script>
 	</head>
@@ -21,6 +22,8 @@
 	 
     <!-- Begin page content -->
     <div class="container">
+		
+			<?php printAlerts(); ?>
       <div class="page-header">
         <h1><?php echo $pageTitle ?></h1>
       </div>
@@ -28,6 +31,9 @@
 		<form method="post" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]) ?>">
 			<div class="form-group">
 				<input type="checkbox" id="visibleGlobally" name="visibleGlobally"> Profile is visible to everyone.
+			</div>
+			<div class="form-group">
+				<input type="checkbox" id="showInfoMessage" name="showInfoMessage"> Show helpful guide messages.
 			</div>
 			<div class="form-group">
 				<label for="timezone">Timezone: </label>

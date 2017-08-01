@@ -12,7 +12,7 @@
 		
     <!-- Begin page content -->
     <div class="container">
-			<?php if(isset($message)) { echo $message; } ?>
+			<?php printAlerts(); ?>
 		
       <div class="page-header">
         <h1>Profile <small><?php echo $_SESSION['userName']; ?></small></h1>

@@ -50,6 +50,7 @@
 				$_SESSION['quizComplete'] = $resultArray['QuizComplete'];
 				if(!empty($resultArray['QuizResume'])) $_SESSION['quizResume'] = $resultArray['QuizResume'];
 				$_SESSION['receivedFeedback'] = !isEmptyCompetencyIndex($resultArray['ID']);
+				$_SESSION['showInfoMessage'] = $resultArray['ShowInfoMessage'];
 				redirect_to('profile.php');
 			} 
 			else

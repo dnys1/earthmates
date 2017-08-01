@@ -8,7 +8,7 @@ function roundScore(score) {
 	else return 5;
 }
 
-$(document).ready(function () {	
+$(document).ready(function () {
 	// Set values
 	var minWidth = 20;
 	var maxWidth = parseInt($(".overallScore").width());

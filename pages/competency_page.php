@@ -24,15 +24,33 @@
 			<!-- Score panel -->
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Score Explanation</h3>
+					<h3 class="panel-title">Behavior Sets</h3>
 				</div>
 				<div class="panel-body" id="scorePanel">
-				<p class="lead text-center">
-					Your self-score is: <?php echo number_format(getAverageSelfCompetencyScore($_SESSION['userID'], $competencyID), 1); ?>
-					Your score among others is: <?php echo number_format(getAverageOtherCompetencyScore($_SESSION['userID'], $competencyID), 1); ?><br>
-					
-					<h4>Explain the score.</h4>
-				</p>
+					<div class="row">
+						<div class="col-md-6">
+							<h3>Level 0</h3>
+							<ul>
+								<li>Level 0 Skill</li>
+								<li>Level 0 Skill</li>
+								<li>Level 0 Skill</li>
+								<li>Level 0 Skill</li>
+								<li>Level 0 Skill</li>
+								<li>Level 0 Skill</li>
+							</ul>
+						</div>
+						<div class="col-md-6">
+							<h3>Level 5</h3>
+							<ul>
+								<li>Level 5 skill</li>
+								<li>Level 5 skill</li>
+								<li>Level 5 skill</li>
+								<li>Level 5 skill</li>
+								<li>Level 5 skill</li>
+								<li>Level 5 skill</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 			
@@ -44,19 +62,23 @@
 				<table class="table">
 				<tr>
 					<th>Reviewer</th>
-					<th>Date</th>
 					<th>Score</th>
 					<th>Comments</th>
+					<th>Date</th>
 				</tr>
 				<?php
 						foreach ($competencyIndex as $commentRow)
 						{
-							echo "<tr>\n";
-							echo "<td>" . getUserName($commentRow['FollowerID']) . "</td>\n";
-							echo "<td>" . $commentRow['CommentTimestamp'] . "</td>\n";
-							echo "<td>" . $commentRow['Level'] . "</td>\n";
-							echo "<td>" . $commentRow['Comment'] . "</td>\n";
-							echo "</tr>\n";
+							$date = date('M d, Y', strtotime($commentRow['CommentTimestamp']));
+							
+							echo "<tr>";
+							echo "<td>" . getUserName($commentRow['FollowerID']) . "</td>";
+							echo "<td>" . $commentRow['Level'] . "</td>";
+							echo "<td>";
+							echo empty($commentRow['Comment']) ? "None" : $commentRow['Comment'];
+							echo "</td>";
+							echo "<td>" . $date . "</td>";
+							echo "</tr>";
 						}
 				?>
 				</table>

@@ -53,9 +53,13 @@ function loadCompetencyData() {
 $(document).ready(function() {
 	loadCompetencyData();
 	$("tbody .table-score").append('<span class="fa fa-spinner fa-spin spinner"></span>');
+	
+	$('.infoMessage').on('closed.bs.alert', function () {
+		console.log('closed info message');
+	})
 });
 
-$(document).ajaxStop(function() {
+$(document).ajaxStop(function() {	
 	var otherLevelColors = ["rgb(253, 187, 45)", "rgb(209, 188, 75)", "rgb(165, 189, 105)",
 									 "rgb(121, 191, 135)", "rgb(77, 192, 165)", "rgb(34, 193, 195)"];
 	var selfLevelColors = ["rgba(253, 187, 45, 0.6)", "rgba(209, 188, 75, 0.6)", "rgba(165, 189, 105, 0.6)",
@@ -75,8 +79,7 @@ $(document).ajaxStop(function() {
 	
 	$(".spinner").remove();
 		
-	var blocks = d3.select("tbody")
-									.selectAll(".table-score:empty")
+	var blocks = d3.selectAll(".table-score:empty")
 									.data(competencies);
 	
 	blocks.append("div").classed("bar-self", true);

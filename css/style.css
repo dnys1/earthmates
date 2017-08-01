@@ -191,7 +191,7 @@ code {
 	padding: 10px;
 }
 
-.profile-table tr:hover {
+.score-table tr:hover {
 	cursor: pointer;
 }
 
@@ -201,8 +201,13 @@ code {
 
 .overallScore {
 	width: 50%;
-	margin-top: 30px;
-	margin-bottom: 40px;
+	margin-top: 15px;
+	margin-bottom: 35px;
+}
+
+.score-table-label {
+	width: 75px;
+	font-weight: bold;
 }
 
 .marker {
