@@ -15,6 +15,13 @@
 
 		<!-- Begin page content -->
 		<div class="container">
+		
+			<!-- Breadcrumb -->
+			<ol class="breadcrumb">
+				<li><a href="scores.php">View Scores</a></li>
+				<li class="active">View Competency Score</li>
+			</ol>
+			
 			<div class="page-header">
 				<h1><?php echo $competencyName ?></h1>
 			</div>
@@ -29,7 +36,7 @@
 				<div class="panel-body" id="scorePanel">
 					<div class="row">
 						<div class="col-md-6">
-							<h3>Level 0</h3>
+							<h2 class="text-center">Level 0</h2>
 							<ul>
 								<li>Level 0 Skill</li>
 								<li>Level 0 Skill</li>
@@ -40,7 +47,7 @@
 							</ul>
 						</div>
 						<div class="col-md-6">
-							<h3>Level 5</h3>
+							<h2 class="text-center">Level 5</h2>
 							<ul>
 								<li>Level 5 skill</li>
 								<li>Level 5 skill</li>

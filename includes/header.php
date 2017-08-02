@@ -35,3 +35,7 @@
 		
 		<!-- D3 visualization library -->
 		<script src="https://d3js.org/d3.v4.min.js"></script>
+		
+		<!-- Bootstrap tour -->
+		<link href="css/bootstrap-tour.min.css" rel="stylesheet">
+		<script src="js/bootstrap-tour.min.js"></script>

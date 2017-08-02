@@ -24,6 +24,13 @@
     <div class="container">
 		
 			<?php printAlerts(); ?>
+			
+			<!-- Breadcrumb -->
+			<ol class="breadcrumb">
+				<li><a href="profile.php">Profile</a></li>
+				<li class="active">Settings</li>
+			</ol>
+			
       <div class="page-header">
         <h1><?php echo $pageTitle ?></h1>
       </div>
@@ -41,6 +48,7 @@
 					<?php foreach($timezones as $label => $timezone) echo '<option value="'.$timezone.'">'.$label.'</option>'; ?>
 				</select>
 			</div>
+			<!--<button type="button" class="btn btn-lg btn-primary back">Go Back</button>-->
 			<button type="submit" class="btn btn-lg btn-success">Save</button>
 		</form>
     </div>

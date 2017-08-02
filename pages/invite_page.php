@@ -16,6 +16,13 @@
     <!-- Begin page content -->
     <div class="container">		
 		<?php printAlerts(); ?>
+		
+			<!-- Breadcrumb -->
+			<ol class="breadcrumb">
+				<li><a href="profile.php">Profile</a></li>
+				<li class="active">Invite Friend</li>
+			</ol>
+		
       <div class="page-header">
         <h1><?php echo $pageTitle ?></h1>
       </div>

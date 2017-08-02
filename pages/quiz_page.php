@@ -32,6 +32,17 @@
     <!-- Begin page content -->
     <div class="container">
 			<?php printAlerts(); ?>
+			
+			<!-- Breadcrumb -->
+			<?php if($selfAssessment)
+			{
+				echo '<ol class="breadcrumb">';
+				echo '<li><a href="profile.php">Profile</a></li>';
+				echo '<li class="active">Self-Assessment</li>';
+				echo '</ol>';
+			}
+			?>
+			
       <div class="page-header">
         <h1><?php echo $pageTitle; if(!$selfAssessment) echo " for " . getUserName($tokenUserID); ?></h1>
       </div>

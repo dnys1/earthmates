@@ -46,7 +46,7 @@
 		else if ($showInfoMessage)
 		{
 			setShowInfoMessage($_SESSION['userID'], false);
-			$_SESSION['showInfoMessage'] = true;
+			$_SESSION['showInfoMessage'] = false;
 			$showInfoMessage = false;
 		}
 		

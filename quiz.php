@@ -126,6 +126,11 @@
 				redirect_to('index.php?login-required=1');
 			}
 			
+			if ($_SESSION['quizComplete'])
+			{
+				redirect_to('profile.php?completed=1');
+			}
+			
 			$_SESSION['quizResume'] = getIncompleteQuestions($_SESSION['userID']);
 			
 			if(isset($_GET['saved']) && $_GET['saved'] == 1)

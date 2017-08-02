@@ -5,6 +5,10 @@
 			$pageTitle = "Profile";
 			$pageDescription = "This is your EarthMates profile page!";
 			include('includes/header.php');
+		
+			// Set up welcome tour
+			if(isset($_GET['signup']) && intval($_GET['signup']) == 1)
+				echo '<script src="js/welcome.js"></script>';
 		?>
 	</head>
 	<body>
@@ -13,14 +17,14 @@
     <!-- Begin page content -->
     <div class="container">
 			<?php printAlerts(); ?>
-		
+			
       <div class="page-header">
         <h1>Profile <small><?php echo $_SESSION['userName']; ?></small></h1>
       </div>
 
 			<?php if(!$_SESSION['quizComplete'] || !$_SESSION['receivedFeedback']) include('profile_panel.php'); ?>
 			
-			<div class="profile row">
+			<div class="profile row" id="profile">
 				<div class="col-md-2 col-xs-6 profile-picture">
 					<img src="img/anonymous.png" class="img-responsive pull-left" />
 				</div>

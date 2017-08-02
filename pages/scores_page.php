@@ -22,10 +22,17 @@
 				echo '<div class="alert alert-success infoMessage fade in" role="alert">';
 				echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 				echo '<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> ';
-				echo "Click on each of the competencies to learn more about your individual scores, and visit the 'Guide' in the menu to learn more about the EarthMates methodology.";
+				echo "Click on each of the competencies to learn more about your individual scores."; // and visit the 'Guide' in the menu to learn more about the EarthMates methodology.";
 				echo '</div>';
 			}
 			?>
+			
+			<!-- Breadcrumb -->
+			<ol class="breadcrumb">
+				<li><a href="profile.php">Profile</a></li>
+				<li class="active">View Scores</li>
+			</ol>
+			
 			<div class="page-header">
         <h1><?php echo $pageTitle ?></h1>
       </div>
