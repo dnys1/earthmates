@@ -1,3 +1,9 @@
+/** GLOBAL STYLES **/
+
+body {
+	font-size: 16px;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -169,7 +175,16 @@ code {
 
 /*** SCORES PAGE ***/
 
-.table h5 {
+#score-panel hr {
+	border-bottom: 1px solid black;
+}
+
+.score-table th {
+	font-weight: normal;
+	vertical-align: middle !important;
+}
+
+.score-table h5 {
 	font-weight: bold;
 	padding: 0;
 	font-size: 20px;
@@ -188,7 +203,7 @@ code {
 	width: 25%;
 	text-align: center;
 	position: relative;
-	padding: 10px;
+	margin: 10px;
 }
 
 .score-table tr:hover {
@@ -197,6 +212,10 @@ code {
 
 .table>tbody>tr>td {
 	vertical-align: middle;
+}
+
+.score-panel-table td {
+	font-size: 16px;
 }
 
 .overallScore {

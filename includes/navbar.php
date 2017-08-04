@@ -76,7 +76,7 @@
 					echo '</li></ul>';
 					echo '</ul>';
 					
-					echo '<form class="navbar-form navbar-right" role="search" method="get" action="index.php">';
+					echo '<form class="navbar-form navbar-right" role="search" method="get" action="search_users.php">';
 					echo '<div class="form-group">';
 					echo '<input type="text" class="form-control" placeholder="Search Users" name="q">';
 					echo '</div>';

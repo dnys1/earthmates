@@ -18,8 +18,9 @@
 		
 			<!-- Breadcrumb -->
 			<ol class="breadcrumb">
+				<li><a href="profile.php">Profile</a></li>
 				<li><a href="scores.php">View Scores</a></li>
-				<li class="active">View Competency Score</li>
+				<li class="active">Competency Score</li>
 			</ol>
 			
 			<div class="page-header">
@@ -33,28 +34,32 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Behavior Sets</h3>
 				</div>
-				<div class="panel-body" id="scorePanel">
+				<div class="panel-body" id="score-panel">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-6 col-xs-12">
 							<h2 class="text-center">Level 0</h2>
+							<hr>
 							<ul>
-								<li>Level 0 Skill</li>
-								<li>Level 0 Skill</li>
-								<li>Level 0 Skill</li>
-								<li>Level 0 Skill</li>
-								<li>Level 0 Skill</li>
-								<li>Level 0 Skill</li>
+								<?php
+									$level0 = explode("\n", $competencyDescriptions['0']);
+									foreach($level0 as $desc)
+									{
+										echo "<li>".$desc."</li>";
+									}
+								?>
 							</ul>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6 col-xs-12">
 							<h2 class="text-center">Level 5</h2>
+							<hr>
 							<ul>
-								<li>Level 5 skill</li>
-								<li>Level 5 skill</li>
-								<li>Level 5 skill</li>
-								<li>Level 5 skill</li>
-								<li>Level 5 skill</li>
-								<li>Level 5 skill</li>
+								<?php
+									$level5 = explode("\n", $competencyDescriptions['5']);
+									foreach($level5 as $desc)
+									{
+										echo "<li>".$desc."</li>";
+									}
+								?>
 							</ul>
 						</div>
 					</div>

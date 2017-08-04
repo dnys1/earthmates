@@ -66,6 +66,27 @@ function updateTimezone($userID, $timezone)
 	}
 }
 
+function getSearchResults($query)
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT ID, FirstName, LastName FROM Users WHERE (FirstName LIKE ? OR LastName LIKE ?) AND GlobalProfile = 1');
+		$handle->bindValue(1, $query[0], PDO::PARAM_STR);
+		$handle->bindValue(2, end($query), PDO::PARAM_STR);
+		
+		$handle->execute();
+		
+		$rows = $handle->fetchAll();
+		
+		if($rows) return $rows;
+		else return NULL;
+	} catch(PDOException $e)
+	{
+		print($e->getMessage());
+	}
+}
+
 function isGlobalProfile($userID)
 {
 	global $link;
@@ -220,6 +241,28 @@ function getCompetencyIndex($userID, $competencyID)
 		$handle->execute();
 		
 		return $handle->fetchAll();
+	}
+	catch(\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
+function getCompetencyDescriptions($competencyID)
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT * FROM Competencies WHERE ID = ?');
+		$handle->bindValue(1, $competencyID, PDO::PARAM_INT);
+		$handle->execute();
+		
+		$row = $handle->fetch();
+		
+		$descriptions = array("0" => $row['Description0'], "5" => $row['Description5']);
+		
+		return $descriptions;
 	}
 	catch(\PDOException $e)
 	{

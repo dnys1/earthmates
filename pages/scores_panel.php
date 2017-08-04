@@ -18,7 +18,7 @@
 		</div>
 		<div class="overallScore center-block"></div>
 		<p class="lead">In general, the scoring was designed to follow this pattern:</p>
-		<table class="table">
+		<table class="table score-panel-table">
 		<tbody>
 			<tr>
 				<td style="border-top: none;" class="score-table-label">Level 0</td>

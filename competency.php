@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
 		$competencyID = $_GET['id'];
 		$competencyName = getCompetency($competencyID);
 		$competencyIndex = getCompetencyIndex($_SESSION['userID'], $competencyID);
+		$competencyDescriptions = getCompetencyDescriptions($competencyID);
 	}
 	else
 	{

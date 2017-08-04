@@ -18,6 +18,11 @@
     <div class="container">
 			<?php printAlerts(); ?>
 			
+			<!-- Breadcrumb -->
+			<ol class="breadcrumb">
+				<li class="active">Profile</li>
+			</ol>
+			
       <div class="page-header">
         <h1>Profile <small><?php echo $_SESSION['userName']; ?></small></h1>
       </div>

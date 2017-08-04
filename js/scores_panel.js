@@ -8,28 +8,31 @@ function roundScore(score) {
 	else return 5;
 }
 
+var overallWidth, overallMinWidth, overallMaxWidth;
+var overallScore;
+
 $(document).ready(function () {
 	// Set values
-	var minWidth = 20;
-	var maxWidth = parseInt($(".overallScore").width());
+	overallMinWidth = 20;
+	overallMaxWidth = parseInt($(".overallScore").width());
 	
-	var width = d3.scaleLinear()
+	overallWidth = d3.scaleLinear()
 				.domain([0, 5])
-				.range([minWidth, maxWidth]);
+				.range([overallMinWidth, overallMaxWidth]);
 
 	// Generate score-panel overall bar chart
-	var overallScore = d3.select(".overallScore");
+	overallScore = d3.select(".overallScore");
 	overallScore.append("div").classed("bar-self", true);
 	overallScore.append("div").classed("bar-other", true);
 	overallScore.selectAll("div").data([totalSelfScore, totalOtherScore]);
-	overallScore.select(".bar-self").style("width", function (d) {return width(d) + "px"; })
+	overallScore.select(".bar-self").style("width", function (d) {return overallWidth(d) + "px"; })
 																	.text(function (d) { return d; })
 																	.style("background-color", function(d) {
 																		 var score = roundScore(d);
 																		 return selfLevelColors[score];
 																	 });
 	
-	overallScore.select(".bar-other").style("width", function (d) {return width(d) + "px"; })
+	overallScore.select(".bar-other").style("width", function (d) {return overallWidth(d) + "px"; })
 																	 .text(function (d) { return d; })
 																	 .style("background-color", function(d) {
 																		 var score = roundScore(d);
@@ -37,16 +40,57 @@ $(document).ready(function () {
 																	 });
 																	 
 	overallScore.select(".bar-self").append("div")
-																	.classed("marker", true).style("width",maxWidth+"px")
+																	.classed("marker", true).style("width",overallMaxWidth+"px")
 																	.style("border-color", function(d) {
 																		var score = roundScore(d);
 																		return selfLevelColors[score];
 																	}).text("You");
 	overallScore.select(".bar-other").append("div")
-																	 .classed("marker", true).style("width",maxWidth+"px")
+																	 .classed("marker", true).style("width",overallMaxWidth+"px")
 																	 .style("border-color", function(d) {
 																		var score = roundScore(d);
 																		return otherLevelColors[score];
 																	 }).text("Peers");
 	
+	$(window).on('resize', overallResize);
+	// Listen for orientation changes      
+	window.addEventListener("orientationchange", overallResize, false);
 });
+
+function overallResize() {
+	overallMinWidth = 20;
+	overallMaxWidth = parseInt($(".overallScore").width());
+	overallWidth = d3.scaleLinear()
+				.domain([0, 5])
+				.range([overallMinWidth, overallMaxWidth]);
+				
+	$(".overallScore>.bar-self").empty();
+	$(".overallScore>.bar-other").empty();
+				
+	overallScore.select(".bar-self").style("width", function (d) {return overallWidth(d) + "px"; })
+																	.text(function (d) { return d; })
+																	.style("background-color", function(d) {
+																		 var score = roundScore(d);
+																		 return selfLevelColors[score];
+																	 });
+	
+	overallScore.select(".bar-other").style("width", function (d) {return overallWidth(d) + "px"; })
+																	 .text(function (d) { return d; })
+																	 .style("background-color", function(d) {
+																		 var score = roundScore(d);
+																		 return otherLevelColors[score];
+																	 });
+																	 
+	overallScore.select(".bar-self").append("div")
+																	.classed("marker", true).style("width",overallMaxWidth+"px")
+																	.style("border-color", function(d) {
+																		var score = roundScore(d);
+																		return selfLevelColors[score];
+																	}).text("You");
+	overallScore.select(".bar-other").append("div")
+																	 .classed("marker", true).style("width",overallMaxWidth+"px")
+																	 .style("border-color", function(d) {
+																		var score = roundScore(d);
+																		return otherLevelColors[score];
+																	 }).text("Peers");
+}

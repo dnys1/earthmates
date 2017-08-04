@@ -47,7 +47,7 @@
 						<tr>
 							<th><h3>#</h3></th>
 							<th><h3>Competency</h3></th>
-							<th class="table-score"><h3>Scores</h3></th>
+							<th class="table-score"><h3>Scores</h3>(You - <b>Top</b>, Peers - <b>Bottom</b>)</th>
 						</tr>
 					</thead>
 					<tbody>
