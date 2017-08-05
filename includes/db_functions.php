@@ -71,7 +71,7 @@ function getSearchResults($query)
 	global $link;
 	
 	try {
-		$handle = $link->prepare('SELECT ID, FirstName, LastName FROM Users WHERE (FirstName LIKE ? OR LastName LIKE ?) AND GlobalProfile = 1');
+		$handle = $link->prepare('SELECT ID, FirstName, LastName, GlobalProfile FROM Users WHERE FirstName LIKE ? OR LastName LIKE ?');
 		$handle->bindValue(1, $query[0], PDO::PARAM_STR);
 		$handle->bindValue(2, end($query), PDO::PARAM_STR);
 		

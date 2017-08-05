@@ -14,7 +14,13 @@
 			$query = explode(" ", $query);
 			$results = getSearchResults($query);
 			
-			echo json_encode($results);
+			foreach ($results as $key => $profile)
+			{
+				if($profile['GlobalProfile'])
+					$results[$key]['AvgScore'] = getTotalAverageOtherScore($profile['ID']);
+				else
+					$results[$key]['AvgScore'] = NULL;
+			}
 		}
 	}
 	

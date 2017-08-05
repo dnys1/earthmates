@@ -307,3 +307,30 @@ div.book-row {
 div.book {
 	height: 100%;
 }
+
+/** Search results page **/
+.search-table img {
+	height: 75px;
+	max-height: 75px;
+}
+.search-table td {
+	font-size: 26px;
+	font-weight: bold;
+}
+.search-table>thead>th:first-of-type,
+.search-table>thead>th:nth-of-type(3),
+.search-table>thead>th:nth-of-type(4),
+.search-table>tbody>tr>td:first-of-type,
+.search-table>tbody>tr>td:nth-of-type(3),
+.search-table>tbody>tr>td:nth-of-type(4) {
+	width: 100px;
+}
+.pager .next>a,
+.pager .next>span,
+.pager .previous>a,
+.pager .previous>span {
+	float: none;
+}
+.search-panel>.panel-body {
+	padding:0;
+}
