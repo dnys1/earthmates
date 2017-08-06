@@ -19,7 +19,7 @@
 						echo '</div>';
 					}
 					break;
-				case "error":
+				case "multerror":
 					if (!empty($value))
 					{
 						echo '<div class="alert alert-danger" role="alert">';
@@ -27,6 +27,16 @@
 						echo '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> ';
 						echo 'The following errors were found. Please fix them and try again.';
 						echo '<ul>' . $value . '</ul>';
+						echo '</div>';
+					}
+					break;
+				case "error":
+					if (!empty($value))
+					{
+						echo '<div class="alert alert-danger" role="alert">';
+						echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+						echo '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> ';
+						echo  $value;
 						echo '</div>';
 					}
 					break;

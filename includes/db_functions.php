@@ -11,6 +11,28 @@ require_once('timezones.php');
 
 $link = connectToDB();
 
+function getProfile($userID)
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT * FROM Users WHERE ID = ?');
+		$handle->bindValue(1, $userID, PDO::PARAM_INT);
+		$handle->execute();
+		
+		$user = $handle->fetch();
+		$user['OtherScore'] = getTotalAverageOtherScore($userID);
+		$user['SelfScore'] = getTotalAverageSelfScore($userID);
+		
+		return $user;
+	} 
+	catch (\PDOException $e)
+	{
+		print($e->getMessage());
+		return NULL;
+	}
+}
+
 function getAllCompetencies()
 {
 	global $link;
@@ -71,7 +93,7 @@ function getSearchResults($query)
 	global $link;
 	
 	try {
-		$handle = $link->prepare('SELECT ID, FirstName, LastName, GlobalProfile FROM Users WHERE FirstName LIKE ? OR LastName LIKE ?');
+		$handle = $link->prepare('SELECT ID, FirstName, LastName, GlobalProfile FROM Users WHERE (FirstName LIKE ? OR LastName LIKE ?) AND PasswordHash IS NOT NULL');
 		$handle->bindValue(1, $query[0], PDO::PARAM_STR);
 		$handle->bindValue(2, end($query), PDO::PARAM_STR);
 		

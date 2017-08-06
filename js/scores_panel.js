@@ -10,11 +10,13 @@ function roundScore(score) {
 
 var overallWidth, overallMinWidth, overallMaxWidth;
 var overallScore;
+var topText;
 
 $(document).ready(function () {
 	// Set values
 	overallMinWidth = 20;
 	overallMaxWidth = parseInt($(".overallScore").width());
+	if(other) topText = "Them"; else topText = "You";
 	
 	overallWidth = d3.scaleLinear()
 				.domain([0, 5])
@@ -44,7 +46,7 @@ $(document).ready(function () {
 																	.style("border-color", function(d) {
 																		var score = roundScore(d);
 																		return selfLevelColors[score];
-																	}).text("You");
+																	}).text(topText);
 	overallScore.select(".bar-other").append("div")
 																	 .classed("marker", true).style("width",overallMaxWidth+"px")
 																	 .style("border-color", function(d) {

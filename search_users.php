@@ -12,7 +12,7 @@
 		{
 			$query = test_input($_GET['q']);
 			$query = explode(" ", $query);
-			$results = getSearchResults($query);
+			$results = (array) getSearchResults($query);
 			
 			foreach ($results as $key => $profile)
 			{

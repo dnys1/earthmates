@@ -14,20 +14,20 @@
 		// Check email field
 		// Is it in the proper format?
 		if(empty($_POST["inputEmail"])) {
-			$alert['error'] .= "<li>Email is required.</li>\n";
+			$alert['multerror'] .= "<li>Email is required.</li>\n";
 		}
 		else 
 		{
 			$email = test_input($_POST["inputEmail"]);
 			if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 			{
-				$alert['error'] .= "<li>Invalid email format.</li>\n";
+				$alert['multerror'] .= "<li>Invalid email format.</li>\n";
 			}
 		}
 		
 		// Collect the password
 		if(empty($_POST['inputPassword'])) {
-			$alert['error'] .= "<li>Password is required.</li>";
+			$alert['multerror'] .= "<li>Password is required.</li>";
 		}
 		else
 		{
@@ -55,7 +55,7 @@
 			} 
 			else
 			{
-				$alert['error'] .= "<li>Email/password combination does not exist.</li>";
+				$alert['multerror'] .= "<li>Email/password combination does not exist.</li>";
 			}
 		}
 		catch (PDOException $ex)

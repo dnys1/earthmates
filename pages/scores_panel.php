@@ -5,6 +5,7 @@
 	var totalOtherScore = <?php if(on_page('scores.php')) { echo getTotalAverageOtherScore($_SESSION['userID']);}
 															else echo getAverageOtherCompetencyScore($_SESSION['userID'], $_GET['id']);
 												?>;
+	var other = false;
 </script>
 <script src="js/scores_panel.js"></script>
 <div class="panel panel-default">

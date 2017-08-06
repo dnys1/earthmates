@@ -19,10 +19,15 @@
 	 
     <!-- Begin page content -->
     <div class="container">
+		
+			<ol class="breadcrumb">
+				<li class="active">Search</li>
+			</ol>
+		
       <div class="page-header">
         <h1><?php echo $pageTitle ?></h1>
       </div>
-	  <p class="lead">Results found for "<?php if(isset($_GET['q'])) echo $_GET['q']?>":</p>
+	  <p class="lead">Results found for "<?php if(isset($_GET['q'])) echo $_GET['q']?>"</p>
 		<div class="panel panel-default search-panel">
 			<div class="panel-heading"></div>
 			<?php

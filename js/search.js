@@ -1,8 +1,10 @@
-var page = 0, rows;
+var page = 0, rows, resultsPerPage, pageCount;
 $(document).ready(function() {
 	if (results)
 	{
 		results = JSON.parse(results);
+		resultsPerPage = 5;
+		pageCount = Math.floor(results.length / resultsPerPage);
 	
 		rows = $(".search-table>tbody>tr");
 	
@@ -10,8 +12,8 @@ $(document).ready(function() {
 		if(results.length <= 5) 
 				$(".next>a").disable(true);
 			
-		$(".previous>a").one('click', loadPrevious);
-		$(".next>a").one('click', loadNext);
+		$(".previous>a").on('click', loadPrevious);
+		$(".next>a").on('click', loadNext);
 	}
 });
 
@@ -23,7 +25,10 @@ function loadPrevious()
 	if(page > 0)
 	{
 		page--;
-		var start = page * 5;
+		var start = page * resultsPerPage;
+		
+		console.log(page);
+		console.log(start);
 		
 		rows.empty();
 		
@@ -52,10 +57,9 @@ function loadPrevious()
 		
 		// Reset page navigators
 		if (page > 0) {
-			$(".previous>a").disable(true);
-			$(".previous>a").one('click', loadPrevious);
+			$(".previous>a").disable(false);
 		}
-		$(".next>a").disable(true);
+		$(".next>a").disable(false);
 	}
 }
 
@@ -64,15 +68,19 @@ function loadNext()
 	$(".previous>a").disable(true);
 	$(".next>a").disable(true);
 	
-	if(page < results.length % 5)
+	if(page < pageCount)
 	{
 		page++;
-		var start = page * 5, end;
+		var start = page * resultsPerPage, end;
 		
 		if (start + rows.length <= results.length)
 			end = rows.length;
 		else
 			end = results.length - start;
+		
+		console.log(page);
+		console.log(start);
+		console.log(end);
 		
 		rows.empty();
 		
@@ -100,10 +108,9 @@ function loadNext()
 		}
 		
 		// Reset page navigators
-		if (page < results.length % 5)
+		if (page < pageCount)
 		{
 			$(".next>a").disable(false);
-			$(".next>a").one('click', loadNext);
 		}
 		$(".previous>a").disable(false);
 	}
