@@ -49,7 +49,7 @@
 						if($i < 5)
 						{
 							echo "<tr>";
-							echo '<td><img src="img/anonymous.png" class="img-responsive" />';
+							echo '<td><img src="profile_image.php?id=' . $profile['ID'] . '" class="img-responsive" />';
 							if($profile['GlobalProfile'])
 							{
 								echo '<td><a href="view_profile.php?id=' . $profile['ID'] . '">' . $profile['FirstName'] . " " . $profile['LastName'] . '</a></td>';

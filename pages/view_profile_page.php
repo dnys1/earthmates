@@ -17,7 +17,13 @@
     <div class="container">
 		
 			<ol class="breadcrumb">
-				<li><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>">Search</a></li>
+				<?php
+					if(isset($_SERVER['HTTP_REFERER']))
+					{
+						echo '<li><a href="' . $_SERVER['HTTP_REFERER'] . '">Search</a></li>';
+					}
+				?>
+				
 				<li class="active">View Profile</li>
 			</ol>
 		
@@ -28,11 +34,11 @@
 			<?php
 				if(!empty($profile))
 				{
-					include('includes/view_profile_panel.php');
+					include('view_profile_panel.php');
 				}
 				else
 				{
-					include('includes/empty_profile_panel.php');
+					include('empty_profile_panel.php');
 				}
 			?>
 		</div>

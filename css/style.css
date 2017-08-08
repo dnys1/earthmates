@@ -152,6 +152,10 @@ code {
 	margin-bottom: 10px;
 }
 
+.profile img {
+	padding-top: 40px;
+}
+
 .profile-info {
 	padding: 20px;
 }
@@ -176,6 +180,13 @@ code {
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-bottom: 10px;
+}
+
+.change-profile-pic {
+	display:block;
+	width: 80%;
+	margin: 20px auto;
+	font-size: 20px;
 }
 
 .profile-panel {

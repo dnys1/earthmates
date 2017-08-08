@@ -88,6 +88,41 @@ function updateTimezone($userID, $timezone)
 	}
 }
 
+function updateProfilePicture($userID, $profileImage) 
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('UPDATE Users SET ProfileImage = ? WHERE ID = ?');
+		$handle->bindValue(1, $profileImage, PDO::PARAM_STR);
+		$handle->bindValue(2, $userID, PDO::PARAM_INT);
+		$handle->execute();
+		
+		return true;
+	} catch(PDOException $e)
+	{
+		print($e->getMessage());
+	}
+}
+
+function getProfilePicture($userID) 
+{
+	global $link;
+	
+	try {
+		$handle = $link->prepare('SELECT ProfileImage FROM Users WHERE ID = ?');
+		$handle->bindValue(1, $userID, PDO::PARAM_INT);
+		$handle->execute();
+		
+		$row = $handle->fetch();
+		
+		return $row['ProfileImage'];
+	} catch(PDOException $e)
+	{
+		print($e->getMessage());
+	}
+}
+
 function getSearchResults($query)
 {
 	global $link;

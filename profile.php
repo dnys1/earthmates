@@ -18,6 +18,28 @@
 		if(isset($_GET['completed']) && intval($_GET['completed']) == 1) {
 			$alert['error'] = "You've already completed the quiz.";
 		}
+	} else {
+		if(isset($_FILES))
+		{
+			
+			require_once 'includes/class.upload.php';
+			
+			$location = '../uploads/' . $_SESSION['userID'];
+			$filename = $_FILES['file']['name'];
+
+			$handle = new Upload($_FILES['file']);
+			$handle->allowed = 'image/*';
+
+			if($handle->uploaded) {
+					$handle->Process($location);
+					if($handle->processed) {
+							$alert['success'] = "Your image has been updated.";
+							updateProfilePicture($_SESSION['userID'], $filename);
+							$_SESSION['profileImage'] = $filename;
+					} else {
+					}
+			}
+		}
 	}
 	
 	if (isset($_SESSION['quizComplete']))

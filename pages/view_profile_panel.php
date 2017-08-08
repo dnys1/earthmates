@@ -1,6 +1,6 @@
 <div class="profile row" id="profile">
-	<div class="col-md-2 col-xs-6 profile-picture">
-		<img src="img/anonymous.png" class="img-responsive pull-left" />
+	<div class="col-md-2 col-xs-6 profile-picture pull-left">
+		<img src="profile_image.php?id=<?php echo $_GET['id']; ?>" class="img-responsive" />
 	</div>
 	<div class="col-md-10 col-xs-12 profile-info">
 		<h2><b>Name: </b><?php echo $userName; ?></h2>
