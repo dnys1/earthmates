@@ -4,7 +4,7 @@
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<meta name="description" content="<?php echo $pageDescription ?>">
 		<meta name="author" content="Dillon Nys">
-
+		
 		<link rel="icon" href="favicon.ico">
 
 		<title><?php if (isset($pageTitle)){ echo $pageTitle; } else { echo "EarthMates"; } ?></title>

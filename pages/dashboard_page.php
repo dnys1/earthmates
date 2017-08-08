@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
 		<?php 
-			$pageTitle = "View Scores";
+			$pageTitle = "Dashboard";
 			$pageDescription = "Your EarthMates scores";
 			include('includes/header.php'); 
 		?>	
@@ -30,7 +30,7 @@
 			<!-- Breadcrumb -->
 			<ol class="breadcrumb">
 				<li><a href="profile.php">Profile</a></li>
-				<li class="active">View Scores</li>
+				<li class="active">Dashboard</li>
 			</ol>
 			
 			<div class="page-header">

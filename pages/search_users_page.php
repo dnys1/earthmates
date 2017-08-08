@@ -39,7 +39,7 @@
 					echo '<th></th>';
 					echo '<th>Name</th>';
 					echo '<th>Score</th>';
-					echo '<th>Profile</th>';
+					// echo '<th>Profile</th>';
 					echo '</thead>';
 					
 					echo '<tbody>';
@@ -54,13 +54,13 @@
 							{
 								echo '<td><a href="view_profile.php?id=' . $profile['ID'] . '">' . $profile['FirstName'] . " " . $profile['LastName'] . '</a></td>';
 								echo '<td class="results-score">' . number_format(getTotalAverageOtherScore($profile['ID']), 1) . '</td>';
-								echo '<td><a class="btn btn-default" role="button" href="view_profile.php?id=' . $profile['ID'] . '">Link</a></td>';
+								// echo '<td><a class="btn btn-default center-block" role="button" href="view_profile.php?id=' . $profile['ID'] . '">Link</a></td>';
 							}
 							else 
 							{
 								echo '<td title="This user does not allow others to view their EarthMates profile.">' . $profile['FirstName'] . " " . $profile['LastName'] . '</td>';
 								echo '<td title="This user does not allow others to view their EarthMates profile.">N/A</td>';
-								echo '<td><a class="btn btn-default" disabled="disabled" href="#" role="button" title="This user does not allow others to view their EarthMates profile.">Link</a></td>';
+								// echo '<td><a class="btn btn-default center-block" disabled="disabled" href="#" role="button" title="This user does not allow others to view their EarthMates profile.">Link</a></td>';
 							}	
 							echo '</tr>';
 						}

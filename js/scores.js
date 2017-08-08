@@ -86,14 +86,14 @@ $(document).ajaxStop(function() {
 	blocks.append("div").classed("bar-self", true);
 	blocks.append("div").classed("bar-other", true);
 	
-	blocks.selectAll(".bar-self").style("width", function(d) {return width(roundScore(selfScores[d.ID])) + "px";})
+	blocks.selectAll(".bar-self").style("width", function(d) {return width(selfScores[d.ID]) + "px";})
 															 .style("background-color", function(d) {
 																	var score = roundScore(selfScores[d.ID]);
 																	return selfLevelColors[score];
 																})
 															 .text(function(d) { return roundScore(selfScores[d.ID]); });
 															 
-	blocks.selectAll(".bar-other").style("width", function(d) {return width(roundScore(otherScores[d.ID])) + "px";})
+	blocks.selectAll(".bar-other").style("width", function(d) {return width(otherScores[d.ID]) + "px";})
 																.style("background-color", function(d) {
 																	var score = roundScore(otherScores[d.ID]);
 																	return otherLevelColors[score];
@@ -105,20 +105,22 @@ $(document).ajaxStop(function() {
 															 .style("border-color", function(d) {
 																	var score = roundScore(selfScores[d.ID]);
 																	return selfLevelColors[score];
-																}).text(function(d) {
-																	if(roundScore(selfScores[d.ID]) == 5) return "";
-																	else return "5";
-																});
+																}).style("opacity", function(d) {
+																	var score = roundScore(selfScores[d.ID]);
+																	if(score == 5) return "0";
+																	else return "1.0";
+																}).text("5");
 																
 	blocks.selectAll(".bar-other").append("div").classed("marker",true)
 																.style("width", maxWidth + "px")
 																.style("border-color", function(d) {
 																	var score = roundScore(otherScores[d.ID]);
 																	return otherLevelColors[score];
-																}).text(function(d) {
-																	if(roundScore(otherScores[d.ID]) == 5) return "";
-																	else return "5";
-																});		
+																}).style("opacity", function(d) {
+																	var score = roundScore(otherScores[d.ID]);
+																	if(score == 5) return "0";
+																	else return "1.0";
+																}).text("5");		
 																
 	$(window).on('resize', resize);
 	// Listen for orientation changes      
@@ -136,14 +138,14 @@ function resize() {
 	$(".score-table .bar-self").empty();
 	$(".score-table .bar-other").empty();
 	
-	blocks.selectAll(".bar-self").style("width", function(d) {return width(roundScore(selfScores[d.ID])) + "px";})
+	blocks.selectAll(".bar-self").style("width", function(d) {return width(selfScores[d.ID]) + "px";})
 															 .style("background-color", function(d) {
 																	var score = roundScore(selfScores[d.ID]);
 																	return selfLevelColors[score];
 																})
 															 .text(function(d) { return roundScore(selfScores[d.ID]); });
 															 
-	blocks.selectAll(".bar-other").style("width", function(d) {return width(roundScore(otherScores[d.ID])) + "px";})
+	blocks.selectAll(".bar-other").style("width", function(d) {return width(otherScores[d.ID]) + "px";})
 																.style("background-color", function(d) {
 																	var score = roundScore(otherScores[d.ID]);
 																	return otherLevelColors[score];
@@ -155,18 +157,20 @@ function resize() {
 															 .style("border-color", function(d) {
 																	var score = roundScore(selfScores[d.ID]);
 																	return selfLevelColors[score];
-																}).text(function(d) {
-																	if(roundScore(selfScores[d.ID]) == 5) return "";
-																	else return "5";
-																});
+																}).style("opacity", function(d) {
+																	var score = roundScore(selfScores[d.ID]);
+																	if(score == 5) return "0";
+																	else return "1.0";
+																}).text("5");
 																
 	blocks.selectAll(".bar-other").append("div").classed("marker",true)
 																.style("width", maxWidth + "px")
 																.style("border-color", function(d) {
 																	var score = roundScore(otherScores[d.ID]);
 																	return otherLevelColors[score];
-																}).text(function(d) {
-																	if(roundScore(otherScores[d.ID]) == 5) return "";
-																	else return "5";
-																});			
+																}).style("opacity", function(d) {
+																	var score = roundScore(otherScores[d.ID]);
+																	if(score == 5) return "0";
+																	else return "1.0";
+																}).text("5");
 }

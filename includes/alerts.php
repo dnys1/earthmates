@@ -1,5 +1,5 @@
 <?php
-	$alert = array("success" => "", "error" => "", "info" => "");
+	$alert = array("success" => "", "error" => "", "info" => "", "multerror" => "");
 	
 	function printAlerts()
 	{

@@ -96,12 +96,10 @@
 	{
 		if(isset($_GET['success']) && intval($_GET['success']) == 1)
 		{
-			$alert['success'] .= '<div class="alert alert-success" role="alert">' . "\n";
-			$alert['success'] .= "Success! An e-mail has been sent.\n";
-			$alert['success'] .= "</div>\n";
+			$alert['success'] = "Success! An e-mail has been sent.\n";
 		}
 	}
 
 	// The request form
-	include('pages/invite_page.php');
+	require_once('pages/invite_page.php');
 ?>

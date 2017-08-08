@@ -1,4 +1,5 @@
 var page = 0, rows, resultsPerPage, pageCount;
+var blocks, scores = [];
 $(document).ready(function() {
 	if (results)
 	{
@@ -14,6 +15,20 @@ $(document).ready(function() {
 			
 		$(".previous>a").on('click', loadPrevious);
 		$(".next>a").on('click', loadNext);
+		
+		if ($(".results-score").length > 0)
+		{
+			blocks = $(".results-score");
+			for (var i = 0; i < blocks.length; i++)
+			{
+				scores[i] = parseFloat(blocks[i].innerText);
+			}
+			colorScores();
+			
+			$(window).on('resize', colorScores);
+			// Listen for orientation changes      
+			window.addEventListener("orientationchange", colorScores, false);
+		}
 	}
 });
 
@@ -53,6 +68,15 @@ function loadPrevious()
 			}
 			
 			rows[i].innerHTML = html;
+			
+			// Collect scores
+			blocks = $(".results-score");
+			scores = [];
+			for (var i = 0; i < blocks.length; i++)
+			{
+				scores[i] = parseFloat(blocks[i].innerText);
+			}
+			colorScores();
 		}
 		
 		// Reset page navigators
@@ -105,6 +129,14 @@ function loadNext()
 			}
 			
 			rows[i].innerHTML = html;
+			// Collect scores
+			blocks = $(".results-score");
+			scores = [];
+			for (var i = 0; i < blocks.length; i++)
+			{
+				scores[i] = parseFloat(blocks[i].innerText);
+			}
+			colorScores();
 		}
 		
 		// Reset page navigators
@@ -114,6 +146,55 @@ function loadNext()
 		}
 		$(".previous>a").disable(false);
 	}
+}
+
+var otherLevelColors = ["rgb(253, 187, 45)", "rgb(209, 188, 75)", "rgb(165, 189, 105)",
+								 "rgb(121, 191, 135)", "rgb(77, 192, 165)", "rgb(34, 193, 195)"];
+var selfLevelColors = ["rgba(253, 187, 45, 0.6)", "rgba(209, 188, 75, 0.6)", "rgba(165, 189, 105, 0.6)",
+											"rgba(121, 191, 135, 0.6)", "rgba(77, 192, 165, 0.6)", "rgba(34, 193, 195, 0.6)"];
+											
+function roundScore(score) {
+	if (score <= 4.8) return parseInt(score);
+	else return 5;
+}
+
+var width, minWidth, maxWidth; // Width scale function and min/max vals
+var blocks;
+
+function colorScores()
+{
+	// Start fresh
+	$(".results-score").empty();
+	
+	minWidth = 12;
+	maxWidth = $(".results-score").width();
+	
+	width = d3.scaleLinear()
+				.domain([0, 5])
+				.range([minWidth, maxWidth]);
+	
+	blocks = d3.selectAll(".results-score").data(scores).append("div").classed("bar-other", true);
+	
+	if (maxWidth < 50)
+	{
+		console.log("Too small!");
+	}
+	
+	blocks.style("width", function(d) { return width(d) + "px"; })
+				.style("background-color", function(d) {
+					var score = roundScore(d);
+					return otherLevelColors[score];
+				}).text(function(d) { return d; });
+	
+	blocks.append("div").classed("marker", true)
+				.style("width", maxWidth + "px")
+				.style("border-color", function (d) {
+					var score = roundScore(d);
+					return otherLevelColors[score];
+				}).text(function (d){
+					if(roundScore(d) == 5) return "";
+					else return "5";
+				});
 }
 
 jQuery.fn.extend({

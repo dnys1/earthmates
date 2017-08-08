@@ -1,7 +1,7 @@
 <!-- Static footer -->
 <footer class="footer">
 	<div class="container">
-		<p class="text-muted">&copy 2017 Dillon Nys</p>
+		<p class="text-muted">&copy 2017 EarthMates</p>
 	</div>
 </footer>
 

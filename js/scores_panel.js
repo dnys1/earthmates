@@ -46,13 +46,22 @@ $(document).ready(function () {
 																	.style("border-color", function(d) {
 																		var score = roundScore(d);
 																		return selfLevelColors[score];
+																	}).style("opacity", function(d) {
+																		var score = roundScore(d);
+																		if(score == 5) return "0";
+																		else return "1.0";
 																	}).text(topText);
+																	
 	overallScore.select(".bar-other").append("div")
 																	 .classed("marker", true).style("width",overallMaxWidth+"px")
 																	 .style("border-color", function(d) {
 																		var score = roundScore(d);
 																		return otherLevelColors[score];
-																	 }).text("Peers");
+																	 }).style("opacity", function(d) {
+																		var score = roundScore(d);
+																		if(score == 5) return "0";
+																		else return "1.0";
+																	}).text("Peers");
 	
 	$(window).on('resize', overallResize);
 	// Listen for orientation changes      
@@ -88,11 +97,20 @@ function overallResize() {
 																	.style("border-color", function(d) {
 																		var score = roundScore(d);
 																		return selfLevelColors[score];
-																	}).text("You");
+																	}).style("opacity", function(d) {
+																		var score = roundScore(d);
+																		if(score == 5) return "0";
+																		else return "1.0";
+																	}).text(topText);
+																	
 	overallScore.select(".bar-other").append("div")
 																	 .classed("marker", true).style("width",overallMaxWidth+"px")
 																	 .style("border-color", function(d) {
 																		var score = roundScore(d);
 																		return otherLevelColors[score];
+																	 }).style("opacity", function(d) {
+																		var score = roundScore(d);
+																		if(score == 5) return "0";
+																		else return "1.0";
 																	 }).text("Peers");
 }

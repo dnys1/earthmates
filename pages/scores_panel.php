@@ -1,8 +1,8 @@
 <script>
-	var totalSelfScore = <?php if(on_page('scores.php')) { echo getTotalAverageSelfScore($_SESSION['userID']); $onScoresPage = true; }
+	var totalSelfScore = <?php if(on_page('dashboard.php')) { echo getTotalAverageSelfScore($_SESSION['userID']); $onScoresPage = true; }
 														 else { echo getAverageSelfCompetencyScore($_SESSION['userID'], $_GET['id']); $onScoresPage = false; }
 												?>;
-	var totalOtherScore = <?php if(on_page('scores.php')) { echo getTotalAverageOtherScore($_SESSION['userID']);}
+	var totalOtherScore = <?php if(on_page('dashboard.php')) { echo getTotalAverageOtherScore($_SESSION['userID']);}
 															else echo getAverageOtherCompetencyScore($_SESSION['userID'], $_GET['id']);
 												?>;
 	var other = false;

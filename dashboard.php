@@ -18,5 +18,5 @@
 	if(!$_SESSION['quizComplete'] || !$_SESSION['receivedFeedback'])
 		redirect_to('profile.php');
 	
-	require_once('pages/scores_page.php');
+	require_once('pages/dashboard_page.php');
 ?>

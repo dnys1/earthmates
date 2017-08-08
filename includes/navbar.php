@@ -60,13 +60,11 @@
 					if($_SESSION['quizComplete'] && $_SESSION['receivedFeedback']) {
 						echo '<li role="separator" class="divider"></li>';
 						echo '<li ';
-						echo on_page('scores.php') ? 'class="active"' : '';
-						echo '><a href="scores.php"><b>View Scores</b></a></li>';
-						/*
+						echo on_page('dashboard.php') ? 'class="active"' : '';
+						echo '><a href="dashboard.php"><b>Dashboard</b></a></li>';
 						echo '<li ';
 						echo on_page('resources.php') ? 'class="active"' : '';
 						echo '><a href="resources.php">Resources</a></li>';
-						*/
 					}
 					echo '<li role="separator" class="divider"></li>';
 					echo '<li ';

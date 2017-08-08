@@ -155,6 +155,15 @@ code {
 .profile-info {
 	padding: 20px;
 }
+.profile-info>div:first-of-type>h2 {
+	display: inline;
+}
+.profile-info>div>h2 {
+	display: inline-block;
+}
+.profile-info>div>a {
+	padding-left: 10px;
+}
 
 .profile-buttons {
 	width: 50%;
@@ -260,6 +269,12 @@ code {
 	position: relative;
 }
 
+.overallScore .marker,
+.overallScore .bar-self,
+.overallScore .bar-other {
+	font-size: 20px;
+}
+
 /** SELF QUIZ PAGE **/
 #quizContainer {
 	padding: 10px;
@@ -282,48 +297,110 @@ code {
 #quizContainer input[type="radio"] {
 	padding-left: 15px;
 }
-
-/** COMPETENCY PAGE **/
-.cover {
-	width: 100px;
-	margin-right: 20px;
-}
-
-.resource blockquote {
-	font-size: 1em;
-	margin-left: 120px;
-}
-
-.resource {
-	min-height: 175px;
-}
-
 /** Resources Page **/
-
-div.book-row {
-	height: 300px;
+.resource-form .form-group {
+	padding: 3px;
+	margin: 2px;
+}
+.resource-form select {
+	border: 1px solid black;
+	border-radius: 1px;
+}
+#resources-message, #no-resources {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.resources-table>thead>tr>th:first-of-type,
+.resources-table>tbody>tr>td:first-of-type
+{
+	width: 200px;
+	max-width: 200px;
+	min-width: 50px;
+	
+}
+.resources-table .description {
+	padding: 10px;
+}
+.referral > img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	.center-block();
+}
+.rating {
+	width: 150px;
+	min-width: 150px;
+	text-align: center;
+}
+.rating-info {
+	color: #FAB400;
+	font-style: italic;
+	font-size: 10px;
 }
 
-div.book {
-	height: 100%;
+/* -----------------------------------------------------------------------------
+
+  COMPENENTS - RATING
+  
+----------------------------------------------------------------------------- */
+.c-rating {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+	width: 120px;
 }
+
+.c-rating__item {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 24px;
+      -ms-flex: 0 0 24px;
+          flex: 0 0 24px;
+  height: 24px;
+  background: url("../img/stars.svg");
+  background-position: 0 0;
+  cursor: pointer;
+}
+
+.c-rating__item:hover,
+.c-rating__item.is-active {
+  background-position: -24px 0;
+}
+
 
 /** Search results page **/
 .search-table img {
+	min-height: 75px;
+	width: auto;
 	height: 75px;
-	max-height: 75px;
 }
 .search-table td {
 	font-size: 26px;
 	font-weight: bold;
 }
-.search-table>thead>th:first-of-type,
-.search-table>thead>th:nth-of-type(3),
-.search-table>thead>th:nth-of-type(4),
+.search-table>thead>tr>th:first-of-type,
+.search-table>thead>tr>th:nth-of-type(4),
 .search-table>tbody>tr>td:first-of-type,
-.search-table>tbody>tr>td:nth-of-type(3),
 .search-table>tbody>tr>td:nth-of-type(4) {
-	width: 100px;
+	width: 80px;
+	min-width: 80px;
+}
+.search-table>thead>tr>th:nth-of-type(3),
+.search-table>tbody>tr>td:nth-of-type(3) {
+	width: 250px;
+	min-width: 80px;
+	margin-left: 15px;
+	margin-right: 15px;
+	text-align: center;
+}
+.search-table>thead>tr>th:nth-of-type(4),
+.search-table>tbody>tr>td:nth-of-type(4) {
+	text-align: center;
+	padding-left: 30px;
+	padding-right: 20px;
 }
 .pager .next>a,
 .pager .next>span,
@@ -333,4 +410,10 @@ div.book {
 }
 .search-panel>.panel-body {
 	padding:0;
+}
+.results-score .bar-other,
+.results-score .marker {
+	font-size: 20px;
+	height: 35px;
+	line-height: 30px;
 }

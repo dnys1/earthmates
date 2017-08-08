@@ -34,9 +34,9 @@
 					<img src="img/anonymous.png" class="img-responsive pull-left" />
 				</div>
 				<div class="col-md-10 col-xs-12 profile-info">
-					<h2><b>Name: </b><?php echo $_SESSION['userName']; ?></h2>
-					<h2><b>Email: </b><?php echo $_SESSION['userEmail']; ?></h2>
-					<h2><b>Timezone: </b><?php echo array_search(getTimezone($_SESSION['userID']), $timezones); ?></h2>
+					<div id="name" ><h2><b>Name: </b><?php echo $_SESSION['userName']; ?></h2><!--<a href="#">Edit</a>--></div>
+					<div id="email"><h2><b>Email: </b><?php echo $_SESSION['userEmail']; ?></h2></div>
+					<div id="timezone"><h2><b>Timezone: </b><?php echo array_search(getTimezone($_SESSION['userID']), $timezones); ?></h2></div>
 				</div>
 			</div>
 		</div>

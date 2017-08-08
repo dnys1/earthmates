@@ -104,6 +104,14 @@
 			{
 				$handle->execute();
 				$results = $handle->fetchAll();
+				
+				foreach($results as $key => $resource) 
+				{
+					$rating = getResourceRatings($resource['ID']);
+					$results[$key]['Rating'] = $rating['Rating'];
+					$results[$key]['RatingCount'] = $rating['Count'];
+				}
+				
 				echo json_encode($results);
 			}
 		} catch(PDOException $e) {

@@ -659,8 +659,63 @@ function getIncompleteQuestions($userID, $token = NULL)
 			print($e->getMessage());
 		}
 	}
+}
+
+function getResourceRatings($resourceID)
+{
+	global $link;
 	
+	try{
+		$handle = $link->prepare('SELECT AVG(Rating) AS Rating FROM Ratings WHERE ResourceID = ?');
+		$handle->bindValue(1, $resourceID, PDO::PARAM_INT);
+		$handle->execute();
+		
+		$row1 = $handle->fetch();
+		
+		$handle = $link->prepare('SELECT COUNT(Rating) AS Count FROM Ratings WHERE ResourceID = ?');
+		$handle->bindValue(1, $resourceID, PDO::PARAM_INT);
+		$handle->execute();
+		
+		$row2 = $handle->fetch();
+		
+		return array_merge($row1, $row2);
+	}
+	catch(PDOException $e)
+	{
+		print($e->getMessage());
+	}
+}
+
+function postResourceRating($userID, $resourceID, $rating) : int
+{
+	global $link;
 	
+	try {
+		$handle = $link->prepare('INSERT INTO Ratings (UserID, ResourceID, Rating) VALUES (?, ?, ?)');
+		$handle->bindValue(1, $userID, PDO::PARAM_INT);
+		$handle->bindValue(2, $resourceID, PDO::PARAM_INT);
+		$handle->bindValue(3, $rating, PDO::PARAM_INT);
+		$handle->execute();
+		
+		return 1;
+	}
+	catch(\PDOException $e)
+	{
+		try {
+			$handle = $link->prepare('UPDATE Ratings SET Rating = ? WHERE UserID = ? AND ResourceID = ?');
+			$handle->bindValue(1, $rating, PDO::PARAM_INT);
+			$handle->bindValue(2, $userID, PDO::PARAM_INT);
+			$handle->bindValue(3, $resourceID, PDO::PARAM_INT);
+			$handle->execute();
+			
+			return 2;
+		}
+		catch(PDOException $e)
+		{
+			print($e->getMessage());
+			return -1;
+		}
+	}
 }
 
 function test($test)
