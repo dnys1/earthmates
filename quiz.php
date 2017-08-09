@@ -58,7 +58,7 @@
 			if(isset($_SESSION['userID']) &&  $_SESSION['userID'] == $tokenFollowerID && $_SESSION['userID'] == $tokenUserID)
 			{
 				updateQuizComplete($_SESSION['userID']);				
-				redirect_to('scores.php?success=1');
+				redirect_to('dashboard.php?success=1');
 			}
 			else if(isset($_SESSION['token']))
 			{
@@ -68,6 +68,11 @@
 				// so it can no longer be referenced
 				invalidateToken($_SESSION['token']);
 				unset($_SESSION['token']);
+				
+				if(isset($_SESSION['userID']) && $_SESSION['userID'] == $tokenUserID)
+				{
+					$_SESSION['receivedFeedback'] = true;
+				}
 				
 				redirect_to('index.php?success=1');
 			}

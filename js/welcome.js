@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
 $("#tourLink").click(function () {
 	if (typeof tour === 'undefined') {
     // the variable is undefined
@@ -35,13 +35,15 @@ $("#tourLink").click(function () {
 			element: "#dropdown-toggle",
 			title: "Next Steps",
 			content: "After you've done these two things, you'll be able to access your scores in this dropdown menu.",
-			backdropContainer: 'nav'
+			backdropContainer: 'nav',
+				placement: 'left'
 		},
 		{
 			element: "#dropdown-toggle",
 			title: "Next Steps",
 			content: "The goal is to get more than just one person reviewing you so you have a diverse profile to learn from.",
-			backdropContainer: 'nav'
+			backdropContainer: 'nav',
+				placement: 'left'
 		},
 		{
 			title: "Next Steps",

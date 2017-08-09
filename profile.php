@@ -11,8 +11,10 @@
 	
 	if ($_SERVER["REQUEST_METHOD"] == "GET")
 	{
-		if(isset($_GET['signup']) && intval($_GET['signup']) == 1) {
+		if((isset($_GET['signup']) && intval($_GET['signup']) == 1)) {
 			$alert['success'] = 'Success! Welcome to your profile. Click <a id="tourLink" href="#">here</a> to take a short, guided tour of EarthMates.';
+		} else if($_SESSION['showInfoMessage']) {
+			$alert['success'] = 'Welcome to your profile. Click <a id="tourLink" href="#">here</a> to take a short, guided tour of EarthMates.';
 		}
 		
 		if(isset($_GET['completed']) && intval($_GET['completed']) == 1) {

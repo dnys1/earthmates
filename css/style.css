@@ -151,11 +151,10 @@ code {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
-
 .profile img {
-	padding-top: 40px;
+	padding-top: 20px;
+	margin: auto;
 }
-
 .profile-info {
 	padding: 20px;
 }
@@ -317,7 +316,7 @@ code {
 	border: 1px solid black;
 	border-radius: 1px;
 }
-#resources-message, #no-resources {
+.empty-panel {
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
@@ -427,4 +426,7 @@ code {
 	font-size: 20px;
 	height: 35px;
 	line-height: 30px;
+}
+.search-table img {
+	margin: auto;
 }

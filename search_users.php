@@ -8,7 +8,7 @@
 	
 	if($_SERVER["REQUEST_METHOD"] == "GET")
 	{
-		if(isset($_GET["q"]))
+		if(isset($_GET["q"]) && !empty($_GET['q']))
 		{
 			$query = test_input($_GET['q']);
 			$query = explode(" ", $query);
@@ -21,8 +21,11 @@
 				else
 					$results[$key]['AvgScore'] = NULL;
 			}
+		} else {
+			$query = NULL;
+			$results = NULL;
 		}
+		
+		include('pages/search_users_page.php');
 	}
-	
-	include('pages/search_users_page.php');
 ?>

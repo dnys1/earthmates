@@ -43,10 +43,10 @@
 			<div class="panel-heading">
 				<h3 class="panel-title"></h3>
 			</div>
-			<div class="text-center" id="resources-message">
+			<div class="text-center empty-panel" id="resources-message">
 				<h3>Please select a category and type to list resources.</h3>
 			</div>
-			<div class="text-center" id="no-resources">
+			<div class="text-center empty-panel" id="no-resources">
 				<h3>There are currently no resources under that selection.</h3>
 			</div>
 			<table class="table resources-table">

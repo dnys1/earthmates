@@ -68,7 +68,7 @@
 		
 		<?php
 			// Set up welcome tour
-			if(isset($_GET['signup']) && intval($_GET['signup']) == 1)
+			if((isset($_GET['signup']) && intval($_GET['signup']) == 1) || $_SESSION['showInfoMessage'])
 				echo '<script src="js/welcome.js"></script>';
 		?>
 	<?php include('includes/footer.php'); ?>

@@ -52,32 +52,30 @@ function loadPrevious()
 			var profile = results[start+i];
 			var html = "";
 			html += "<td>";
-			html += '<img src="img/anonymous.png" class="img-responsive" />';
+			html += '<img src="profile_image.php?id=' + profile.ID + '" class="img-responsive" />';
 			html += '</td>';
 			if (parseInt(profile.GlobalProfile))
 			{
 				html += '<td><a href="view_profile.php?id=' + profile.ID + '">' + profile.FirstName + " " + profile.LastName + '</a></td>';
 				html += '<td class="results-score">' + (profile.AvgScore ? profile.AvgScore.toFixed(1) : 'N/A' ) + '</td>';
-				html += '<td><a class="btn btn-default" role="button" href="view_profile.php?id=' + profile.ID + '">Link</a></td>';	
 			}
 			else
 			{
 				html += '<td title="This user does not allow others to view their EarthMates profile.">' + profile.FirstName + " " + profile.LastName + '</td>';
 				html += '<td title="This user does not allow others to view their EarthMates profile.">N/A</td>';
-				html += '<td><a class="btn btn-default" disabled="disabled" href="#" role="button" title="This user does not allow others to view their EarthMates profile.">Link</a></td>';
 			}
 			
 			rows[i].innerHTML = html;
-			
-			// Collect scores
-			blocks = $(".results-score");
-			scores = [];
-			for (var i = 0; i < blocks.length; i++)
-			{
-				scores[i] = parseFloat(blocks[i].innerText);
-			}
-			colorScores();
 		}
+		
+		// Collect scores
+		blocks = $(".results-score");
+		scores = [];
+		for (var i = 0; i < blocks.length; i++)
+		{
+			scores[i] = parseFloat(blocks[i].innerText);
+		}
+		colorScores();
 		
 		// Reset page navigators
 		if (page > 0) {
@@ -113,31 +111,30 @@ function loadNext()
 			var profile = results[start+i];
 			var html = "";
 			html += "<td>";
-			html += '<img src="img/anonymous.png" class="img-responsive" />';
+			html += '<img id="image' + i +'" src="profile_image.php?id=' + profile.ID + '" class="img-responsive" />';
 			html += '</td>';
 			if (parseInt(profile.GlobalProfile))
 			{
 				html += '<td><a href="view_profile.php?id=' + profile.ID + '">' + profile.FirstName + " " + profile.LastName + '</a></td>';
 				html += '<td class="results-score">' + (profile.AvgScore ? profile.AvgScore.toFixed(1) : 'N/A' ) + '</td>';
-				html += '<td><a class="btn btn-default" role="button" href="view_profile.php?id=' + profile.ID + '">Link</a></td>';	
 			}
 			else
 			{
 				html += '<td title="This user does not allow others to view their EarthMates profile.">' + profile.FirstName + " " + profile.LastName + '</td>';
 				html += '<td title="This user does not allow others to view their EarthMates profile.">N/A</td>';
-				html += '<td><a class="btn btn-default" disabled="disabled" href="#" role="button" title="This user does not allow others to view their EarthMates profile.">Link</a></td>';
 			}
 			
 			rows[i].innerHTML = html;
-			// Collect scores
-			blocks = $(".results-score");
-			scores = [];
-			for (var i = 0; i < blocks.length; i++)
-			{
-				scores[i] = parseFloat(blocks[i].innerText);
-			}
-			colorScores();
 		}
+		
+		// Collect scores
+		blocks = $(".results-score");
+		scores = [];
+		for (var i = 0; i < blocks.length; i++)
+		{
+			scores[i] = parseFloat(blocks[i].innerText);
+		}
+		colorScores();
 		
 		// Reset page navigators
 		if (page < pageCount)
@@ -145,6 +142,22 @@ function loadNext()
 			$(".next>a").disable(false);
 		}
 		$(".previous>a").disable(false);
+	}
+}
+
+function resizeImage(elementID) 
+{
+	var img = document.getElementById(elementID);
+	var height = img.clientHeight;
+	var width = img.clientWidth;
+	
+	if (width > height)
+	{
+		var base = height / 5;
+		var xClip = Math.round((width - 4 * base) / 2);
+		$(img).css('clip-path', 'inset(0 ' + xClip + 'px 0 ' + xClip + 'px)');
+	} else {
+		var base = width / 4;
 	}
 }
 

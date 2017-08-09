@@ -8,18 +8,22 @@
 	var other = false;
 </script>
 <script src="js/scores_panel.js"></script>
-<div class="panel panel-default">
+<div id="scorePanel" class="panel panel-default">
 	<div class="panel-heading"></div>
 	<div class="panel-body">
-		<div class="overallScoreHeading text-center">
-			<h2>
-				<?php echo $onScoresPage ? "Your EarthMates score:" : "Your Competency score:"; ?><br>
-				<small><?php echo $onScoresPage ? "An average of your individual competency values." : "A comparison of your self-assessment vs. others'"?></small>
-			</h2>
+	
+		<div id="overallScoreHeading">
+			<div id="overallScoreTitle" class="overallScoreHeading text-center">
+				<h2>
+					<?php echo $onScoresPage ? "Your EarthMates score:" : "Your Competency score:"; ?><br>
+					<small><?php echo $onScoresPage ? "An average of your individual competency values." : "A comparison of your self-assessment vs. others'"?></small>
+				</h2>
+			</div>
+			<div id="overallScore" class="overallScore center-block"></div>
 		</div>
-		<div class="overallScore center-block"></div>
+		
 		<p class="lead">In general, the scoring was designed to follow this pattern:</p>
-		<table class="table score-panel-table">
+		<table id="scoreDescriptions" class="table score-panel-table">
 		<tbody>
 			<tr>
 				<td style="border-top: none;" class="score-table-label">Level 0</td>

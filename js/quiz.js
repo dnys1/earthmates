@@ -177,20 +177,20 @@ function loadQuestion() {
 	if (q == 0) {
 		$("#submitQuiz").hide();
 		$("#saveProgress").show();
-		$("#nextQuestion").removeClass("disabled");
-		$("#prevQuestion").addClass("disabled");
+		$("#nextQuestion").show();
+		$("#prevQuestion").hide();
 	}
 	else if (q == questionsArray.length-1) {
 		$("#submitQuiz").show();
 		$("#saveProgress").hide();
-		$("#nextQuestion").addClass("disabled");
-		$("#prevQuestion").removeClass("disabled");
+		$("#nextQuestion").hide();
+		$("#prevQuestion").show();
 	} 
 	else {
 		$("#submitQuiz").hide();
 		$("#saveProgress").show();
-		$("#prevQuestion").removeClass("disabled");
-		$("#nextQuestion").removeClass("disabled");
+		$("#prevQuestion").show();
+		$("#nextQuestion").show();
 	}
 	
 	// If question has already been answered

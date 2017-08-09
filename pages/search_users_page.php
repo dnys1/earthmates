@@ -27,11 +27,11 @@
       <div class="page-header">
         <h1><?php echo $pageTitle ?></h1>
       </div>
-	  <p class="lead">Results found for "<?php if(isset($_GET['q'])) echo $_GET['q']?>"</p>
+	  <p class="lead">Results found for "<?php if($_GET['q']) echo $_GET['q'] ?>"</p>
 		<div class="panel panel-default search-panel">
 			<div class="panel-heading"></div>
 			<?php
-				if($results == NULL){ echo '<p class="text-center">No results found for "'.$_GET['q'].'"</p>'; }
+				if($results == NULL){ echo '<div class="text-center empty-panel"><h3>No results found for "'.$query.'"</h3></div>'; }
 				else
 				{
 					echo '<table class="table table-hover search-table">';

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
 		<?php 
-			$pageTitle = "Home";
+			$pageTitle = "EarthMates";
 			$pageDescription = "EarthMates home page";
 			include('includes/header.php'); 
 		?>

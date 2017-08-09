@@ -13,6 +13,11 @@
 		if(isset($_GET['success']) && intval($_GET['success']) == 1) {
 			$alert['success'] = "Thanks for taking the quiz! Your answers have been recorded.";
 		}
+		
+		if($_SESSION['showInfoMessage'])
+		{
+			$alert['success'] = 'Welcome to your dashboard. Click <a id="dashboardTour" href="#">here</a> to take a short, guided tour of your scores.';
+		}
 	}
 	
 	if(!$_SESSION['quizComplete'] || !$_SESSION['receivedFeedback'])

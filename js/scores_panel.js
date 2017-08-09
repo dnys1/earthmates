@@ -12,7 +12,7 @@ var overallWidth, overallMinWidth, overallMaxWidth;
 var overallScore;
 var topText;
 
-$(document).ready(function () {
+$(function () {
 	// Set values
 	overallMinWidth = 20;
 	overallMaxWidth = parseInt($(".overallScore").width());
@@ -113,4 +113,14 @@ function overallResize() {
 																		if(score == 5) return "0";
 																		else return "1.0";
 																	 }).text("Peers");
+	
+	if($(".overallScore").width() < 200) {
+		$(".overallScore .bar-self").css('font-size', '16px');
+		$(".overallScore .bar-other").css('font-size', '16px');
+		$(".overallScore .marker").css('font-size', '16px');
+	} else {
+		$(".overallScore .bar-self").css('font-size', '20px');
+		$(".overallScore .bar-other").css('font-size', '20px');
+		$(".overallScore .marker").css('font-size', '20px');
+	}
 }

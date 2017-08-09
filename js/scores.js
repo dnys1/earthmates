@@ -65,7 +65,7 @@ function roundScore(score) {
 var width, minWidth, maxWidth; // Width scale function and min/max vals
 var blocks;
 
-$(document).ready(function() {
+$(function() {
 	loadCompetencyData();
 	$("tbody .table-score").append('<span class="fa fa-spinner fa-spin spinner"></span>');
 	
@@ -75,6 +75,85 @@ $(document).ready(function() {
 	width = d3.scaleLinear()
 				.domain([0, 5])
 				.range([minWidth, maxWidth]);
+
+	$("#dashboardTour").click(function () {
+		if (typeof dashboardTour === 'undefined') {
+			var dashboardTour = new Tour({
+			name: "dashboard",
+			smartPlacement: false,
+			steps: [
+			{
+				title: "Welcome to your dashboard!",
+				content: "This is the main landing page of your profile. It houses all your scoring information.",
+				orphan: true
+			},
+			{
+				element: "#dropdown-toggle",
+				title: "Your Dashboard",
+				content: "It is accessible always from the dropdown menu.",
+				backdropContainer: 'nav',
+				placement: 'left'
+			},
+			{
+				element: "#dropdown-toggle",
+				title: "Resources",
+				content: "You can also now view our 'Resources' section which will help you on your journey.",
+				backdropContainer: 'nav',
+				placement: 'left'
+			},
+			{
+				element: "#overallScoreHeading",
+				title: "Your Overall Score",
+				content: "These are the averages of your individual scores.",
+				placement: 'top'
+			},
+			{
+				element: "#overallScore",
+				title: "Your Overall Score",
+				content: "Your self average is on top, and the average of your peers' scores is on bottom.",
+				placement: 'top'
+			},
+			{
+				element: "#overallScore",
+				title: "Your Overall Score",
+				content: "This trend is exhibited across the site.",
+				placement: 'top'
+			},
+			{
+				element: "#scoreDescriptions",
+				title: "Score Descriptions",
+				content: "In general, we designed the scoring system to follow a pattern with 0 at the lower end and 5 at the upper.",
+				placement: 'top'
+			},
+			{
+				element: "#competencies",
+				title: "Individual Competencies",
+				content: "Here you'll find a breakdown of your score, separated into 16 individual competencies.",
+				placement: 'top'
+			},
+			{
+				element: "#competencies",
+				title: "Individual Competencies",
+				content: "We believe this set of values encompasses a wide range of the human experience.",
+				placement: 'top'
+			},
+			{
+				element: "#firstCompetency",
+				title: "Individual Competencies",
+				content: "Clicking on an individual competency will bring you to it's information page. Click on one to explore.",
+				placement: 'top'
+			}],
+			storage: false,
+			backdrop: true
+			});
+
+			// Initialize the tour
+			dashboardTour.init();
+			
+			// Start the tour
+			dashboardTour.start();
+		}
+	});
 });
 
 $(document).ajaxStop(function() {		
@@ -127,7 +206,7 @@ $(document).ajaxStop(function() {
 	window.addEventListener("orientationchange", resize, false);
 });
 
-function resize() {
+function resize() {	
 	minWidth = 12;
 	maxWidth = $(".table-score").width();
 	
@@ -173,4 +252,12 @@ function resize() {
 																	if(score == 5) return "0";
 																	else return "1.0";
 																}).text("5");
+																
+	if($(".table-score").width() < 120) {
+		$(".table h5").css('font-size', '16px');
+		$(".table h5").css('font-weight', 'normal');
+	} else {
+		$(".table h5").css('font-size', '20px');
+		$(".table h5").css('font-weight', 'bold');
+	}
 }

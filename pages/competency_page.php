@@ -19,7 +19,7 @@
 			<!-- Breadcrumb -->
 			<ol class="breadcrumb">
 				<li><a href="profile.php">Profile</a></li>
-				<li><a href="scores.php">View Scores</a></li>
+				<li><a href="dashboard.php">View Scores</a></li>
 				<li class="active">Competency Score</li>
 			</ol>
 			
