@@ -4,18 +4,18 @@
 		<?php 
 			$pageTitle = "Search Users";
 			$pageDescription = "Search for EarthMates profiles";
-			include('includes/header.php'); 
+			include('../includes/header.php'); 
 		?>
 		<script>
 			var results = '<?php if($results != NULL) echo json_encode($results); ?>';
 		</script>
-		<script src="js/search.js"></script>
+		<script src="js/search.min.js"></script>
 	</head>
 
   <body>
 
    <!-- Fixed navbar -->
-   <?php include('includes/navbar.php'); ?>
+   <?php include('../includes/navbar.php'); ?>
 	 
     <!-- Begin page content -->
     <div class="container">
@@ -68,13 +68,13 @@
 					}
 					echo '</tbody>';
 					echo '</table>';
-					if(count($results) > 5) include('includes/results_pagination.php');
+					if(count($results) > 5) include('../includes/results_pagination.php');
 				}
 			?>
 		 
 		</div>
     </div>
 	
-	<?php	include('includes/footer.php'); ?>
+	<?php	include('../includes/footer.php'); ?>
   </body>
 </html>

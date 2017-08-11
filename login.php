@@ -1,10 +1,10 @@
 <?php
 	/********* INCLUDES **********/
-	require_once('includes/session_start.php');
-	require_once('includes/db_functions.php');
-	require_once('includes/form_functions.php');
-	require_once('includes/redirect.php');
-	require_once('includes/alerts.php');
+	require_once('../includes/session_start.php');
+	require_once('../includes/db_functions.php');
+	require_once('../includes/form_functions.php');
+	require_once('../includes/redirect.php');
+	require_once('../includes/alerts.php');
 	/****************************/
 
 	$email = $inputPassword = "";
@@ -65,5 +65,5 @@
 		}
 	}
 
-	include('pages/login_page.php');
+	include('../pages/login_page.php');
 ?>

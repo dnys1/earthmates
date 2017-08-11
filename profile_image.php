@@ -1,7 +1,7 @@
 <?php
-	require_once('includes/session_start.php');
-	require_once('includes/form_functions.php');
-	require_once('includes/db_functions.php');
+	require_once('../includes/session_start.php');
+	require_once('../includes/form_functions.php');
+	require_once('../includes/db_functions.php');
 	
 	if(isset($_GET['id']))
 	{

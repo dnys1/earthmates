@@ -1,11 +1,10 @@
 <?php
 	/********* INCLUDES **********/
-	require_once('includes/session_start.php');
-	require_once('includes/db_functions.php');
-	require_once('includes/redirect.php');
-	require_once('includes/form_functions.php');
-	require_once('includes/PHPMailer/PHPMailerAutoload.php');
-	require_once('includes/alerts.php');
+	require_once('../includes/session_start.php');
+	require_once('../includes/db_functions.php');
+	require_once('../includes/redirect.php');
+	require_once('../includes/form_functions.php');
+	require_once('../includes/alerts.php');
 	/****************************/
 
 	ensure_user_logged_in();
@@ -65,6 +64,8 @@
 		
 		if (empty($alert['error'])) 
 		{
+			require '../includes/sendgrid-php/sendgrid-php.php';
+			
 			$userID = $_SESSION['userID'];
 			$followerID = createUser($firstName, $lastName, $email);
 			
@@ -74,32 +75,28 @@
 			// Create the stable link
 			// Email to follower
 			// Generate success message at profile page
-			$followerLink = "https://earthmates.000webhostapp.com/quiz.php?token=" . $token;
+			$followerLink = "https://earthmates.me/quiz.php?token=" . $token;
 			
 			$body = $_SESSION['userName'] . " is requesting feedback for their EarthMates profile. To take a short assessment of their behavior, follow the link below. You may save at any point.<br><br>";
 			$body .= '<a href="' . $followerLink . '">Link to form</a>';
 			
-			$obj = new PHPMailer();
-			$obj->From      = 'dnys1@asu.edu';
-			$obj->FromName  = 'Dillon Nys';
-			$obj->Subject   = 'EarthMates Invitation for Feedback';
-			$obj->Body      = $body;
-			$obj->AddAddress( $email );
-			$obj->isHTML(true);
-
-			$obj->Send();
+			$from = new SendGrid\Email("EarthMates", "admin@earthmates.me");
+			$subject = "Request for EarthMates Feedback";
+			$to = new SendGrid\Email($firstName . " " . $lastName, $email);
+			$content = new SendGrid\Content("text/html", $body);
+			$mail = new SendGrid\Mail($from, $subject, $to, $content);
+			$apiKey = getenv('SENDGRID_API_KEY');
+			$sg = new \SendGrid($apiKey);
+			$response = $sg->client->mail()->send()->post($mail);
 			
-			redirect_to('invite.php?success=1');
-		}
-	} 
-	else if ($_SERVER["REQUEST_METHOD"] == "GET")
-	{
-		if(isset($_GET['success']) && intval($_GET['success']) == 1)
-		{
-			$alert['success'] = "Success! An e-mail has been sent.\n";
+			if (intval($response->statusCode()) != 202) {
+				$alert['error'] = "Message could not be sent at this time. Please try again later.";
+			} else {
+				$alert['success'] = "Success! An e-mail has been sent.\n";
+			}
 		}
 	}
 
 	// The request form
-	require_once('pages/invite_page.php');
+	require_once('../pages/invite_page.php');
 ?>

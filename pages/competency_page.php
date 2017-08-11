@@ -4,14 +4,14 @@
 		<?php 
 			$pageTitle = $competencyName;
 			$pageDescription = "Competency: " . $competencyName;
-			include('includes/header.php'); 
+			include('../includes/header.php'); 
 		?>
 	</head>
 
   <body>
 
 		<!-- Fixed navbar -->
-		<?php include('includes/navbar.php'); ?>
+		<?php include('../includes/navbar.php'); ?>
 
 		<!-- Begin page content -->
 		<div class="container">
@@ -98,7 +98,7 @@
 		</div>
 		
 		<?php
-			include('includes/footer.php');
+			include('../includes/footer.php');
 		?>
   </body>
 </html>

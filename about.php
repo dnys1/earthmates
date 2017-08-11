@@ -1,5 +1,5 @@
 <?php
-	require_once('includes/session_start.php');
+	require_once('../includes/session_start.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,12 +7,12 @@
 		<?php 
 			$pageTitle = "About";
 			$pageDescription = "About EarthMates: What is it and what can it do for you?";
-			include('includes/header.php'); 
+			include('../includes/header.php'); 
 		?>
 	</head>
 	<body>
 		<!-- Fixed navbar -->
-		<?php include('includes/navbar.php'); ?>
+		<?php include('../includes/navbar.php'); ?>
 	
     <!-- Begin page content -->
     <div class="container about-container">
@@ -59,6 +59,6 @@
     </div>
 		
 		<!-- Static footer -->
-		<?php include('includes/footer.php'); ?>
+		<?php include('../includes/footer.php'); ?>
 	</body>
 </html>

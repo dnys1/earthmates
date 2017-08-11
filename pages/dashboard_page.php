@@ -4,15 +4,15 @@
 		<?php 
 			$pageTitle = "Dashboard";
 			$pageDescription = "Your EarthMates scores";
-			include('includes/header.php'); 
+			include('../includes/header.php'); 
 		?>	
-	<script src="js/scores.js"></script>
+	<script src="js/scores.min.js"></script>
 	</head>
 
   <body>
 
    <!-- Fixed navbar -->
-   <?php include('includes/navbar.php'); ?>
+   <?php include('../includes/navbar.php'); ?>
 	 
     <!-- Begin page content -->
     <div class="container">
@@ -65,6 +65,6 @@
 			</div>
     </div>
 	
-	<?php	include('includes/footer.php'); ?>
+	<?php	include('../includes/footer.php'); ?>
   </body>
 </html>

@@ -4,7 +4,7 @@
 		<?php 
 			$pageTitle = "Settings";
 			$pageDescription = "Adjust your EarthMates settings";
-			include('includes/header.php'); 
+			include('../includes/header.php'); 
 		?>
 		<script>
 			$(document).ready(function() {
@@ -18,7 +18,7 @@
   <body>
 
    <!-- Fixed navbar -->
-   <?php include('includes/navbar.php'); ?>
+   <?php include('../includes/navbar.php'); ?>
 	 
     <!-- Begin page content -->
     <div class="container">
@@ -53,6 +53,6 @@
 		</form>
     </div>
 	
-	<?php	include('includes/footer.php'); ?>
+	<?php	include('../includes/footer.php'); ?>
   </body>
 </html>

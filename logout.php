@@ -8,6 +8,6 @@ session_unset();
 // destroy the session 
 session_destroy();
 
-header('Location: https://earthmates.000webhostapp.com');
+header('Location: https://earthmates.me');
 exit();
 ?>

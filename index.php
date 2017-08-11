@@ -1,6 +1,6 @@
 <?php
-	require_once('includes/session_start.php');
-	require_once('includes/alerts.php');
+	require_once('../includes/session_start.php');
+	require_once('../includes/alerts.php');
 	
 	if ($_SERVER["REQUEST_METHOD"] == "GET")
 	{
@@ -15,5 +15,5 @@
 		}
 	}
 	
-	require_once('pages/index_page.php');
+	require_once('../pages/index_page.php');
 ?>

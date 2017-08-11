@@ -4,14 +4,14 @@
 		<?php 
 			$pageTitle = "Invite Friend";
 			$pageDescription = "Page to invite a friend to submit feedback";
-			include('includes/header.php'); 
+			include('../includes/header.php'); 
 		?>
 	</head>
 
   <body>
 
    <!-- Fixed navbar -->
-   <?php include('includes/navbar.php'); ?>
+   <?php include('../includes/navbar.php'); ?>
 
     <!-- Begin page content -->
     <div class="container">		
@@ -49,7 +49,7 @@
       </form>
 	</div>
 	<?php
-		include('includes/footer.php');
+		include('../includes/footer.php');
 	?>
   </body>
 </html>

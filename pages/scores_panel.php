@@ -7,7 +7,7 @@
 												?>;
 	var other = false;
 </script>
-<script src="js/scores_panel.js"></script>
+<script src="js/scores_panel.min.js"></script>
 <div id="scorePanel" class="panel panel-default">
 	<div class="panel-heading"></div>
 	<div class="panel-body">

@@ -14,20 +14,20 @@
 				$pageTitle = "Self-Assessment";
 				$pageDescription = "Time to test your skills!";
 			}
-			include('includes/header.php'); 
+			include('../includes/header.php'); 
 		?>
 		<script>
 			var selfAssessment = <?php echo $selfAssessment ? 'true' : 'false';?>;
 			var quizResume = [];
 			<?php if(isset($_SESSION['quizResume'])) echo "quizResume = " . $_SESSION['quizResume'] . ";"; ?>
 		</script>
-		<script src="js/quiz.js"></script>
+		<script src="js/quiz.min.js"></script>
 	</head>
 
   <body>
 
    <!-- Fixed navbar -->
-   <?php include('includes/navbar.php'); ?>
+   <?php include('../includes/navbar.php'); ?>
 		
     <!-- Begin page content -->
     <div class="container">
@@ -132,6 +132,6 @@
 		
     </div>
 	
-	<?php	include('includes/footer.php');	?>
+	<?php	include('../includes/footer.php');	?>
   </body>
 </html>

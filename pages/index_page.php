@@ -4,14 +4,14 @@
 		<?php 
 			$pageTitle = "EarthMates";
 			$pageDescription = "EarthMates home page";
-			include('includes/header.php'); 
+			include('../includes/header.php'); 
 		?>
 	</head>
 
   <body>
 
    <!-- Fixed navbar -->
-   <?php include('includes/navbar.php'); ?>
+   <?php include('../includes/navbar.php'); ?>
 
 	 <div class="container">
 		<?php printAlerts(); ?>
@@ -51,7 +51,7 @@
 	
 	<?php
 		// include('includes/page_nav.html');
-		include('includes/footer.php');
+		include('../includes/footer.php');
 	?>
   </body>
 </html>

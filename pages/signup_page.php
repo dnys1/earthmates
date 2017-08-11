@@ -4,13 +4,13 @@
 		<?php
 			$pageTitle = "Signup";
 			$pageDescription = "Sign Up for your awesome EarthMates account!";
-			include('includes/header.php'); 
+			include('../includes/header.php'); 
 		?>
   </head>
 
   <body>
 		<!-- Fixed navbar -->
-		<?php include('includes/navbar.php'); ?>
+		<?php include('../includes/navbar.php'); ?>
 		
 		<!-- Begin page content -->
     <div class="container">
@@ -44,6 +44,6 @@
 
     </div> <!-- /container -->
 
-		<?php include('includes/footer.php'); ?>
+		<?php include('../includes/footer.php'); ?>
   </body>
 </html>

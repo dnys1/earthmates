@@ -1,10 +1,10 @@
 <?php
 	/********* INCLUDES **********/
-	require_once('includes/session_start.php');
-	require_once('includes/db_functions.php');
-	require_once('includes/redirect.php');
-	require_once('includes/form_functions.php');
-	require_once('includes/alerts.php');
+	require_once('../includes/session_start.php');
+	require_once('../includes/db_functions.php');
+	require_once('../includes/redirect.php');
+	require_once('../includes/form_functions.php');
+	require_once('../includes/alerts.php');
 	/****************************/
 
 	$firstName = $lastName = $email = $inputPassword = $retypePassword = $passwordHash = "";
@@ -133,5 +133,5 @@
 	if(check_if_logged_in())
 		redirect_to('profile.php');
 
-	include('pages/signup_page.php');
+	include('../pages/signup_page.php');
 ?>

@@ -4,14 +4,14 @@
 		<?php 
 			$pageTitle = "Resources";
 			$pageDescription = "A compiled list of resources geared towards becoming a better human being.";
-			include('includes/header.php'); 
+			include('../includes/header.php'); 
 		?>
 	</head>
 
   <body>
 
    <!-- Fixed navbar -->
-   <?php include('includes/navbar.php'); ?>
+   <?php include('../includes/navbar.php'); ?>
 	 
     <!-- Begin page content -->
     <div class="container">
@@ -63,8 +63,8 @@
 		</div>
     </div>
 	
-	<script src="js/resources.js"></script>
+	<script src="js/resources.min.js"></script>
 	
-	<?php	include('includes/footer.php'); ?>
+	<?php	include('../includes/footer.php'); ?>
   </body>
 </html>

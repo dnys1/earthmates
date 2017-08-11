@@ -1,10 +1,10 @@
 <?php
 	/********* INCLUDES **********/
-	require_once('includes/session_start.php');
-	require_once('includes/db_functions.php');
-	require_once('includes/redirect.php');
-	require_once('includes/alerts.php');
-	require_once('includes/timezones.php');
+	require_once('../includes/session_start.php');
+	require_once('../includes/db_functions.php');
+	require_once('../includes/redirect.php');
+	require_once('../includes/alerts.php');
+	require_once('../includes/timezones.php');
 	/****************************/
 	
 	ensure_user_logged_in();
@@ -60,5 +60,5 @@
 		$alert['success'] = "Your settings have been saved.";
 	}
 	
-	require_once('pages/settings_page.php');
+	require_once('../pages/settings_page.php');
 ?>

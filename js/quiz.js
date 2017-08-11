@@ -16,8 +16,8 @@ $(document).ready(function() {
 		$("#welcomeScreen").hide();
 		$("#quizContainer").show();
 		$("#submitQuiz").hide();
-		$("#nextQuestion").removeClass("disabled");
-		$("#prevQuestion").addClass("disabled");
+		$("#nextQuestion").show();
+		$("#prevQuestion").show();
 		
 		loadQuestion();
 	});
@@ -105,7 +105,7 @@ $(document).ready(function() {
 function loadAllQuestions() {
 	$.ajax({
 			type: 'GET',
-			url: 'includes/get_quiz_questions.php',
+			url: 'ajax/get_quiz_questions.php',
 			cache: false,
 			success: function(result) {
 				var json = JSON.parse(result);

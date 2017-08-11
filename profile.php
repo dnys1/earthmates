@@ -1,10 +1,11 @@
 <?php
 	/********* INCLUDES **********/
-	require_once('includes/session_start.php');
-	require_once('includes/db_functions.php');
-	require_once('includes/redirect.php');
-	require_once('includes/timezones.php');
-	require_once('includes/alerts.php');
+	require_once('../config.php');
+	require_once('../includes/session_start.php');
+	require_once('../includes/db_functions.php');
+	require_once('../includes/redirect.php');
+	require_once('../includes/timezones.php');
+	require_once('../includes/alerts.php');
 	/****************************/
 	
 	ensure_user_logged_in();
@@ -24,9 +25,10 @@
 		if(isset($_FILES))
 		{
 			
-			require_once 'includes/class.upload.php';
+			require_once '../includes/class.upload.php';
 			
-			$location = '../uploads/' . $_SESSION['userID'];
+			$location = SITE_ROOT . '/uploads/' . $_SESSION['userID'] . '/';
+			
 			$filename = $_FILES['file']['name'];
 
 			$handle = new Upload($_FILES['file']);
@@ -39,6 +41,7 @@
 							updateProfilePicture($_SESSION['userID'], $filename);
 							$_SESSION['profileImage'] = $filename;
 					} else {
+						echo 'error : ' . $handle->error;
 					}
 			}
 		}
@@ -49,5 +52,5 @@
 	else
 		$quizComplete = false;
 	
-	require_once('pages/profile_page.php');
+	require_once('../pages/profile_page.php');
 	?>

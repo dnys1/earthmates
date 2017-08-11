@@ -4,14 +4,14 @@
 		<?php 
 			$pageTitle = "Profile";
 			$pageDescription = "This is your EarthMates profile page!";
-			include('includes/header.php');
+			include('../includes/header.php');
 		?>
 		<script>
 			
 		</script>
 	</head>
 	<body>
-		<?php include('includes/navbar.php'); ?>
+		<?php include('../includes/navbar.php'); ?>
 		
     <!-- Begin page content -->
     <div class="container">
@@ -29,11 +29,11 @@
 			<?php if(!$_SESSION['quizComplete'] || !$_SESSION['receivedFeedback']) include('profile_panel.php'); ?>
 			
 			<div class="profile row" id="profile">
-				<div class="col-md-2 col-xs-6 profile-picture pull-left">
+				<div class="col-md-4 col-xs-6 profile-picture pull-left">
 					<img src="profile_image.php" class="img-responsive" />
 					<button type="button" class="btn btn-default change-profile-pic" data-toggle="modal" data-target="#change-profile-pic">Change</button>
 				</div>
-				<div class="col-md-10 col-xs-12 profile-info">
+				<div class="col-md-8 col-xs-12 profile-info">
 					<div id="name" ><h2><b>Name: </b><?php echo $_SESSION['userName']; ?></h2><!--<a href="#">Edit</a>--></div>
 					<div id="email"><h2><b>Email: </b><?php echo $_SESSION['userEmail']; ?></h2></div>
 					<div id="timezone"><h2><b>Timezone: </b><?php echo array_search(getTimezone($_SESSION['userID']), $timezones); ?></h2></div>
@@ -69,8 +69,8 @@
 		<?php
 			// Set up welcome tour
 			if((isset($_GET['signup']) && intval($_GET['signup']) == 1) || $_SESSION['showInfoMessage'])
-				echo '<script src="js/welcome.js"></script>';
+				echo '<script src="js/welcome.min.js"></script>';
 		?>
-	<?php include('includes/footer.php'); ?>
+	<?php include('../includes/footer.php'); ?>
 	</body>
 </html>

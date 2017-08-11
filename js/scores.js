@@ -6,7 +6,7 @@ function loadCompetencyData() {
 	// Get all competencies
 	$.ajax({
 		type: 'GET',
-		url: 'includes/get_competencies.php',
+		url: 'ajax/get_competencies.php',
 		cache: false,
 		success: function(result) {
 			var json = JSON.parse(result);
@@ -20,7 +20,7 @@ function loadCompetencyData() {
 	// Get self competency scores
 	$.ajax({
 		type: 'GET',
-		url: 'includes/get_competency_scores.php',
+		url: 'ajax/get_competency_scores.php',
 		data: {other: 'false'},
 		cache: false,
 		success: function(result) {
@@ -36,7 +36,7 @@ function loadCompetencyData() {
 	// Get other competency scores
 	$.ajax({
 		type: 'GET',
-		url: 'includes/get_competency_scores.php',
+		url: 'ajax/get_competency_scores.php',
 		data: {other: 'true'},
 		cache: false,
 		success: function(result) {
@@ -252,12 +252,4 @@ function resize() {
 																	if(score == 5) return "0";
 																	else return "1.0";
 																}).text("5");
-																
-	if($(".table-score").width() < 120) {
-		$(".table h5").css('font-size', '16px');
-		$(".table h5").css('font-weight', 'normal');
-	} else {
-		$(".table h5").css('font-size', '20px');
-		$(".table h5").css('font-weight', 'bold');
-	}
 }

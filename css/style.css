@@ -146,7 +146,6 @@ code {
 }
 
 /*** PROFILE PAGE ***/
-
 .profile {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -154,6 +153,7 @@ code {
 .profile img {
 	padding-top: 20px;
 	margin: auto;
+	max-height: 250px;
 }
 .profile-info {
 	padding: 20px;

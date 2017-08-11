@@ -1,9 +1,9 @@
 <?php
 	/********* INCLUDES **********/
-	require_once('includes/session_start.php');
-	require_once('includes/db_functions.php');
-	require_once('includes/redirect.php');
-	require_once('includes/form_functions.php');
+	require_once('../includes/session_start.php');
+	require_once('../includes/db_functions.php');
+	require_once('../includes/redirect.php');
+	require_once('../includes/form_functions.php');
 	/****************************/
 	
 	if($_SERVER["REQUEST_METHOD"] == "GET")
@@ -11,8 +11,8 @@
 		if(isset($_GET["q"]) && !empty($_GET['q']))
 		{
 			$query = test_input($_GET['q']);
-			$query = explode(" ", $query);
-			$results = (array) getSearchResults($query);
+			$queryArray = explode(" ", $query);
+			$results = (array) getSearchResults($queryArray);
 			
 			foreach ($results as $key => $profile)
 			{
@@ -26,6 +26,6 @@
 			$results = NULL;
 		}
 		
-		include('pages/search_users_page.php');
+		include('../pages/search_users_page.php');
 	}
 ?>

@@ -23,27 +23,27 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<?php
-							// If not logged in
-							// echo the dropdown 'Account' menu
-							if(!isset($_SESSION['userID'])) {
-								echo '<li><a href="./">Home</a></li>';
-								echo '<li ';
-								echo on_page('about.php') ? 'class="active"' : '';
-								echo '><a href="about.php">About</a></li>';
-								echo '<li class="dropdown">';
-								echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>';
-								echo '<ul class="dropdown-menu">';						
-								echo '<li ';
-								echo on_page('login.php') ? 'class="active"' : '';
-								echo '><a href="login.php">Log In</a></li>';
-								echo '<li ';
-								echo on_page('signup.php') ? 'class="active"' : '';
-								echo '><a href="signup.php">Sign Up</a></li>';
-								echo '</ul>';
-							}
-						?>
-					</ul>
-				</li>
+					echo '<li><a href="./">Home</a></li>';
+					echo '<li ';
+					echo on_page('about.php') ? 'class="active"' : '';
+					echo '><a href="about.php">About</a></li>';
+					
+					// If not logged in
+					// echo the dropdown 'Account' menu
+					if(!isset($_SESSION['userID'])) {
+						echo '<li class="dropdown">';
+						echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>';
+						echo '<ul class="dropdown-menu">';						
+						echo '<li ';
+						echo on_page('login.php') ? 'class="active"' : '';
+						echo '><a href="login.php">Log In</a></li>';
+						echo '<li ';
+						echo on_page('signup.php') ? 'class="active"' : '';
+						echo '><a href="signup.php">Sign Up</a></li>';
+						echo '</ul>';
+						echo '</li>';
+					}
+				?>
 			</ul>
 			<?php
 				if (isset($_SESSION['userID'])) {
@@ -73,14 +73,14 @@
 					echo '<li><a href="logout.php">Log Out</a></li>';
 					echo '</li></ul>';
 					echo '</ul>';
-					
-					echo '<form class="navbar-form navbar-right" role="search" method="get" action="search_users.php">';
-					echo '<div class="form-group">';
-					echo '<input type="text" class="form-control" placeholder="Search Users" name="q">';
-					echo '</div>';
-					echo '<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>';
-					echo '</form>';
-					}
+				}
+				
+				echo '<form class="navbar-form navbar-right" role="search" method="get" action="search_users.php">';
+				echo '<div class="form-group">';
+				echo '<input type="text" class="form-control" placeholder="Search Users" name="q">';
+				echo '</div>';
+				echo '<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>';
+				echo '</form>';
 			?>
 		</div><!--/.nav-collapse -->
 	</div>

@@ -189,14 +189,14 @@ function escapeHtml(text) {
   return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
-function loadResources(category = 0, subcategory = 0, type = 0)
+function loadResources(category, subcategory, type)
 {
 	resources = [];
 	$("table>tbody").empty();
 	
 	$.ajax({
 		type:'GET',
-		url: 'includes/get_resources.php',
+		url: 'ajax/get_resources.php',
 		data: {cat: category, sub: subcategory, typ: type},
 		cache: false,
 		success: function(result) {
@@ -303,7 +303,7 @@ function postRating(resource, rating, index)
 {	
 	$.ajax({
 		type: "POST",
-		url: 'includes/post_resource_rating.php',
+		url: 'ajax/post_resource_rating.php',
 		data: {resource: resource, rating: rating},
 		success: function(data) {
 			console.log("Setting data for resource " + resource);
@@ -317,7 +317,7 @@ function loadTypes()
 {
 	$.ajax({
 		type: 'GET',
-		url: 'includes/get_types.php',
+		url: 'ajax/get_types.php',
 		cache: false,
 		success: function(result) {
 			types = JSON.parse(result);
@@ -329,7 +329,7 @@ function loadCategories()
 {
 	$.ajax({
 		type: 'GET',
-		url: 'includes/get_categories.php',
+		url: 'ajax/get_categories.php',
 		cache: false,
 		success: function(result) {
 			categories = JSON.parse(result);
@@ -346,15 +346,17 @@ function fillCategories()
 		$("#categories").append('<option data-index="' +i+'" value="'+categories[i].ID+'">'+categories[i].Category+'</option>');
 	}
 }
-
+var subcategories;
 function fillSubcategories()
 {	
 	var index = $("#categories").find(":selected").data("index");
 	if(index != -1)
 	{	
-		var subcategories = categories[index].Subcategories;
+		subcategories = categories[index].Subcategories;
+		console.log(subcategories);
 		$("#subcategories").append('<option data-index="-1" value="0" selected="selected"></option>');
 		$("#subcategories").append('<option data-index="-1" value="all">All</option>');
+			console.log(subcategories.length);
 		for(var i = 0; i < subcategories.length; i++)
 		{
 			$("#subcategories").append('<option data-index="' +i+'" value="'+subcategories[i].ID+'">'+subcategories[i].Subcategory+'</option>');
@@ -376,6 +378,15 @@ function fillTypes()
 	{
 		$("#types").append('<option data-index="' +i+'" value="'+types[i].ID+'">'+types[i].Type+'</option>');
 	}
+	
+	// Reactivate types
+	$("#types").one('change', function () {
+		console.log("Type changed");
+		
+		if($("#types").val() == 0)
+			return;
+		fillResources();
+	});
 	$(".types").show();
 }
 
@@ -436,7 +447,7 @@ function resize() {
 	}
 }
 
-$(document).ajaxStop(function () {
+$(document).one('ajaxStop', function () {
 	// Display all loaded resources
 	var table = $(".resources-table");
 	
@@ -468,14 +479,6 @@ $(document).ajaxStop(function () {
 		if($("#subcategories").val() == 0)
 			return;
 		fillTypes();
-		fillResources();
-	});
-	
-	$("#types").one('change', function () {
-		console.log("Type changed");
-		
-		if($("#types").val() == 0)
-			return;
 		fillResources();
 	});
 });
